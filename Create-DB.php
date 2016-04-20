@@ -62,7 +62,7 @@
 
 	echo "Creating table Etablissement status: ";
 	try {
-    	$sql = "CREATE TABLE Etablissement (ID INT UNSIGNED NOT NULL,nom VARCHAR(30) NOT NULL,rue VARCHAR(50) NOT NULL,numero INT UNSIGNED NOT NULL,codePostal INT UNSIGNED NOT NULL,localite VARCHAR(50) NOT NULL,longitude VARCHAR(10) NOT NULL,latitude VARCHAR(10) NOT NULL,telephone INT UNSIGNED NOT NULL,lienWeb VARCHAR(50),type VARCHAR(10) NOT NULL,PRIMARY KEY (ID,nom,type))";
+    	$sql = "CREATE TABLE Etablissement (ID INT UNSIGNED NOT NULL,nom VARCHAR(30) NOT NULL,rue VARCHAR(50) NOT NULL,numero INT UNSIGNED NOT NULL,codePostal INT UNSIGNED NOT NULL,localite VARCHAR(50) NOT NULL,longitude FLOAT NOT NULL,latitude FLOAT NOT NULL,telephone INT UNSIGNED NOT NULL,lienWeb VARCHAR(50),type VARCHAR(10) NOT NULL,PRIMARY KEY (ID,nom,type))";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
