@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{enumitem}
+\title{Rapport : Projet  - Base de donnée}
+\author{Maximilien ROMAIN (000411776) - George RUSU (000407965)}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Diagramme}
+	\begin{flushleft}
+		\includegraphics[scale=0.6]{BDD-UML-2Final.pdf}
+	\end{flushleft}
+
+\subsection{Contraintes :}
+
+\begin{itemize}
+	\item Un client peut etre un admin ou bien un utilisatuer
+	\item Un client ne peut pas commenter un même établissement une même date
+	\item Un client ne peut pas choisir le meme label plusieur fois pour un meme etablissement dans un commentaire
+	\item La date d'enregsitrement d'un utilisateur doit etre inferieure a la date de chaque commentaire
+	\item Un client peut faire un commentaire sans choisir de label(tag)
+	\item Un commentaire possede un ID unique et doit contenier l'ID du client, l'ID du label si il y en a un, l'ID de l'etablissement ainsi que le texte et le score.
+	\item Un client ne peut pas labeliser plusieurs fois un même établissement avec un même label
+\end{itemize}
+\newpage
+
+\section{Model Relationnel}
+\begin{itemize}
+	\item Etablissement(ID, Nom, Adresse, AdRue, AdNuméro, AdCodePostal, AdLocalité, Coordonnée, CoodLongitude, CoordLatitude, NumTelephone, \textit{SiteWeb})
+	\item Restaurant(ID, FourchettePrix, NbrPlace, \textit{Emporter}, \textit{Livraison}, Fermeture)
+	\\ID référence Etablissement.ID
+	\item Bar(ID, \textit{Fumer}, \textit{Snack})
+	\\ID référence Etablissement.ID
+	\item Hotel(ID, NbrEtoiles, NbrChambres, IndicePrix)
+	\\ID référence Etablissement.ID
+	\item Client(ID, Identifiant, AdresseMail, MotDePasse, DateCréation)
+	\item Utilisateur(ID)
+	\\ID référence Client.ID
+	\item Admin(ID)
+	\\ID référence Client.ID
+	\item Modification(AdminID, EtablissementID, TypeModif, Date)
+	\\AdminID référence Client.ID; EtablissementID référence Etablissement.ID
+	\item Commentaire(ID, Score, Texte, Date, EtablissementID, UtilisateurID)
+	\\EtablissementID référence Etablissement.ID; UtilisateurID référence Client.ID
+	\item Tag(ID, IDLabel, EtablissementID, UtilisateurID, IDListeTag) 
+	\\EtablissementID référence Etablissement.ID; UtilisateurID référence Client.ID; IDLabel référence ListeTag.ID
+	\item ListTag(ID, countUser, text)
+	\item ClientCommentaire(ID, EtablissementID)
+	\\ID référence Client.ID ; EtablissementID référence Commentaire.EtablissementID
+
+\end{itemize}
+\newpage
+
+\section{Choix d'implémentation}
+Pour expliquer notre schema UML plus haut, nous avons choisi l'implementation suivante: lorsqu'on voudra connaître les informations d'un établissement en particulière (commentaires, tags , auteur du commentaire, auteur du tag, etc) il nous suffira de retrouver son id correspondant et de regarder avec cet id dans les tables Commentaire et Tag. Idem, pour un utilisateur, si on souhaite savoir ce qu'il a commenté. Nous pouvons donc dire que nos deux tables de bases sont Commentaire et Tag. \\
+
+En ce qui concerne l'ajout d'un label, nous avons decidé d'avoir une table ("ListeTag") qui va stocker tous les tag/label deja crée avec chacun leur id et chaque label qui caracterisera un etablissement dans la table Tag.\\
+
+En ce qui concerne le disctinction entre utilisateur et admin, nous avons une colonne, isAdmin qui grace a un boolean ou bien a un int (0 ou 1) nous permet de savoir si le client est admin ou bien un simple utilisateur. L'héritage présent dans le schéma permet donc de voir ce qu'un admin peut faire en plus qu'un client standard. C'est même opération supplémentaire que peut faire un admin sont stocké dans une nouvelle table (Modification) qui va permettre de récupérer chaque modification d'un établissement, c'est à dire sont type de modification (Création, suppression ou modification) ainsi que sa date, l'admin qui a opéré et l'établissement concerné.\\
+
+\end{document}
