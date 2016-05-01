@@ -81,7 +81,7 @@
 
 		$banquet = $resto->getElementsByTagName('Banquet')->item(0);
 		echo "Banquet : " . $banquet->getAttribute('capacity') . "<br />";
-
+  
 		echo "--- COMMENT SECTION --- <br/>";
 		$commentList = $resto->getElementsByTagName('Comment');
 		foreach ($commentList as $comment) {
