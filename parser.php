@@ -5,20 +5,20 @@
 	echo $cible;
 	print($cible);*/
 
-	echo "Début Teste<br />";
+	echo "Lecture Fichier XML<br />";
 	#$dom=simplexml_load_file("./datas/Restaurants.xml") or die("Error: Cannot create object");
 
 	$dom = new DomDocument;
 	$dom->load("./datas/Restaurants.xml");
-	$listePays = $dom->getElementsByTagName('Street');
+	/*$listePays = $dom->getElementsByTagName('Street');
 	foreach($listePays as $pays)
-		echo $pays->firstChild->nodeValue . "<br />";
+		echo $pays->firstChild->nodeValue . "<br />";*/
 
 	echo "--- <br />";
 
 	$listResto = $dom->getElementsByTagName('Restaurant');
 	foreach ($listResto as $resto) {
-		echo $resto->nodeName . "<br />" . $resto->nodeValue . "<br />" . "<br />";
+		//echo $resto->nodeName . "<br />" . $resto->nodeValue . "<br />" . "<br />";
 
 		$date = $resto->getAttribute('creationDate');
 		echo "Date création : " . $date . "<br />";
@@ -50,13 +50,31 @@
 		$tel = $resto->getElementsByTagName('Tel')->item(0);
 		echo "Tel : " . $tel->nodeValue . "<br />";
 
-		#TODO: Condition: Si le site existe
-		#$site = $resto->getElementsByTagName('Site')->item(0);
-		#echo "Site : " . $site->getAttribute('link') . "<br />";
+		$site = $resto->getElementsByTagName('Site')->item(0);
+		if ($site->nodeName) {
+			echo "Site : " . $site->getAttribute('link') . "<br />";
+		}
+		else {
+			echo "Site : Aucun site web n'est présent<br />";
+		}
 
 		#TODO: Récupération des heures
 
-		#TODO: Condition si TakeAway et Delivery Existe
+		$takeAway = $resto->getElementsByTagName('TakeAway')->item(0);
+		if ($site->nodeName) {
+			echo "Take away : True <br />";
+		}
+		else {
+			echo "Take away : False <br />";
+		}
+
+		$delivery = $resto->getElementsByTagName('Delivery')->item(0);
+		if ($delivery->nodeName) {
+			echo "Delivery : True <br />";
+		}
+		else {
+			echo "Delivery : False <br />";
+		}
 
 		$price = $resto->getElementsByTagName('PriceRange')->item(0);
 		echo "Price : " . $price->nodeValue . "<br />";
@@ -64,11 +82,21 @@
 		$banquet = $resto->getElementsByTagName('Banquet')->item(0);
 		echo "Banquet : " . $banquet->getAttribute('capacity') . "<br />";
 
-		#TODO: Liste pour récuperer les comment
-		/*$comment = $resto->getElementsByTagName('Comment')->item(1);
-		echo "Comment 2 : " . $comment->getAttribute('nickname') . "<br />";*/
+		echo "--- COMMENT SECTION --- <br/>";
+		$commentList = $resto->getElementsByTagName('Comment');
+		foreach ($commentList as $comment) {
+			$nickname = $comment->getAttribute('nickname');
+			$dateComment = $comment->getAttribute('date');
+			$score = $comment->getAttribute('score');
 
-		#TODO: Même chose pour les tag et les user 
+			echo "Nickname : " . $nickname . "<br/>";
+			echo "Date : " . $dateComment . "<br/>";
+			echo "Score : " . $score . "<br/>";
+			echo "Comment : " . $comment->nodeValue . "<br />";
+			echo "***<br/>";
+		}
+
+		#TODO: Récupérer les TAGS
 
 		echo "<br/>--- <br/><br/>";
 
