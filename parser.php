@@ -68,7 +68,7 @@
 		/*$comment = $resto->getElementsByTagName('Comment')->item(1);
 		echo "Comment 2 : " . $comment->getAttribute('nickname') . "<br />";*/
 
-		#TODO: Même chose pour les tag et les user 
+		#TODO: Même chose pour les tag et les user    
 
 		echo "<br/>--- <br/><br/>";
 
