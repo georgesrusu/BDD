@@ -5,3 +5,9 @@ La première chose qui se passe est de lancer le fichier Create-DB.php qui va se
 
 ### Deuxième action
 Ensuite nous avons besoin de remplir nos tables, nous parsons donc avec notre fichier parser.php qui va se charger de décompenser les fichiers XML et de les rentrer par des QUERY dans notre Base de donnée.
+
+## Fichiers
+fichiers 		|	Explication
+--------------	|------------------
+Create-DB.php 	|Crée la DBB
+parser.php 		|Parse dans la BDD
