@@ -98,6 +98,35 @@
 		 * ICI ON VA INSERT DANS LA TABLE RESTAURANT
 		 */
 
+		
+		#TODO: Récupération des heures
+		$dayList = $resto->getElementsByTagName('On');
+		$days = array ('0', '0', '0', '0', '0', '0', '0');
+
+		foreach ($dayList as $day) {
+			$dayNumber = $day->getAttribute('day');
+			echo "day : " . $dayNumber;
+
+			if ($day->hasAttribute('hour') && $day->getAttribute('hour') == "am") {
+				$days[(int)$dayNumber] = 2;
+				echo " am<br/>";
+			}
+			elseif ($day->hasAttribute('hour') && $day->getAttribute('hour') == "pm") {
+				$days[(int)$dayNumber] = 3;
+				echo " pm<br/>";
+			}
+			else {
+				$days[(int)$dayNumber] = 1;
+				echo "<br/>";
+			}
+		}
+
+		echo "[ ";
+		for ($i = 0; $i <= 6; $i++) {
+    		echo $days[$i];
+		}
+		echo "]<br/>";	
+
 		$takeAway = $resto->getElementsByTagName('TakeAway')->item(0);
 		if ($takeAway->nodeName) {
 			$takeAway=1;
