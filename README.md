@@ -15,5 +15,5 @@ parser.php 		|Parse dans la BDD
 ## Base de donnée
 ### Etablissement
 ID | Nom | Rue | Numéro | CodePostal | Localité | Long | Lat | Tel | WebLink | type
----------
+---|-----|-----|--------|------------|----------|------|-----|-----|---------|------
 
