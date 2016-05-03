@@ -27,7 +27,8 @@
 		echo "Admin : " . $admin . "<br />";
 
 		$restoName = $resto->getElementsByTagName('Name')->item(0);
-		echo "Name : " . $restoName->nodeValue . "<br />";
+		$res=$restoName->nodeValue
+		echo "Name : " . $res . "<br />";
 
 		$street = $resto->getElementsByTagName('Street')->item(0);
 		echo "Street : " . $street->nodeValue . "<br />";
