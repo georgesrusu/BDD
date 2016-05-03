@@ -4,8 +4,10 @@
   	$cible = $xml->getElementById("Name");
 	echo $cible;
 	print($cible);*/
+
 	echo "Lecture Fichier XML<br />";
 	#$dom=simplexml_load_file("./datas/Restaurants.xml") or die("Error: Cannot create object");
+
 	$dom = new DomDocument;
 	$dom->load("./datas/Restaurants.xml") or die("Error: Cannot create object");
 	/*$listePays = $dom->getElementsByTagName('Street');
@@ -28,45 +30,61 @@
 		echo "Name : " . $restoName->nodeValue . "<br />";
 
 		$street = $resto->getElementsByTagName('Street')->item(0);
-		$street=$street->nodeValue;
-		echo "Street : " . $street . "<br />";
+		echo "Street : " . $street->nodeValue . "<br />";
 
 		$num = $resto->getElementsByTagName('Num')->item(0);
-		$num=$num->nodeValue;
-		echo "Num : " . $num . "<br />";
+		echo "Num : " . $num->nodeValue . "<br />";
 
 		$zip = $resto->getElementsByTagName('Zip')->item(0);
-		$zip=$zip->nodeValue;
-		echo "Zip : " . $zip . "<br/>";
+		echo "Zip : " . $zip->nodeValue . "<br/>";
 
 		$city = $resto->getElementsByTagName('City')->item(0);
-		$city=$city->nodeValue;
-		echo "City : " . $city . "<br/>";
+		echo "City : " . $city->nodeValue . "<br/>";
 
 		$longitude = $resto->getElementsByTagName('Longitude')->item(0);
-		$longitude=$longitude->nodeValue;
-		echo "Longitude : " . $longitude . "<br />";
+		echo "Longitude : " . $longitude->nodeValue . "<br />";
 
 		$latitude = $resto->getElementsByTagName('Latitude')->item(0);
-		$latitude=$latitude->nodeValue;
-		echo "Latitude : " . $latitude . "<br />";
+		echo "Latitude : " . $latitude->nodeValue . "<br />";
 
 		$tel = $resto->getElementsByTagName('Tel')->item(0);
-		$tel=$tel->nodeValue;
-		echo "Tel : " . $tel . "<br />";
+		echo "Tel : " . $tel->nodeValue . "<br />";
 
 		$site = $resto->getElementsByTagName('Site')->item(0);
 		if ($site->nodeName) {
-			$site=$site->getAttribute('link')
-			echo "Site : " . $site . "<br />";
+			echo "Site : " . $site->getAttribute('link') . "<br />";
 		}
 		else {
-			$site="";
 			echo "Site : Aucun site web n'est présent<br />";
 		}
-		//$stmt = $conn->prepare("INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES (".$restoName.",".$street.",".$num.",".$zip.",".$city.",".$longitude.",".$latitude.",".$tel.",".$site.")"; 
-		//$stmt->execute();
+
 		#TODO: Récupération des heures
+		$dayList = $resto->getElementsByTagName('On');
+		$days = array ('0', '0', '0', '0', '0', '0', '0');
+
+		foreach ($dayList as $day) {
+			$dayNumber = $day->getAttribute('day');
+			echo "day : " . $dayNumber;
+
+			if ($day->hasAttribute('hour') && $day->getAttribute('hour') == "am") {
+				$days[(int)$dayNumber] = 2;
+				echo " am<br/>";
+			}
+			elseif ($day->hasAttribute('hour') && $day->getAttribute('hour') == "pm") {
+				$days[(int)$dayNumber] = 3;
+				echo " pm<br/>";
+			}
+			else {
+				$days[(int)$dayNumber] = 1;
+				echo "<br/>";
+			}
+		}
+
+		echo "[ ";
+		for ($i = 0; $i <= 6; $i++) {
+    		echo $days[$i];
+		}
+		echo "]<br/>";	
 
 		$takeAway = $resto->getElementsByTagName('TakeAway')->item(0);
 		if ($takeAway->nodeName) {
