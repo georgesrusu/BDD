@@ -14,6 +14,6 @@ parser.php 		|Parse dans la BDD
 
 ## Base de donnée
 ### Etablissement
-ID | Nom | Rue | Numéro | CodePostal | Localité | Long | Lat | Tel | WebLink | type
----|-----|-----|--------|------------|----------|------|-----|-----|---------|------
+ID | Nom                 | Rue        | Numéro | CodePostal | Localité | Long | Lat | Tel | WebLink | type
+---|---------------------|------------|--------|------------|----------|------|-----|-----|---------|------
 1  |Chez Théo Sodexo Ulb | Paul Heger | 22 | 23.43434 | 24.34655 | 02/234455| Restaurant
