@@ -36,7 +36,7 @@
 
 	echo "Creating table Utilisateur status: ";
 	try {
-    	$sql = "CREATE TABLE Utilisateur (ID INT UNSIGNED NOT NULL,identifiant VARCHAR(30) NOT NULL,mot_de_passe VARCHAR(30) NOT NULL,email VARCHAR(50) NOT NULL,dateCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,isAdmin BOOLEAN NOT NULL DEFAULT 0,PRIMARY KEY (id,identifiant))";
+    	$sql = "CREATE TABLE Utilisateur (ID INT UNSIGNED NOT NULL AUTO_INCREMENT,identifiant VARCHAR(30) NOT NULL,mot_de_passe VARCHAR(30) NOT NULL,email VARCHAR(50) NOT NULL,dateCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,isAdmin BOOLEAN NOT NULL DEFAULT 0,PRIMARY KEY (id,identifiant))";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
@@ -49,7 +49,7 @@
 
 	echo "Creating table Tag status: ";
 	try {
-    	$sql = "CREATE TABLE Tag (ID INT UNSIGNED NOT NULL,label VARCHAR(30) NOT NULL,etablissementID INT UNSIGNED NOT NULL,clientID INT UNSIGNED NOT NULL,PRIMARY KEY (ID,label,etablissementID,clientID))";
+    	$sql = "CREATE TABLE Tag (label VARCHAR(30) NOT NULL,etablissementID INT UNSIGNED NOT NULL,clientID INT UNSIGNED NOT NULL,PRIMARY KEY (etablissementID,clientID,label))";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
@@ -62,7 +62,7 @@
 
 	echo "Creating table Etablissement status: ";
 	try {
-    	$sql = "CREATE TABLE Etablissement (ID INT UNSIGNED NOT NULL,nom VARCHAR(30) NOT NULL,rue VARCHAR(50) NOT NULL,numero INT UNSIGNED NOT NULL,codePostal INT UNSIGNED NOT NULL,localite VARCHAR(50) NOT NULL,longitude FLOAT NOT NULL,latitude FLOAT NOT NULL,telephone INT UNSIGNED NOT NULL,lienWeb VARCHAR(50),type VARCHAR(10) NOT NULL,PRIMARY KEY (ID,nom,type))";
+    	$sql = "CREATE TABLE Etablissement (ID INT UNSIGNED NOT NULL AUTO_INCREMENT,nom VARCHAR(30) NOT NULL,rue VARCHAR(50) NOT NULL,numero INT UNSIGNED NOT NULL,codePostal INT UNSIGNED NOT NULL,localite VARCHAR(50) NOT NULL,longitude FLOAT NOT NULL,latitude FLOAT NOT NULL,telephone INT UNSIGNED NOT NULL,lienWeb VARCHAR(50),type VARCHAR(10) NOT NULL,PRIMARY KEY (ID,nom,type))";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
