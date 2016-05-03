@@ -62,7 +62,7 @@
 
 	echo "Creating table Etablissement status: ";
 	try {
-    	$sql = "CREATE TABLE Etablissement (ID INT UNSIGNED NOT NULL,nom VARCHAR(30) NOT NULL,rue VARCHAR(50) NOT NULL,numero INT UNSIGNED NOT NULL,codePostal INT UNSIGNED NOT NULL,localite VARCHAR(50) NOT NULL,longitude FLOAT NOT NULL,latitude FLOAT NOT NULL,telephone INT UNSIGNED NOT NULL,lienWeb VARCHAR(50),type VARCHAR(10) NOT NULL,PRIMARY KEY (ID,nom,type))";
+    	$sql = "CREATE TABLE Etablissement (ID INT UNSIGNED NOT NULL AUTO_INCREMENT,nom VARCHAR(50) NOT NULL UNIQUE,rue VARCHAR(50) NOT NULL,numero INT UNSIGNED NOT NULL,codePostal INT UNSIGNED NOT NULL,localite VARCHAR(30) NOT NULL,longitude FLOAT NOT NULL,latitude FLOAT NOT NULL,telephone VARCHAR(15) NOT NULL,lienWeb VARCHAR(100),type VARCHAR(10) NOT NULL,PRIMARY KEY (ID,nom,type))";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
@@ -99,7 +99,7 @@
 	}
 	echo "Creating table Restaurant status: ";
 	try {
-    	$sql = "CREATE TABLE Restaurant (ID INT UNSIGNED PRIMARY KEY NOT NULL,prix FLOAT UNSIGNED NOT NULL,placesBanquet INT NOT NULL,emporter BOOLEAN NOT NULL,livraison BOOLEAN NOT NULL,fermeture INT(6) UNSIGNED NOT NULL)";
+    	$sql = "CREATE TABLE Restaurant (ID INT UNSIGNED PRIMARY KEY NOT NULL,prix FLOAT UNSIGNED NOT NULL,placesBanquet INT NOT NULL,emporter TINYINT(1) NOT NULL,livraison TINYINT(1) NOT NULL,fermeture INT(6) UNSIGNED NOT NULL)";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
