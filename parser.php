@@ -10,7 +10,6 @@
 	include("connect.php");
 	echo "Lecture Fichier XML<br />";
 	#$dom=simplexml_load_file("./datas/Restaurants.xml") or die("Error: Cannot create object");
-
 	$dom = new DomDocument;
 	$dom->load("./datas/Restaurants.xml") or die("Error: Cannot create object");
 	/*$listePays = $dom->getElementsByTagName('Street');
@@ -38,25 +37,32 @@
 		echo "Name : " . $restoName . "<br />";
 
 		$street = $resto->getElementsByTagName('Street')->item(0);
-		echo "Street : " . $street->nodeValue . "<br />";
+		$street=$street->nodeValue;
+		echo "Street : " . $street . "<br />";
 
 		$num = $resto->getElementsByTagName('Num')->item(0);
-		echo "Num : " . $num->nodeValue . "<br />";
+		$num=$num->nodeValue;
+		echo "Num : " . $num . "<br />";
 
 		$zip = $resto->getElementsByTagName('Zip')->item(0);
-		echo "Zip : " . $zip->nodeValue . "<br/>";
+		$zip=$zip->nodeValue;
+		echo "Zip : " . $zip . "<br/>";
 
 		$city = $resto->getElementsByTagName('City')->item(0);
-		echo "City : " . $city->nodeValue . "<br/>";
+		$city=$city->nodeValue;
+		echo "City : " . $city . "<br/>";
 
 		$longitude = $resto->getElementsByTagName('Longitude')->item(0);
-		echo "Longitude : " . $longitude->nodeValue . "<br />";
+		$longitude=$longitude->nodeValue;
+		echo "Longitude : " . $longitude . "<br />";
 
 		$latitude = $resto->getElementsByTagName('Latitude')->item(0);
-		echo "Latitude : " . $latitude->nodeValue . "<br />";
+		$latitude=$latitude->nodeValue;
+		echo "Latitude : " . $latitude . "<br />";
 
 		$tel = $resto->getElementsByTagName('Tel')->item(0);
-		echo "Tel : " . $tel->nodeValue . "<br />";
+		$tel=$tel->nodeValue;
+		echo "Tel : " . $tel . "<br />";
 
 		$site = $resto->getElementsByTagName('Site')->item(0);
 		if ($site->nodeName) {
@@ -64,9 +70,9 @@
 			echo "Site : " . $site. "<br />";
 		}
 		else {
+			$site="";
 			echo "Site : Aucun site web n'est présent<br />";
 		}
-
 		try{
 			$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$restoName.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","Restaurant")';
     		$conn->exec($sql);
@@ -92,6 +98,7 @@
 		 * ICI ON VA INSERT DANS LA TABLE RESTAURANT
 		 */
 
+		
 		#TODO: Récupération des heures
 		$dayList = $resto->getElementsByTagName('On');
 		$days = array ('0', '0', '0', '0', '0', '0', '0');
