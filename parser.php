@@ -175,7 +175,7 @@
 			echo "***<br/>";
 		}
 		try{
-			$sql = 'INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$nickname.'@email.com")';
+			$sql = 'INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$date.'","'.$comment.'","'.$score.'")';
     		$conn->exec($sql);
 			echo "Insert SUCCESS <br/>";
 		}
