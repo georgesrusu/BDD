@@ -87,11 +87,11 @@
 			$stmt = $conn->prepare($sql); 
 			$stmt->execute();
 			$result=$stmt->fetch();
-			$ID=$result[0]; //premiere colonne
+			$etablissementID=$result[0]; //premiere colonne
 			echo "GET ID SUCCESS ".$result[0]." <br/>";
 		}
 		catch(PDOException $e) {
-			echo "ID FAIL :";
+			echo "GET ID FAIL :";
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
 		/*
@@ -127,7 +127,7 @@
 		echo "Banquet : " . $banquet . "<br />";
 
 		try{
-			$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$ID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'")';
+			$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'")';
     		$conn->exec($sql);
 			echo "Insert SUCCESS <br/>";
 		}
@@ -136,18 +136,52 @@
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
   
+  		/*
+  		 * ICI ON VA INSERER LES COMMENTAIRE MAIS AUSSI LES UTILISATEUR QUI ONT DEJA COMMENTE
+  		 *
+  		 */
 		echo "--- COMMENT SECTION --- <br/>";
 		$commentList = $resto->getElementsByTagName('Comment');
 		foreach ($commentList as $comment) {
 			$nickname = $comment->getAttribute('nickname');
+		try{
+			$sql = 'INSERT INTO Utilisateur (identifiant,mot_de_passe,email) VALUES ("'.$nickname.'","'.$nickname.'","'.$nickname.'@email.com")';
+    		$conn->exec($sql);
+			echo "Insert SUCCESS <br/>";
+		}
+		catch(PDOException $e) {
+			echo "Insert FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}
+		try{
+			$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$nickname.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			$clientID=$result[0]; //premiere colonne
+			echo "GET ID SUCCESS ".$result[0]." <br/>";
+		}
+		catch(PDOException $e) {
+			echo "GET ID FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}
 			$dateComment = $comment->getAttribute('date');
 			$score = $comment->getAttribute('score');
-
+			$comment=$comment->nodeValue;
 			echo "Nickname : " . $nickname . "<br/>";
 			echo "Date : " . $dateComment . "<br/>";
 			echo "Score : " . $score . "<br/>";
-			echo "Comment : " . $comment->nodeValue . "<br />";
+			echo "Comment : " . $comment . "<br />";
 			echo "***<br/>";
+		}
+		try{
+			$sql = 'INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$nickname.'@email.com")';
+    		$conn->exec($sql);
+			echo "Insert SUCCESS <br/>";
+		}
+		catch(PDOException $e) {
+			echo "Insert FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
 		}
 
 		$tagList = $resto->getElementsByTagName('Tag');

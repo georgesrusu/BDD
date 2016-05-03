@@ -36,7 +36,7 @@
 
 	echo "Creating table Utilisateur status: ";
 	try {
-    	$sql = "CREATE TABLE Utilisateur (ID INT UNSIGNED NOT NULL AUTO_INCREMENT,identifiant VARCHAR(30) NOT NULL,mot_de_passe VARCHAR(30) NOT NULL,email VARCHAR(50) NOT NULL,dateCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,isAdmin BOOLEAN NOT NULL DEFAULT 0,PRIMARY KEY (id,identifiant))";
+    	$sql = "CREATE TABLE Utilisateur (ID INT UNSIGNED NOT NULL AUTO_INCREMENT,identifiant VARCHAR(30) NOT NULL UNIQUE,mot_de_passe VARCHAR(30) NOT NULL,email VARCHAR(50) NOT NULL,dateCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,isAdmin BOOLEAN NOT NULL DEFAULT 0,PRIMARY KEY (id,identifiant))";
     // use exec() because no results are returned
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
