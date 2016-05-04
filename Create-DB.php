@@ -82,7 +82,7 @@
 	}
 	echo "Creating table Hotel status: ";
 	try {
-    	$sql = "CREATE TABLE Hotel (ID INT UNSIGNED PRIMARY KEY NOT NULL,prix FLOAT UNSIGNED NOT NULL,nbChambre INT UNSIGNED NOT NULL,nbEtoiles INT UNSIGNED NOT NULL)";
+    	$sql = "CREATE TABLE Hotel (ID INT UNSIGNED PRIMARY KEY NOT NULL,prix FLOAT UNSIGNED NOT NULL,nbChambres INT UNSIGNED NOT NULL,nbEtoiles INT UNSIGNED NOT NULL)";
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
 		
