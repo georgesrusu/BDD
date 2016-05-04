@@ -71,7 +71,7 @@
 			
 	echo "Creating table Bar status: ";
 	try {
-    	$sql = "CREATE TABLE Bar (ID INT UNSIGNED PRIMARY KEY NOT NULL,fumeur BOOLEAN NOT NULL,petiteRestauration BOOLEAN NOT NULL)";
+    	$sql = "CREATE TABLE Bar (ID INT UNSIGNED PRIMARY KEY NOT NULL,fumeur TINYINT(1) NOT NULL,petiteRestauration TINYINT(1) NOT NULL)";
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
 		

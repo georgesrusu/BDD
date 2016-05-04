@@ -295,7 +295,7 @@
 	
 	
 	
-	<Cafe creationDate="2/032008" nickname="Fred">
+	<Cafe creationDate="2/03/2008" nickname="Fred">
 		<Informations>
 			<Name>Pantin</Name>
 			<Address>
@@ -507,7 +507,7 @@
 	
 	
 	
-	<Cafe creationDate="4/07/2004" nickname="Fred">
+	<Cafe creationDate="04/07/2004" nickname="Fred">
 		<Informations>
 			<Name>Greenwich</Name>
 			<Address>
