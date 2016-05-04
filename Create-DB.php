@@ -5,7 +5,7 @@
 //Creation de Eureka
 	echo "Creating Database status: ";
 	try {
-    	$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    	$conn = new PDO("mysql:host=$servername", $username, $password);
     	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     	$sql = "CREATE DATABASE Eureka";
     // use exec() because no results are returned
