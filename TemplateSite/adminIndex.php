@@ -28,7 +28,7 @@ Released   : 20130902
 	<div id="header">
 		<div id="logo">
 			<img src="" alt="" />
-			<h1><a href="#">DataBase</a></h1>
+			<h1><a href="index.html">Eureka</a></h1>
 			<span>Created for <a href="https://www.ulb.ac.be" rel="nofollow">ULB Project</a></span>
 			</br><span>Admin Page</span>
 		</div>
@@ -36,7 +36,8 @@ Released   : 20130902
 			<ul>
 				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
 				<li><a href="#" accesskey="2" title="Type here to research something">Research</a></li>
-				<li><a href="" accesskey="3" title="Connexion to our database">Parser</a></li>
+				<li><a href="" accesskey="3" title="">Parser</a></li>
+				<li><a href="" accesskey="4" title="">Add</a></li>
 			</ul>
 		</div>
 	</div>
