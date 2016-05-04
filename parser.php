@@ -227,7 +227,7 @@
 		echo "<br/>--- FIN DU RESTAU<br/><br/>";
 	}
 
-	echo "<br/>*** LECTURE FICHIER CAFE XML ***<br/>";
+	echo "<br/>*** LECTURE FICHIER CAFES XML ***<br/>";
 
 	$dom = new DomDocument;
 	$dom->load("./datas/Cafes.xml") or die("Error: Cannot create object");
@@ -264,6 +264,16 @@
 
 		$tel = $cafe->getElementsByTagName('Zip')->item(0)->nodeValue;
 		echo "Tel : " . $tel . "<br/>";
+
+		$site = $cafe->getElementsByTagName('Site')->item(0);
+		if ($site->nodeName) {
+			$site=$site->getAttribute('link');
+			echo "Site : " . $site. "<br />";
+		}
+		else {
+			$site="";
+			echo "Site : Aucun site web n'est présent<br />";
+		}
 
 		$smoking = $cafe->getElementsByTagName('Smoking')->item(0);
 		if ($smoking->nodeName) {
@@ -313,6 +323,95 @@
 		}
 
 		echo "<br/>--- FIN DU CAFE ---<br/><br/>";
+	}
+
+	echo "<br/>*** LECTURE FICHIER HOTELS XML ***<br/>";
+
+	$dom = new DomDocument;
+	$dom->load("./datas/Hotels.xml") or die("Error: Cannot create object");
+
+	$listHotel = $dom->getElementsByTagName('Hotel');
+	foreach ($listHotel as $hotel) {
+
+		$date = $hotel->getAttribute('creationDate');
+		echo "Date création : " . $date . "<br />";
+
+		$admin = $hotel->getAttribute('nickname');
+		echo "Admin : " . $admin . "<br/>";
+
+		$cafeName = $hotel->getElementsByTagName('Name')->item(0)->nodeValue;
+		echo "Name : " . $cafeName . "<br />";	
+
+		$street = $hotel->getElementsByTagName('Street')->item(0)->nodeValue;
+		echo "Street : " . $street . "<br/>";
+
+		$num = $hotel->getElementsByTagName('Num')->item(0)->nodeValue;
+		echo "Num : " . $num . "<br/>";
+
+		$zip = $hotel->getElementsByTagName('Zip')->item(0)->nodeValue;
+		echo "Zip : " . $zip . "<br/>";
+
+		$city = $hotel->getElementsByTagName('City')->item(0)->nodeValue;
+		echo "City : " . $city . "<br/>";
+
+		$longitude = $hotel->getElementsByTagName('Longitude')->item(0)->nodeValue;
+		echo "Longitude : " . $longitude . "<br/>";
+
+		$latitude = $hotel->getElementsByTagName('Latitude')->item(0)->nodeValue;
+		echo "Latitude : " . $latitude . "<br/>";
+
+		$tel = $hotel->getElementsByTagName('Zip')->item(0)->nodeValue;
+		echo "Tel : " . $tel . "<br/>";
+
+		$site = $hotel->getElementsByTagName('Site')->item(0);
+		if ($site->nodeName) {
+			$site=$site->getAttribute('link');
+			echo "Site : " . $site. "<br />";
+		}
+		else {
+			$site="";
+			echo "Site : Aucun site web n'est présent<br />";
+		}
+
+		$stars = $hotel->getElementsByTagName('Stars')->item(0);
+		$stars = $stars->getAttribute('number');
+		echo "Stars : " . $stars . "<br/>";
+
+		$bedRooms = $hotel->getElementsByTagName('Bedrooms')->item(0);
+		$bedRooms = $bedRooms->getAttribute('capacity');
+		echo "Capacity : " . $bedRooms . "<br/>";
+
+		$price = $hotel->getElementsByTagName('PriceRange')->item(0);
+		$price = $price->nodeValue;
+		echo "Price : " . $price . "<br />";
+
+		echo "--- COMMENT SECTION --- <br/>";
+		$commentList = $hotel->getElementsByTagName('Comment');
+		foreach ($commentList as $comment) {
+			$nickname = $comment->getAttribute('nickname');
+			$dateComment = $comment->getAttribute('date');
+			$score = $comment->getAttribute('score');
+			$comment=$comment->nodeValue;
+			echo "&nbspNickname : " . $nickname . "<br/>";
+			echo "&nbspDate : " . $dateComment . "<br/>";
+			echo "&nbspScore : " . $score . "<br/>";
+			echo "&nbspComment : " . $comment . "<br />";
+			echo "***<br/>";
+		}
+
+		$tagList = $hotel->getElementsByTagName('Tag');
+		foreach ($tagList as $tag) {
+			$nameTag = $tag->getAttribute('name');
+			echo "Name Tag : " . $nameTag . "<br/>";
+
+			$userList = $tag->getElementsByTagName('User');
+			foreach ($userList as $user) {
+				$userName = $user->getAttribute('nickname');
+				echo "&nbsp User : " . $userName . "<br/>";
+			}
+		}
+
+		echo "<br/>--- FIN DE L'HOTEL ---<br/><br/>";
 	}
 ?>
 
