@@ -104,7 +104,18 @@
 	}
 	echo "Creating table ModificationAdmin status: ";
 	try {
-    	$sql = "CREATE TABLE  ModificationAdmin (etablissementID INT UNSIGNED NOT NULL,adminID INT UNSIGNED NOT NULL,dateCreation DATE NOT NULL,PRIMARY KEY (etablissementID,adminID,dateCreation))";
+    	$sql = "CREATE TABLE ModificationAdmin (etablissementID INT UNSIGNED NOT NULL,adminID INT UNSIGNED NOT NULL,dateCreation DATE NOT NULL,PRIMARY KEY (etablissementID,adminID,dateCreation))";
+    	$conn->exec($sql);
+    	echo "Table created successfully<br>";
+		
+		}
+	catch(PDOException $e) {
+    	echo "Error: " . $e->getMessage();
+    	echo "<br>";
+	}
+	echo "Creating table Label status: ";
+	try {
+    	$sql = "CREATE TABLE Label (etablissementID INT UNSIGNED NOT NULL,clientID INT UNSIGNED NOT NULL,texte VARCHAR(50) NOT NULL,PRIMARY KEY (etablissementID,clientID,texte))";
     	$conn->exec($sql);
     	echo "Table created successfully<br>";
 		
