@@ -12,6 +12,7 @@
 	#$dom=simplexml_load_file("./datas/Restaurants.xml") or die("Error: Cannot create object");
 	$dom = new DomDocument;
 	$dom->load("./datas/Restaurants.xml") or die("Error: Cannot create object");
+	$today = date("Y-m-d");
 	/*$listePays = $dom->getElementsByTagName('Street');
 	foreach($listePays as $pays)
 		echo $pays->firstChild->nodeValue . "<br />";*/
@@ -27,11 +28,72 @@
 
 		$admin = $resto->getAttribute('nickname');
 		echo "Admin : " . $admin . "<br />";
-
+		/*try{
+			$isAdmin=1;
+			$sql = 'INSERT INTO Utilisateur (identifiant,mot_de_passe,email,dateCreation,isAdmin) VALUES ("'.$admin.'","'.$admin.'","'.$admin.'@email.com","'.$today.'","'.$isAdmin.'")';
+    		$conn->exec($sql);
+			echo "Insert Utilisateur Admin SUCCESS <br/>";
+		}
+		catch(PDOException $e) {
+			echo "Insert Utilisateur FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}*/
+		$date = str_replace("/", "-", $date);
+		$date = date("Y-m-d", strtotime($date));
+		$isAdmin=1;
+		try{
+			$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$admin.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			if ($result==""){
+				echo "ADMIN DOESN'T EXIST <br/>";
+				$sql = 'INSERT INTO Utilisateur (identifiant,mot_de_passe,email,dateCreation,isAdmin) VALUES ("'.$admin.'","'.$admin.'","'.$admin.'@email.com","'.$date.'","'.$isAdmin.'")';
+    			$conn->exec($sql);
+				echo "INSERT UTILISATEUR ADMIN SUCCESS <br/>";
+				$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$admin.'"';
+				$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				$result=$stmt->fetch();
+				}
+			else{
+				echo "ADMIN ALREADY EXIST <br/>";
+				$sql = 'UPDATE Utilisateur SET isAdmin="'.$isAdmin.'" WHERE ID="'.$result[0].'"';
+    			$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+			}
+			$adminID=$result[0];
+			echo "GET ID ADMIN SUCCESS ".$result[0]." <br/>";
+		}
+		catch(PDOException $e) {
+			echo "GET ID ADMIN FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}
+		try{
+			echo "VERIFICATION DATECREATION UTILISATEUR ADMIN<br/>";
+			$sql='SELECT dateCreation FROM Utilisateur WHERE ID="'.$adminID.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			$dateAdmin=$result[0];
+			if ($date<$dateAdmin){
+				echo "DATECREATION ETABLISSEMENT OLDEST <br/>";
+				$sql = 'UPDATE Utilisateur SET dateCreation="'.$date.'" WHERE ID="'.$adminID.'"';
+    			$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				echo "DATECREATION UTILISATEUR ADMIN UPDATED SUCCESS <br/>";
+			}
+			else{
+				echo "DATECREATION UTILISATEUR ADMIN OLDEST <br/>";
+			}
+		}
+		catch(PDOException $e) {
+			echo "UPDATE DATE FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}
 		/*
 		 * ICI ON VA INSERT DANS LA TABLE ETABLISSEMENT
 		 */
-
 		$restoName = $resto->getElementsByTagName('Name')->item(0);
 		$restoName=$restoName->nodeValue;
 		echo "Name : " . $restoName . "<br />";
@@ -73,33 +135,68 @@
 			$site="";
 			echo "Site : Aucun site web n'est présent<br />";
 		}
-		try{
+		/*try{
 			$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$restoName.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","Restaurant")';
     		$conn->exec($sql);
-			echo "Insert SUCCESS <br/>";
+			echo "Insert Etablissement SUCCESS <br/>";
 		}
 		catch(PDOException $e) {
-			echo "Insert FAIL :";
+			echo "Insert Etablissement FAIL :";
     		echo "Error: " . $e->getMessage()."<br/>";
-		}
+		}*/
 		try{
 			$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$restoName.'"';
 			$stmt = $conn->prepare($sql); 
 			$stmt->execute();
 			$result=$stmt->fetch();
-			$etablissementID=$result[0]; //premiere colonne
-			echo "GET ID SUCCESS ".$result[0]." <br/>";
+			if ($result==""){
+				echo "ETABLISSEMENT DOESN'T EXIST <br/>";
+				$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$restoName.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","Restaurant")';
+    			$conn->exec($sql);
+				echo "INSERT ETABLISSEMENT SUCCESS <br/>";
+				$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$restoName.'"';
+				$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				$result=$stmt->fetch();
+				}
+			else{
+				echo "ETABLISSEMENT ALREADY EXIST <br/>";
+			}
+			$etablissementID=$result[0];
+			echo "GET ID ETABLISSEMENT SUCCESS ".$result[0]." <br/>";
 		}
 		catch(PDOException $e) {
-			echo "GET ID FAIL :";
+			echo "GET ID ETABLISSEMENT FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}
+		//insert des modification Admin
+		try{
+			//$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")'; 
+    		//$conn->exec($sql);
+			//echo "Insert ModificationAdmin SUCCESS <br/>";
+		//}
+			$sql = 'SELECT * FROM ModificationAdmin WHERE etablissementID="'.$etablissementID.'" AND adminID="'.$adminID.'" AND dateCreation="'.$date.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			if ($result==""){
+				echo "MODIFICATIONADMIN DOESN'T EXIST <br/>";
+				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
+    			$conn->exec($sql);
+				echo "INSERT MODIFICATIONADMIN SUCCESS <br/>";
+				}
+			else{
+				echo "MODIFICATIONADMIN ALREADY EXIST <br/>";
+			}
+		}
+		catch(PDOException $e) {
+			echo "INSERT MODIFICATIONADMIN FAIL :";
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
 		/*
 		 * ICI ON VA INSERT DANS LA TABLE RESTAURANT
 		 */
 
-		
-		#TODO: Récupération des heures
 		$dayList = $resto->getElementsByTagName('On');
 		$days = array ('0', '0', '0', '0', '0', '0', '0');
 
@@ -120,10 +217,11 @@
 				echo "<br/>";
 			}
 		}
-
+		$closedDays="";
 		echo "[ ";
 		for ($i = 0; $i <= 6; $i++) {
     		echo $days[$i];
+    		$closedDays=$closedDays.$days[$i];
 		}
 		echo "]<br/>";	
 
@@ -156,12 +254,22 @@
 		echo "Banquet : " . $banquet . "<br />";
 
 		try{
-			$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'")';
-    		$conn->exec($sql);
-			echo "Insert SUCCESS <br/>";
+			$sql = 'SELECT * FROM Restaurant WHERE ID="'.$etablissementID.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			if ($result==""){
+				echo "RESTAURANT DOESN'T EXIST <br/>";
+				$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
+    			$conn->exec($sql);
+				echo "INSERT RESTAURANT SUCCESS <br/>";
+			}
+			else{
+				echo "RESTAURANT ALREADY EXIST <br/>";
+			}
 		}
 		catch(PDOException $e) {
-			echo "Insert FAIL :";
+			echo "INSERT RESTAURANT FAIL :";
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
   
@@ -174,24 +282,28 @@
 		foreach ($commentList as $comment) {
 			$nickname = $comment->getAttribute('nickname');
 		try{
-			$sql = 'INSERT INTO Utilisateur (identifiant,mot_de_passe,email) VALUES ("'.$nickname.'","'.$nickname.'","'.$nickname.'@email.com")';
-    		$conn->exec($sql);
-			echo "Insert SUCCESS <br/>";
-		}
-		catch(PDOException $e) {
-			echo "Insert FAIL :";
-    		echo "Error: " . $e->getMessage()."<br/>";
-		}
-		try{
 			$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$nickname.'"';
 			$stmt = $conn->prepare($sql); 
 			$stmt->execute();
 			$result=$stmt->fetch();
-			$clientID=$result[0]; //premiere colonne
-			echo "GET ID SUCCESS ".$result[0]." <br/>";
+			if ($result==""){
+				echo "CLIENT DOESN'T EXIST <br/>";
+				$sql = 'INSERT INTO Utilisateur (identifiant,mot_de_passe,email,dateCreation) VALUES ("'.$nickname.'","'.$nickname.'","'.$nickname.'@email.com","'.$today.'")';
+    			$conn->exec($sql);
+				echo "INSERT UTILISATEUR CLIENT SUCCESS <br/>";
+				$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$nickname.'"';
+				$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				$result=$stmt->fetch();
+				}
+			else{
+				echo "CLIENT ALREADY EXIST <br/>";
+			}
+			$clientID=$result[0];
+			echo "GET ID CLIENT SUCCESS ".$result[0]." <br/>";
 		}
 		catch(PDOException $e) {
-			echo "GET ID FAIL :";
+			echo "GET ID CLIENT FAIL :";
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
 			$dateComment = $comment->getAttribute('date');
@@ -201,18 +313,53 @@
 			echo "Date : " . $dateComment . "<br/>";
 			echo "Score : " . $score . "<br/>";
 			echo "Comment : " . $comment . "<br />";
-			echo "***<br/>";
-		}
+			$comment = addcslashes($comment,'"');
+			$dateComment = str_replace("/", "-", $dateComment);
+			$dateComment = date("Y-m-d", strtotime($dateComment));
+		
 		try{
-			$sql = 'INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$date.'","'.$comment.'","'.$score.'")';
-    		$conn->exec($sql);
-			echo "Insert SUCCESS <br/>";
+			$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$etablissementID.'" AND clientID="'.$clientID.'" AND dateCreation="'.$dateComment.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			if ($result==""){
+				echo "COMMENTAIRE DOESN'T EXIST <br/>";
+				$sql = 'INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$dateComment.'","'.$comment.'","'.$score.'")';
+    			$conn->exec($sql);
+				echo "INSERT COMMENTAIRE SUCCESS <br/>";
+				}
+			else{
+				echo "COMMENTAIRE ALREADY EXIST <br/>";
+			}
 		}
 		catch(PDOException $e) {
-			echo "Insert FAIL :";
+			echo "INSERT COMMENTAIRE FAIL :";
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
-
+		try{
+			echo "VERIFICATION DATECREATION UTILISATEUR <br/>";
+			$sql='SELECT dateCreation FROM Utilisateur WHERE ID="'.$clientID.'"';
+			$stmt = $conn->prepare($sql); 
+			$stmt->execute();
+			$result=$stmt->fetch();
+			$dateUtilisateur=$result[0];
+			if ($dateComment<$dateUtilisateur){
+				echo "DATECREATION COMMENTAIRE OLDEST <br/>";
+				$sql = 'UPDATE Utilisateur SET dateCreation="'.$dateComment.'" WHERE ID="'.$clientID.'"';
+    			$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				echo "DATECREATION UTILISATEUR CLIENT UPDATED SUCCESS <br/>";
+			}
+			else{
+				echo "DATECREATION UTILISATEUR CLIENT OLDEST <br/>";
+			}
+		}
+		catch(PDOException $e) {
+			echo "UPDATE DATE FAIL :";
+    		echo "Error: " . $e->getMessage()."<br/>";
+		}
+		echo "***<br/>";
+		}
 		$tagList = $resto->getElementsByTagName('Tag');
 		foreach ($tagList as $tag) {
 			$nameTag = $tag->getAttribute('name');
@@ -226,7 +373,7 @@
 
 		echo "<br/>--- FIN DU RESTAU<br/><br/>";
 	}
-
+/*
 	echo "<br/>*** LECTURE FICHIER CAFE XML ***<br/>";
 
 	$dom = new DomDocument;
@@ -313,7 +460,7 @@
 		}
 
 		echo "<br/>--- FIN DU CAFE ---<br/><br/>";
-	}
+	}*/
 ?>
 
 
