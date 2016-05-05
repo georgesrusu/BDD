@@ -1,4 +1,21 @@
-<form>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style type="text/css">
+        #formulaire {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .divForm {
+            margin-left: auto;
+            margin-right: auto;
+        }
+  </style>
+</head>
+<body>
+
+<div class="divForm">
+<form id="formulaire">
 
     <div>
         <label for="identifiant">Identifiant: </label>
@@ -11,8 +28,20 @@
     </div>
 
     <div class="button">
-        <button type="submit">Register</button>
         <button type="submit">Connexion</button>
+        <button type="submit">Register</button>
     </div>
 
 </form>
+</div>
+
+<form action="action.php" method="post">
+ <p>Identifiant : <input type="text" name="nom" /></p>
+ <p>Password : <input type="text" name="age" /></p>
+ <p><input type="submit" value="OK">
+</form>
+<form action="register.php" method="post">
+<p><input type="submit" value="Register"></p>
+</form></p>
+
+</body>
