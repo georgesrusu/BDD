@@ -26,6 +26,9 @@
                     echo "<br/>Ouverture de l'index admin<br/>";
                     echo '<meta http-equiv="Refresh" content="0;URL=TemplateSite/adminIndex.php">';            
                 }
+                else {
+                    echo '<meta http-equiv="Refresh" content="0;URL=TemplateSite/index.php">';       
+                }
             }
         }
 

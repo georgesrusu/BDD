@@ -35,4 +35,34 @@
 		echo "<br/>";
 	}
 
+	$stmt = $conn->prepare("SELECT * FROM Bar"); 
+	$stmt->execute();
+
+	echo "<br/><br/><br/>---------------------<br/><br/><br/>";
+
+	$restaurantList = $stmt->fetchall();
+	for($j=0;$j<sizeof($restaurantList);++$j){
+		echo " | ";
+		for ($i=0;$i<sizeof($restaurantList[$j]);++$i){
+			echo $restaurantList[$j][$i];
+			echo " | ";
+		}
+		echo "<br/>";
+	}
+
+	$stmt = $conn->prepare("SELECT * FROM Hotel"); 
+	$stmt->execute();
+
+	echo "<br/><br/><br/>---------------------<br/><br/><br/>";
+
+	$restaurantList = $stmt->fetchall();
+	for($j=0;$j<sizeof($restaurantList);++$j){
+		echo " | ";
+		for ($i=0;$i<sizeof($restaurantList[$j]);++$i){
+			echo $restaurantList[$j][$i];
+			echo " | ";
+		}
+		echo "<br/>";
+	}
+
 ?>

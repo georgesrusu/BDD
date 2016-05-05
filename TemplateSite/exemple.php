@@ -30,42 +30,76 @@ Released   : 20130902
         // set the resulting array to associative
 	$result = $stmt->fetchall(); //fetch
 
-	$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
-	$stmt->execute();
+	$i = $_GET['id'];
+	$idEtablissement = $result[$i][0];
+	$typeEtablissement = $result[$i][10];
+	#$typeEtablissement = "Cafe";
 
-	$restaurantList = $stmt->fetchall();
+	if ($typeEtablissement == "Restaurant") {
+		$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
+		$stmt->execute();
 
-	$i = 0;
+		$restaurantList = $stmt->fetchall();
+
+		for ($rest=0; $rest < sizeof($restaurantList); $rest++) { 
+			if ($idEtablissement == $restaurantList[$rest][0]) {
+				$indexTable = $rest;
+			}
+		}
+	}
+	#TODO: D'abord trouver la place des etablissement dans les tables spécidique
+	elseif ($typeEtablissement == "Cafe") {
+		$stmt = $conn->prepare("SELECT * FROM Bar"); 
+		$stmt->execute();
+
+		$restaurantList = $stmt->fetchall();
+
+		for ($bar=0; $bar < sizeof($restaurantList); $bar++) { 
+			if ($idEtablissement == $restaurantList[$bar][0]) {
+				$indexTable = $bar;
+			}
+		}
+	}
+
+	elseif ($typeEtablissement == "Hotel") {
+		$stmt = $conn->prepare("SELECT * FROM Hotel"); 
+		$stmt->execute();
+
+		$restaurantList = $stmt->fetchall();
+
+		for ($hot=0; $hot < sizeof($restaurantList); $hot++) { 
+			if ($idEtablissement == $restaurantList[$hot][0]) {
+				$indexTable = $hot;
+			}
+		}
+	}
 
 	function closedPrint($day, $id) {
 		if ($id == "0") {
-			echo "
-						<tr>
-							<td>"  . $day . "</td>
+			echo "		<tr>
+							<td class=\"daysClosed\">"  . $day . "</td>
 							<td>am : <span class=\"t\">Ouvert</span></td>
 							<td>pm : <span class=\"t\">Ouvert</span></td>
 						</tr>";
 		}
 		elseif ($id == "1") {
 			echo "		<tr>
-							<td>"  . $day . "</td>
+							<td class=\"daysClosed\">"  . $day . "</td>
 							<td>am : Fermé</td>
 							<td>pm : Fermé</td>
 						</tr>";
 		}
 		elseif ($id == "2") {
-			echo "
-						<tr>
-							<td>"  . $day . "</td>
+			echo "		<tr>
+							<td class=\"daysClosed\">"  . $day . "</td>
 							<td>am : Fermé</td>
 							<td>pm : <span class=\"t\">Ouvert</span></td>
 
 						</tr>";				
 		}
 		else {
-			echo "
-						<tr>
-							<td>"  . $day . "</td>
+			echo "		<tr>
+							<td class=\"daysClosed\">"  . $day . "</td>
 							<td>am : <span class=\"t\">Ouvert</span></td>
 							<td>pm : Fermé</td>
 						</tr>";
@@ -79,7 +113,7 @@ Released   : 20130902
 function initialize() {
   var mapProp = {
     center:new google.maps.LatLng(<?=$result[$i][7]?>,<?=$result[$i][6]?>),
-    zoom:15,
+    zoom:18,
     mapTypeId:google.maps.MapTypeId.ROADMAP
   };
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
@@ -93,7 +127,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	<div id="header">
 		<div id="logo">
 			<img src="" alt="" />
-			<h1><a href="index.html">Eureka</a></h1>
+			<h1><a href="index.php">Eureka</a></h1>
 			<span>Created for <a href="https://www.ulb.ac.be" rel="nofollow">ULB Project</a></span>
 		</div>
 		<div id="menu">
@@ -115,46 +149,72 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			</div>
 			<h2 class="infos">Informations sur leurs services:</h2>
 				<?php
-				if ($restaurantList[$i][3]) {
-					echo "<p>TakeAway : Oui</p>";
+
+				if ($typeEtablissement == "Restaurant") {
+
+					if ($restaurantList[$indexTable][3]) {
+						echo "<p>TakeAway : Oui</p>";
+					}
+					else {
+						echo "<p>TakeAway : Non</p>";
+					}
+					if ($restaurantList[$indexTable][4]) {
+						echo "<p>Livraison à domicile : Oui</p>";
+					}
+					else {
+						echo "<p>Livraison à domicile : Non</p>";
+					}
+					echo "<p>Fourchette de prix : " . $restaurantList[$indexTable][1] . "€</p>";
+					echo "<p>Banquet maximum : " . $restaurantList[$indexTable][2] . " personnes</p>";
 				}
-				else {
-					echo "<p>TakeAway : Non</p>";
+				elseif ($typeEtablissement == "Cafe") {
+					if ($restaurantList[$indexTable][1]) {
+						echo "<p>Smoking : Oui</p>";
+					}
+					else {
+						echo "<p>Smoking : Non</p>";
+					}
+
+					if ($restaurantList[$indexTable][2]) {
+						echo "<p>Snack : Oui<p>";
+					}
+					else {
+						echo "<p>Snack : Non</p>";
+					}
 				}
-				if ($restaurantList[$i][4]) {
-					echo "<p>Livraison à domicile : Oui</p>";
+				elseif ($typeEtablissement == "Hotel") {
+					echo "<p>Etoiles : " . $restaurantList[$indexTable][3] . "</p>";
+					echo "<p>Capacité : " . $restaurantList[$indexTable][2] . " chambres</p>";
+					echo "<p>Fourchette de prix : " . $restaurantList[$indexTable][1] . "€</p>";
 				}
-				else {
-					echo "<p>Livraison à domicile : Non</p>";
-				}
-				echo "<p>Fourchette de prix : " . $restaurantList[$i][1] . "€</p>";
-				echo "<p>Banquet maximum : " . $restaurantList[$i][2] . " personnes</p>";
 				?>
 
 			<br/>
-			<h2 class="infos">Ouverture:</h2>
 
 			<?php 
-				$ouverture = (string)$restaurantList[$i][5];
+				if ($typeEtablissement == "Restaurant") {
+					echo "<h2 class=\"infos\">Ouverture:</h2>";
+					$ouverture = (string)$restaurantList[$indexTable][5];
 
-				if (strlen($ouverture) < 7) {
-					$numberOfMiss = 7 - strlen($ouverture);
-					for ($elem=0; $elem < $numberOfMiss; $elem++) { 
-						$ouverture = "0" . $ouverture;
+					if (strlen($ouverture) < 7) {
+						$numberOfMiss = 7 - strlen($ouverture);
+						for ($elem=0; $elem < $numberOfMiss; $elem++) { 
+							$ouverture = "0" . $ouverture;
+						}
 					}
-				}
 
-				echo "	<table border=0 style=\"width:40%\">";
-				closedPrint("Lundi", $ouverture[0]);
-				closedPrint("Mardi", $ouverture[1]);
-				closedPrint("Mercredi", $ouverture[2]);
-				closedPrint("Jeudi", $ouverture[3]);
-				closedPrint("Vendredi", $ouverture[4]);
-				closedPrint("Samedi", $ouverture[5]);
-				closedPrint("Dimanche", $ouverture[6]);
-				echo "</table>";
-				echo "<br/>";
-				?>
+					echo "	<table border=0 style=\"width:40%\">";
+					closedPrint("Lundi", $ouverture[0]);
+					closedPrint("Mardi", $ouverture[1]);
+					closedPrint("Mercredi", $ouverture[2]);
+					closedPrint("Jeudi", $ouverture[3]);
+					closedPrint("Vendredi", $ouverture[4]);
+					closedPrint("Samedi", $ouverture[5]);
+					closedPrint("Dimanche", $ouverture[6]);
+					echo "</table>";
+					echo "<br/>";
+				}
+			?>
 
 			<h2 class="infos">Localisation:</h2>
 				<?php 
@@ -166,7 +226,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			<h2 class="infos">Contact:</h2>
 				<?php
 				echo "<p>Téléphone : " . $result[$i][8] ."</p>";
-				echo "<p>Site web : " . $result[$i][9] . "</p>";
+				echo "<p>Site web : ";
+				if ($result[$i][9]) {
+					echo $result[$i][9];
+				}
+				else {
+					echo "Aucun";
+				}
+				echo "</p>";
 				?>
 		</div>
 
