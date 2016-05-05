@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head><title>Connexion</title></head>
+    <head>
+        <title>Connexion</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="login.css" rel="stylesheet" type="text/css"/>
+    </head>
     <body>
+        <div class="formulaire">
         <form name="inscription" method="post" action="login.php">
             Identifiant : <input type="text" name="identifiant"/> <br/>
             Password : <input type="password" name="password"/><br/>
+            <div class="button">
             <input type="submit" name="connexion" value="Connexion"/>
             <input type="submit" name="register" value="Register"/>
+            <div>
         </form>
+        <div>
 
         <?php
         if(isset($_POST['connexion'])){
@@ -24,10 +32,10 @@
                 #TODO: QUERY BDD et verifier admin
                 if ($pseudo == "Max") {
                     echo "<br/>Ouverture de l'index admin<br/>";
-                    echo '<meta http-equiv="Refresh" content="0;URL=TemplateSite/adminIndex.php">';            
+                    echo '<meta http-equiv="Refresh" content="0;URL=adminIndex.php">';            
                 }
                 else {
-                    echo '<meta http-equiv="Refresh" content="0;URL=TemplateSite/index.php">';       
+                    echo '<meta http-equiv="Refresh" content="0;URL=index.php">';       
                 }
             }
         }
