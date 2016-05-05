@@ -62,7 +62,7 @@
     		echo "Error: " . $e->getMessage()."<br/>";
 		}
 	}
-	function create_etablissement($conn,$etabName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site){
+	function create_etablissement($conn,$etabName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site,$type){
 		/*
 		 * AJOUT DES ETABLISSEMENT SI PAS DEJA EXISTANT
 		 */
@@ -73,7 +73,7 @@
 			$result=$stmt->fetch();
 			if ($result==""){
 				echo "ETABLISSEMENT DOESN'T EXIST <br/>";
-				$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$etabName.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","Restaurant")';
+				$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$etabName.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
     			$conn->exec($sql);
 				echo "INSERT ETABLISSEMENT SUCCESS <br/>";
 				$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$etabName.'"';
@@ -282,7 +282,8 @@
 				$site="";
 				echo "Site : Aucun site web n'est présent<br />";
 			}
-			$etablissementID=create_etablissement($conn,$restoName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site); //ajout etablissement
+			$type="Restaurant";
+			$etablissementID=create_etablissement($conn,$restoName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site,$type); //ajout etablissement
 			add_modification_admin($conn,$etablissementID,$adminID,$date); //ajout dans la table ModificationAdmin
 			//ICI ON VA INSERT DANS LA TABLE RESTAURANT
 			$dayList = $resto->getElementsByTagName('On');
@@ -413,7 +414,7 @@
         	echo "Longitude : " . $longitude . "<br/>";
         	$latitude = $cafe->getElementsByTagName('Latitude')->item(0)->nodeValue;
         	echo "Latitude : " . $latitude . "<br/>";
-        	$tel = $cafe->getElementsByTagName('Zip')->item(0)->nodeValue;
+        	$tel = $cafe->getElementsByTagName('Tel')->item(0)->nodeValue;
         	echo "Tel : " . $tel . "<br/>";
         	$site = $cafe->getElementsByTagName('Site')->item(0);
         	if ($site->nodeName) {
@@ -423,7 +424,8 @@
             	$site="";
             	echo "Site : Aucun site web n'est présent<br />";
         	}
-        	$etablissementID=create_etablissement($conn,$cafeName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site); //ajout etablissement
+        	$type="Bar";
+        	$etablissementID=create_etablissement($conn,$cafeName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site,$type); //ajout etablissement
 			add_modification_admin($conn,$etablissementID,$adminID,$date); //ajout dans la table ModificationAdmin
 			//ICI ON VA INSERT DANS LA TABLE BAR
         	$smoking = $cafe->getElementsByTagName('Smoking')->item(0);
@@ -524,7 +526,7 @@
         	echo "Longitude : " . $longitude . "<br/>";
         	$latitude = $hotel->getElementsByTagName('Latitude')->item(0)->nodeValue;
         	echo "Latitude : " . $latitude . "<br/>";
-        	$tel = $hotel->getElementsByTagName('Zip')->item(0)->nodeValue;
+        	$tel = $hotel->getElementsByTagName('Tel')->item(0)->nodeValue;
         	echo "Tel : " . $tel . "<br/>";
         	$site = $hotel->getElementsByTagName('Site')->item(0);
         	if ($site->nodeName) {
@@ -534,7 +536,8 @@
             	$site="";
             	echo "Site : Aucun site web n'est présent<br />";
         	}
-        	$etablissementID=create_etablissement($conn,$hotelName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site); //ajout etablissement
+        	$type="Hotel";
+        	$etablissementID=create_etablissement($conn,$hotelName,$street,$num,$zip,$city,$longitude,$latitude,$tel,$site,$type); //ajout etablissement
 			add_modification_admin($conn,$etablissementID,$adminID,$date); //ajout dans la table ModificationAdmin
 			//ICI ON VA INSERT DANS LA TABLE HOTEL
         	$stars = $hotel->getElementsByTagName('Stars')->item(0);
