@@ -36,7 +36,7 @@ Released   : 20130902
 				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
 				<li><a href="#" accesskey="2" title="Type here to research something">Research</a></li>
 				<li><a href="../login.php" accesskey="3" title="Connexion to our database">Connexion</a></li>
-				<li><a href="exemple.php" accesskey="4" title="">TEST AFFICHAGE</a></li>
+				<li><a href="exemple.php?id=0">TEST id=0</a></li>
 
 			</ul>
 		</div>

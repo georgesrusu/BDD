@@ -581,4 +581,8 @@
 	}
 	.t {
 		color: green;
-		font-weight: bold;	}
+		font-weight: bold;	
+	}
+	.daysClosed {
+		text-align: left;
+	}
