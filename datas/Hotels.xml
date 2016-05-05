@@ -7,6 +7,80 @@
 			<Num>42</Num>
 			<Zip>1180</Zip>
 			<City>Bruxelles</City>
+			<Longitude>4.356925</Longitude>
+			<Latitude>50.8362558</Latitude>
+		</Address>
+		<Tel>02/356 23 78</Tel>
+		<Site link="http://www.sofitel.com/"/>
+		<Stars number="3"/>
+		<Bedrooms capacity="50"/>
+		<PriceRange>250</PriceRange>
+	</Informations>
+
+	<Comments>
+		<Comment nickname="Max" date="03/05/2016" score="3">Hotel très connu et très agréable, bien placé.
+	</Comment>
+		<Comment nickname="George" date="25/11/2013" score="1">Beaucoup trop bruyant, que ce soit dedans que dehors.
+	</Comment>
+
+	</Comments>
+
+	<Tags>
+		<Tag name="Classe">
+			<User nickname="Svetlana"/>
+			<User nickname="Pedrouska"/>
+		</Tag>
+		<Tag name="Bien situé">
+			<User nickname="Matteo"/>
+		</Tag>
+	</Tags>
+</Hotel>
+
+<Hotel creationDate="22/12/2000" nickname="Max">
+	<Informations>
+		<Name>Hilton</Name>
+		<Address>
+			<Street>Gare central</Street>
+			<Num>1</Num>
+			<Zip>1180</Zip>
+			<City>Bruxelles</City>
+			<Longitude>4.356026</Longitude>
+			<Latitude>50.8459706</Latitude>
+		</Address>
+		<Tel>02/111 22 33</Tel>
+		<Site link="http://www.hilton.com/"/>
+		<Stars number="4"/>
+		<Bedrooms capacity="100"/>
+		<PriceRange>1000</PriceRange>
+	</Informations>
+
+	<Comments>
+		<Comment nickname="Leonardo" date="03/05/2016" score="4">J'ai louer tous l'étage, c'était vraiment chouette.
+	</Comment>
+		<Comment nickname="Dominique" date="25/11/2013" score="0">Très mauvais, il n'y avait pas Paris Hilton.
+	</Comment>
+
+	</Comments>
+
+	<Tags>
+		<Tag name="Luxueux">
+			<User nickname="François"/>
+			<User nickname="Nicolas"/>
+		</Tag>
+		<Tag name="Repas délicieux">
+			<User nickname="Gerard"/>
+		</Tag>
+	</Tags>
+</Hotel>
+
+<Hotel creationDate="15/11/1996" nickname="Max">
+	<Informations>
+		<Name>Sofitel</Name>
+		<Address>
+			<Street>Avenue Louise</Street>
+			<Num>42</Num>
+			<Zip>1180</Zip>
+			<City>Bruxelles</City>
 			<Longitude>4.666666</Longitude>
 			<Latitude>50.777777</Latitude>
 		</Address>

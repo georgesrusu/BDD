@@ -1,0 +1,25 @@
+.formulaire {
+	border-style: groove;
+	border-width: 2px;
+	border-radius: 5px;
+	margin-left: 35%;
+	margin-top: 15%;
+	width: 350px;
+	padding: 10px;
+	background: white;
+}
+body
+{
+	margin: 0px;
+	padding: 0px;
+	background: #202020;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 12pt;
+	font-weight: 300;
+	color: #444444;
+}
+.button {
+	padding: 5px;
+	margin-left: 90px;
+	margin-top: 10px;
+}
