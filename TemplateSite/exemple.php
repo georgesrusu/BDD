@@ -271,19 +271,35 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				?>
 
 			<h2 class="infos">Tags de l'établissement:</h2>
+			<table width="50%" border="1" align="center">
+				<tr>
+					<th>Label</th>
+					<th>Apposé</th>
+				</tr>
 			<?php
 				$labelArray = array();
+				$countArray = array();
 				for ($label = 0; $label < sizeof($labelList); $label++) {
 					if ($labelList[$label][0] == $idEtablissement) {
 						if (!in_array($labelList[$label][2], $labelArray)) {
 							array_push($labelArray, $labelList[$label][2]);
+							array_push($countArray, 1);
+						}
+						else {
+							$id = array_keys($labelArray, $labelList[$label][2]);
+							$countArray[$id] = $countArray[$id] + 1;
 						}
 					}
 				}
 				for ($label=0; $label < count($labelArray); $label++) { 
-					echo "<p>" . $labelArray[$label] . "</p>";
+					#echo "<p>" . $labelArray[$label] . "</p>";
+					echo "	<tr>
+								<td>" . $labelArray[$label] . "</td>
+								<td>" . $countArray[$label] . "</td>
+							</tr>";
 				}
 			?>
+			</table>
 		</div>
 
 		<br/><br/><br/><br/>
