@@ -18,34 +18,45 @@
         <div>
 
         <?php
+                error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+        include("connect.php");
         if(isset($_POST['connexion'])){
             $pseudo=$_POST['identifiant'];
             $password=$_POST['password'];
-            echo "Connexion de $pseudo avec le password : $password";
 
             if (empty($pseudo) or empty($password)) {
                 echo '<script language="javascript">';
-                echo 'alert("Identifiant or password empty !")';
+                echo 'alert("login or password empty !")';
                 echo '</script>';
             }
             else {
-                #TODO: QUERY BDD et verifier admin
-                if ($pseudo == "Max") {
-                    echo "<br/>Ouverture de l'index admin<br/>";
-                    echo '<meta http-equiv="Refresh" content="0;URL=adminIndex.php">';            
+                try{
+                    $sql = 'SELECT ID,isAdmin FROM Utilisateur WHERE identifiant="'.$pseudo.'" AND mot_de_passe="'.$password.'"';
+                    $stmt = $conn->prepare($sql); 
+                    $stmt->execute();
+                    $result=$stmt->fetch();
+                    if ($result==""){
+                        echo '<script language="javascript">';
+                        echo 'alert("login or password wrong !")';
+                        echo '</script>';
+                    }
+                    $clientID=$result[0];
+                    $isAdmin=$result[1];
+                    if ($clientID>0){
+                        echo '<meta http-equiv="Refresh" content="0;URL=./Site/index.php?pseudo='.$pseudo.'&isAdmin='.$isAdmin.'">';
+                    }
                 }
-                else {
-                    echo '<meta http-equiv="Refresh" content="0;URL=index.php">';       
+                catch(PDOException $e) {
+                    echo "Error: " . $e->getMessage()."<br/>";
                 }
             }
         }
-
         #TODO: QUERY creation de compte
         if(isset($_POST['register'])) {
             $pseudo = $_POST['identifiant'];
             $password = $_POST['password'];
-            echo "Création du compte $pseudo avec le password : $password";
+            echo '<meta http-equiv="Refresh" content="0;URL=create_account.php">';
         }
-        ?>
-    </body>
+        ?></body>
 </html>
