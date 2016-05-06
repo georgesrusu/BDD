@@ -27,13 +27,25 @@ Released   : 20130902
 	$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
 	$stmt->execute();
 
-        // set the resulting array to associative
+    // set the resulting array to associative
 	$result = $stmt->fetchall(); //fetch
 
 	$i = $_GET['id'];
 	$idEtablissement = $result[$i][0];
 	$typeEtablissement = $result[$i][10];
-	#$typeEtablissement = "Cafe";
+
+	$stmt = $conn->prepare("SELECT * FROM Commentaire"); 
+	$stmt->execute();
+	$commentList = $stmt->fetchall(); //fetch
+
+	$stmt = $conn->prepare("SELECT * FROM Utilisateur"); 
+	$stmt->execute();
+	$userList = $stmt->fetchall(); //fetch
+
+	$stmt = $conn->prepare("SELECT * FROM Label"); 
+	$stmt->execute();
+	$labelList = $stmt->fetchall(); //fetch
+
 
 	if ($typeEtablissement == "Restaurant") {
 		$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
@@ -48,7 +60,7 @@ Released   : 20130902
 		}
 	}
 	#TODO: D'abord trouver la place des etablissement dans les tables spécidique
-	elseif ($typeEtablissement == "Cafe") {
+	elseif ($typeEtablissement == "Bar") {
 		$stmt = $conn->prepare("SELECT * FROM Bar"); 
 		$stmt->execute();
 
@@ -105,7 +117,6 @@ Released   : 20130902
 						</tr>";
 		}
 	}
-
 ?>
 
 <script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -167,7 +178,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					echo "<p>Fourchette de prix : " . $restaurantList[$indexTable][1] . "€</p>";
 					echo "<p>Banquet maximum : " . $restaurantList[$indexTable][2] . " personnes</p>";
 				}
-				elseif ($typeEtablissement == "Cafe") {
+				elseif ($typeEtablissement == "Bar") {
 					if ($restaurantList[$indexTable][1]) {
 						echo "<p>Smoking : Oui</p>";
 					}
@@ -235,6 +246,60 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				}
 				echo "</p>";
 				?>
+
+			<h2 class="infos">Commentaires:</h2>
+				<?php
+					for ($comment = 0; $comment < sizeof($commentList); $comment++) {
+						if ($commentList[$comment][0] == $idEtablissement) {
+							echo "<div class=\"comment\">";
+							echo "<p class=\"nameComment\">" . $userList[$commentList[$comment][1]-1][1] . "</p>";
+							echo "<p>" . $commentList[$comment][2] . "</p>";
+							echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
+							$numberStar = $commentList[$comment][4];
+							for ($star = 0; $star < 5; $star++) {
+								if ($star < $numberStar) {
+									echo "&#9733;";
+								}
+								else {
+									echo "&#9734";
+								}
+							} 
+							echo "<p>" . $commentList[$comment][3] . "</p>";
+							echo "</div>";
+						}
+					}
+				?>
+
+			<h2 class="infos">Tags de l'établissement:</h2>
+			<table width="50%" border="1" align="center">
+				<tr>
+					<th>Label</th>
+					<th>Apposé</th>
+				</tr>
+			<?php
+				$labelArray = array();
+				$countArray = array();
+				for ($label = 0; $label < sizeof($labelList); $label++) {
+					if ($labelList[$label][0] == $idEtablissement) {
+						if (!in_array($labelList[$label][2], $labelArray)) {
+							array_push($labelArray, $labelList[$label][2]);
+							array_push($countArray, 1);
+						}
+						else {
+							$id = array_keys($labelArray, $labelList[$label][2]);
+							$countArray[$id] = $countArray[$id] + 1;
+						}
+					}
+				}
+				for ($label=0; $label < count($labelArray); $label++) { 
+					#echo "<p>" . $labelArray[$label] . "</p>";
+					echo "	<tr>
+								<td>" . $labelArray[$label] . "</td>
+								<td>" . $countArray[$label] . "</td>
+							</tr>";
+				}
+			?>
+			</table>
 		</div>
 
 		<br/><br/><br/><br/>
