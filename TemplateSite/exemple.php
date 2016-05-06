@@ -38,6 +38,14 @@ Released   : 20130902
 	$stmt->execute();
 	$commentList = $stmt->fetchall(); //fetch
 
+	$stmt = $conn->prepare("SELECT * FROM Utilisateur"); 
+	$stmt->execute();
+	$userList = $stmt->fetchall(); //fetch
+
+	$stmt = $conn->prepare("SELECT * FROM Label"); 
+	$stmt->execute();
+	$labelList = $stmt->fetchall(); //fetch
+
 
 	if ($typeEtablissement == "Restaurant") {
 		$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
@@ -241,30 +249,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				?>
 
 			<h2 class="infos">Commentaires:</h2>
-				<div class="comment">
-					<p class="nameComment">Julie</p>
-					<p>21/15/2016</p>
-					<p class="star"><span style="color:black">Score :</span> 
-					<?php 
-						$numberStar = 4;
-						for ($star = 0; $star < 5; $star++) {
-							if ($star < $numberStar) {
-								echo "&#9733;";
-							}
-							else {
-								echo "&#9734";
-							}
-						} 
-					?>
-					</p>
-					<p>Très jolie endroit, j'ai adorer avec mon fils michelle et ma tante tanti tantina et dominique le fameux DSK</p>
-				</div>
-
 				<?php
 					for ($comment = 0; $comment < sizeof($commentList); $comment++) {
 						if ($commentList[$comment][0] == $idEtablissement) {
 							echo "<div class=\"comment\">";
-							echo "<p class=\"nameComment\">" . $commentList[$comment][1] . "</p>";
+							echo "<p class=\"nameComment\">" . $userList[$commentList[$comment][1]-1][1] . "</p>";
 							echo "<p>" . $commentList[$comment][2] . "</p>";
 							echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
 							$numberStar = $commentList[$comment][4];
@@ -282,6 +271,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					}
 				?>
 
+			<h2 class="infos">Tags de l'établissement:</h2>
+			<?php
+				$labelArray = array();
+				for ($label = 0; $label < sizeof($labelList); $label++) {
+					if ($labelList[$label][0] == $idEtablissement) {
+						if (!in_array($labelList[$label][2], $labelArray)) {
+							array_push($labelArray, $labelList[$label][2]);
+						}
+					}
+				}
+				for ($label=0; $label < count($labelArray); $label++) { 
+					echo "<p>" . $labelArray[$label] . "</p>";
+				}
+			?>
 		</div>
 
 		<br/><br/><br/><br/>
