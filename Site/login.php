@@ -51,7 +51,7 @@
             }
         }
         #TODO: QUERY creation de compte
-        if(isset($_POST['register'])) {
+        elseif(isset($_POST['register'])) {
             $pseudo = $_POST['identifiant'];
             $password = $_POST['password'];
             echo '<meta http-equiv="Refresh" content="0;URL=./create_account.php">';

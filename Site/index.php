@@ -166,7 +166,7 @@ Released   : 20130902
 		</div>-->
 		<br/><br/><br/><br/>
 		<div id="copyright">
-			<span>&copy; Eureka. All rights reserved. | Photos by <a href="http://eureka.com/"></a></span>
+			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>
 			<span>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</span>
 		</div>
 	</div>

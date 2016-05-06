@@ -29,67 +29,72 @@ Released   : 20130902
 
 <?php
 	include("../connect.php");
-	$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
-	$stmt->execute();
+	try{
+		$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
+		$stmt->execute();
 
     // set the resulting array to associative
-	$result = $stmt->fetchall(); //fetch
+		$result = $stmt->fetchall(); //fetch
 
-	$i = $_GET['etablissementID']-1;
-	$idEtablissement = $result[$i][0];
-	$typeEtablissement = $result[$i][10];
+		$i = $_GET['etablissementID']-1;
+		$idEtablissement = $result[$i][0];
+		$typeEtablissement = $result[$i][10];
 
-	$stmt = $conn->prepare("SELECT * FROM Commentaire"); 
-	$stmt->execute();
-	$commentList = $stmt->fetchall(); //fetch
-
-	$stmt = $conn->prepare("SELECT * FROM Utilisateur"); 
-	$stmt->execute();
-	$userList = $stmt->fetchall(); //fetch
-
-	$stmt = $conn->prepare("SELECT * FROM Label"); 
-	$stmt->execute();
-	$labelList = $stmt->fetchall(); //fetch
-
-
-	if ($typeEtablissement == "Restaurant") {
-		$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
+		$stmt = $conn->prepare("SELECT * FROM Commentaire"); 
 		$stmt->execute();
+		$commentList = $stmt->fetchall(); //fetch
 
-		$restaurantList = $stmt->fetchall();
+		$stmt = $conn->prepare("SELECT * FROM Utilisateur"); 
+		$stmt->execute();
+		$userList = $stmt->fetchall(); //fetch
 
-		for ($rest=0; $rest < sizeof($restaurantList); $rest++) { 
-			if ($idEtablissement == $restaurantList[$rest][0]) {
-				$indexTable = $rest;
+		$stmt = $conn->prepare("SELECT * FROM Label"); 
+		$stmt->execute();
+		$labelList = $stmt->fetchall(); //fetch
+
+
+		if ($typeEtablissement == "Restaurant") {
+			$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
+			$stmt->execute();
+
+			$restaurantList = $stmt->fetchall();
+
+			for ($rest=0; $rest < sizeof($restaurantList); $rest++) { 
+				if ($idEtablissement == $restaurantList[$rest][0]) {
+					$indexTable = $rest;
+				}
+			}
+		}
+		#TODO: D'abord trouver la place des etablissement dans les tables spécidique
+		elseif ($typeEtablissement == "Bar") {
+			$stmt = $conn->prepare("SELECT * FROM Bar"); 
+			$stmt->execute();
+
+			$restaurantList = $stmt->fetchall();
+
+			for ($bar=0; $bar < sizeof($restaurantList); $bar++) { 
+				if ($idEtablissement == $restaurantList[$bar][0]) {
+					$indexTable = $bar;
+				}
+			}
+		}
+
+		elseif ($typeEtablissement == "Hotel") {
+			$stmt = $conn->prepare("SELECT * FROM Hotel"); 
+			$stmt->execute();
+
+			$restaurantList = $stmt->fetchall();
+
+			for ($hot=0; $hot < sizeof($restaurantList); $hot++) { 
+				if ($idEtablissement == $restaurantList[$hot][0]) {
+					$indexTable = $hot;
+				}
 			}
 		}
 	}
-	#TODO: D'abord trouver la place des etablissement dans les tables spécidique
-	elseif ($typeEtablissement == "Bar") {
-		$stmt = $conn->prepare("SELECT * FROM Bar"); 
-		$stmt->execute();
-
-		$restaurantList = $stmt->fetchall();
-
-		for ($bar=0; $bar < sizeof($restaurantList); $bar++) { 
-			if ($idEtablissement == $restaurantList[$bar][0]) {
-				$indexTable = $bar;
-			}
-		}
-	}
-
-	elseif ($typeEtablissement == "Hotel") {
-		$stmt = $conn->prepare("SELECT * FROM Hotel"); 
-		$stmt->execute();
-
-		$restaurantList = $stmt->fetchall();
-
-		for ($hot=0; $hot < sizeof($restaurantList); $hot++) { 
-			if ($idEtablissement == $restaurantList[$hot][0]) {
-				$indexTable = $hot;
-			}
-		}
-	}
+	catch(PDOException $e) {
+        echo "Error: " . $e->getMessage()."<br/>";
+    }
 
 	function closedPrint($day, $id) {
 		if ($id == "0") {

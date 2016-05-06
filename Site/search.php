@@ -69,9 +69,7 @@ Released   : 20130902
 						<input type="submit" name="rechercher" value="Rechercher" />
 					</form>
 				</h1>
-				<?php 
-				error_reporting(E_ALL);
-       			ini_set('display_errors', 1);
+				<?php
 				if(isset($_POST['rechercher'])){
             		$type=$_POST['type'];
             		$name=$_POST['name'];
@@ -109,7 +107,7 @@ Released   : 20130902
                 	echo "<br/>";
                 	if (sizeof($result)==0){
                 		echo "<hr>";
-                		echo "<p><strong>0 resultat trouvé ";
+                		echo "<p><strong><a>0 resultat trouvé ";
                 		if( ($type!="") OR ($name!="") OR ($zip!="") OR ($label!="")){
             				echo "pour ";
                 			if ($type!=""){
@@ -128,7 +126,7 @@ Released   : 20130902
                 				echo $label;
                 			}
                 		}
-                		echo "</strong></p>";
+                		echo "</a></strong></p>";
                 		echo "<hr>";
                 	}
                 	else{
@@ -218,7 +216,7 @@ Released   : 20130902
 		</div>-->
 		<br/><br/><br/><br/>
 		<div id="copyright">
-			<span>&copy; Eureka. All rights reserved. | Photos by <a href="http://eureka.com/"></a></span>
+			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>
 			<span>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</span>
 		</div>
 	</div>

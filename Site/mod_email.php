@@ -6,16 +6,16 @@ session_start();
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modification mot de passe</title>
+        <title>Modification email</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href="login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="formulaire">
-        <form name="inscription" method="post" action="mod_mdp.php">
-            <p>Veuillez saisir le nouveau mot de passe :</p>
-            Mot de passe : <input type="password" name="password"/> <br/>
-            Confirmation : <input type="password" name="password2"/><br/>
+        <form name="inscription" method="post" action="mod_email.php">
+            <p>Veuillez saisir le nouveau email :</p>
+            email : <input type="email" name="email"/> <br/>
+            Confirmation : <input type="email" name="email2"/><br/>
             <div class="button">
             <input type="submit" name="update" value="Confirmer"/>
             <input type="submit" name="cancel" value="Annuler"/>
@@ -25,12 +25,12 @@ session_start();
     <?php
         include("../connect.php");
         if(isset($_POST['update'])) {
-            $password = $_POST['password'];
-            $password2 = $_POST['password2'];
-            if ($password!=$password2){
+            $email = $_POST['email'];
+            $email2 = $_POST['email2'];
+            if ($email!=$email2){
 
                 echo '<script language="javascript">';
-                echo 'alert("Password not matching!")';
+                echo 'alert("Email not matching!")';
                 echo '</script>';
             }
             else{
@@ -40,7 +40,7 @@ session_start();
                     $stmt->execute();
                     $result=$stmt->fetch();
                     if ($result>0){
-                        $sql = 'UPDATE Utilisateur SET mot_de_passe="'.$password.'" WHERE identifiant="'.$_SESSION["pseudo"].'"';
+                        $sql = 'UPDATE Utilisateur SET email="'.$email.'" WHERE identifiant="'.$_SESSION["pseudo"].'"';
                         $stmt = $conn->exec($sql); 
                         echo '<meta http-equiv="Refresh" content="0;URL=./index.php?pseudo='.$_SESSION["pseudo"].'&isAdmin='.$_SESSION["isAdmin"].'">';
                     }

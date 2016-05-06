@@ -1,5 +1,8 @@
 <?php
 session_start();
+include("../connect.php");
+				error_reporting(E_ALL);
+       			ini_set('display_errors', 1);
 //if(!isset($_SESSION['cart_items'])){
     //$_SESSION['cart_items'] = array();
 ?>
@@ -18,7 +21,7 @@ Released   : 20130902
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Mon profile</title>
+<title>Historique d'activite</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -77,7 +80,7 @@ Released   : 20130902
                     ?></h1>
 			</div>
 
-			<?php echo '<h2>Profile de '.$_SESSION["pseudo"].'</h2>';?>
+			<?php echo "<h2>Historique de l'activite de ".$_SESSION["pseudo"]."</h2>";?>
 			<br/>
 
 			<!--<p>This is <strong>Privy</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
@@ -85,18 +88,101 @@ Released   : 20130902
 				<li><a href="#" class="button">Etiam posuere</a></li>
 			</ul>-->
 		</div>
-		<p><strong>Action :</strong></p>
-		<a href="./deconnexion.php"><p>Se deconnecter</p></a>
-		<a href="./mod_mdp.php"><p>Modifier mot de passe</p></a>
-		<a href="./mod_email.php"><p>Modifier email</p></a>
-		<a href="./hist_acti.php"><p>Voir historique de mon activité</p></a>
+		<p><strong>Commentaires :</strong></p>
 		<?php
-		if ($_SESSION["isAdmin"]==1){
-			echo '<a href="./ajout_etab.php"><p>Ajouter un etablissement</p></a>';
-			echo '<a href="./index.php"><p>Modifier un etablissement</p></a>';
-			echo '<a href="./index.php"><p>Supprimer un etablissement</p></a>';
-		}
-		?>
+
+		    try{
+		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
+               	$stmt = $conn->prepare($sql); 
+               	$stmt->execute();
+                $result=$stmt->fetch();
+                $clientID=$result[0];
+
+               	$sql = 'SELECT * FROM Commentaire WHERE clientID="'.$clientID.'"';
+                $stmt = $conn->prepare($sql); 
+                $stmt->execute();
+                $result=$stmt->fetchall();
+                echo "<br/>";
+                echo "<br/>";
+                if (sizeof($result)==0){
+                	echo "<hr>";
+                	echo "<p><strong><a>Il n'y a aucune activité </a></strong></p>";
+                	echo "<hr>";
+                }
+                else{
+                	echo "<hr>";
+                	echo "<p><strong><a>".sizeof($result)." commentaires trouvé </a></strong></p>";
+                	echo "<hr>";
+                	for ($i=0;$i<sizeof($result);++$i){
+      					$etablissementID=$result[$i][0];
+      					//$clientID=$result[$i][1];
+      					$sql = 'SELECT nom FROM Etablissement WHERE ID="'.$etablissementID.'"';
+                		$stmt = $conn->prepare($sql); 
+                		$stmt->execute();
+                		$query=$stmt->fetch();
+
+      					echo "<hr>";
+      					echo "<p><strong>".$query[0]."</strong></p>";
+      					echo "<p>".$result[$i][2]."</p>";
+           				echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
+						$numberStar = $result[$i][4];
+						for ($star = 0; $star < 5; $star++) {
+							if ($star < $numberStar) {
+								echo "&#9733;";
+							}
+							else {
+								echo "&#9734";	
+							}
+						}
+           				echo "<p>".$result[$i][3]."</p>";
+           				echo '<strong><a href=./exemple.php?etablissementID='.$etablissementID.'>Voir dans le contexte ...</a></strong>';
+           				echo "<hr>";
+           				}
+                }
+            }
+            catch(PDOException $e) {
+                echo "Error: " . $e->getMessage()."<br/>";
+            }
+            ?>
+           <br/>
+		<p><strong>Tags :</strong></p>
+		<?php
+		    try{
+               	$sql = 'SELECT * FROM Label WHERE clientID="'.$clientID.'"';
+                $stmt = $conn->prepare($sql); 
+                $stmt->execute();
+                $result=$stmt->fetchall();
+                echo "<br/>";
+                echo "<br/>";
+                if (sizeof($result)==0){
+                	echo "<hr>";
+                	echo "<p><strong><a>Il n'y a aucune activité </a></strong></p>";
+                	echo "<hr>";
+                }
+                else{
+                	echo "<hr>";
+                	echo "<p><strong><a>".sizeof($result)." tags trouvé </a></strong></p>";
+                	echo "<hr>";
+                	for ($i=0;$i<sizeof($result);++$i){
+      					$etablissementID=$result[$i][0];
+      					//$clientID=$result[$i][1];
+      					$sql = 'SELECT nom FROM Etablissement WHERE ID="'.$etablissementID.'"';
+                		$stmt = $conn->prepare($sql); 
+                		$stmt->execute();
+                		$query=$stmt->fetch();
+
+      					echo "<hr>";
+      					echo "<p><strong>".$query[0]."</strong></p>";
+      					echo "<p>".$result[$i][2]."</p>";
+           				echo '<strong><a href=./exemple.php?etablissementID='.$etablissementID.'>Voir dans le contexte ...</a></strong>';
+           				echo "<hr>";
+           				}
+                }
+            }
+            catch(PDOException $e) {
+                echo "Error: " . $e->getMessage()."<br/>";
+            }
+            ?>
 		<!--<div id="featured">
 			<div class="title">
 				<h2>Maecenas lectus sapien</h2>
