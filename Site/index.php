@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['pseudo'])){
+	$_SESSION['pseudo'] = $_GET['pseudo'];
+}
+//if(!isset($_SESSION['cart_items'])){
+    //$_SESSION['cart_items'] = array();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by TEMPLATED
@@ -13,7 +21,7 @@ Released   : 20130902
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>Eureka-Home</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -21,7 +29,6 @@ Released   : 20130902
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
 </head>
 <body>
 <div id="page" class="container">
@@ -34,9 +41,9 @@ Released   : 20130902
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-				<li><a href="#" accesskey="2" title="Type here to research something">Research</a></li>
+				<li><a href="./search.php" accesskey="2" title="Type here to research something">Research</a></li>
 				<li><?php
-				if(isset($_GET['pseudo'])) {
+				if(isset($_SESSION['pseudo'])) {
 					//$pseudo = $_GET['pseudo'];
 					echo '<a href="./profil.php" accesskey="3" title="Connexion to our database">';
 					echo "Profil";
@@ -61,18 +68,18 @@ Released   : 20130902
 				<?php 
 					if(isset($_GET['action'])){
 						$action = $_GET['action'];
-						$pseudo = $_GET['pseudo'];
 						if ($action=="login"){
                         	echo "<div class='alert alert-info'>";
-                        	echo "<font size=5> Content de vous revoir ".$pseudo."!</font>";
+                        	echo "<font size=5> Content de vous revoir ".$_SESSION['pseudo']."!</font>";
                         	echo "</div>";
                     }elseif($action="added"){
                     	echo "<div class='alert alert-info'>";
-                        echo "<font size=5> Bienvenu parmis nous, ".$pseudo."!</font>";
+                        echo "<font size=5> Bienvenu parmis nous, ".$_SESSION['pseudo']."!</font>";
                         echo "</div>";
                     }
                 }
                     ?></h1>
+                
 				<h2>Nom de l'etablissement</h2>
 				<span class="byline"></span>
 			</div>

@@ -9,7 +9,7 @@
         <form name="inscription" method="post" action="create_account.php">
             Identifiant : <input type="text" name="identifiant"/> <br/>
             Password : <input type="password" name="password"/><br/>
-            email : <input type="text" name="email"/> <br/>    
+            email : <input type="email" name="email"/> <br/>    
             <div class="button">
                 <input type="submit" name="register" value="Register"/>
             <div>
