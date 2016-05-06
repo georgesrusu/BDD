@@ -23,7 +23,7 @@ Released   : 20130902
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 
 <?php
-	include("../connect.php");
+	include("connect.php");
 	$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
 	$stmt->execute();
 
@@ -33,7 +33,11 @@ Released   : 20130902
 	$i = $_GET['id'];
 	$idEtablissement = $result[$i][0];
 	$typeEtablissement = $result[$i][10];
-	#$typeEtablissement = "Cafe";
+
+	$stmt = $conn->prepare("SELECT * FROM Commentaire"); 
+	$stmt->execute();
+	$commentList = $stmt->fetchall(); //fetch
+
 
 	if ($typeEtablissement == "Restaurant") {
 		$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
@@ -48,7 +52,7 @@ Released   : 20130902
 		}
 	}
 	#TODO: D'abord trouver la place des etablissement dans les tables spécidique
-	elseif ($typeEtablissement == "Cafe") {
+	elseif ($typeEtablissement == "Bar") {
 		$stmt = $conn->prepare("SELECT * FROM Bar"); 
 		$stmt->execute();
 
@@ -167,7 +171,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					echo "<p>Fourchette de prix : " . $restaurantList[$indexTable][1] . "€</p>";
 					echo "<p>Banquet maximum : " . $restaurantList[$indexTable][2] . " personnes</p>";
 				}
-				elseif ($typeEtablissement == "Cafe") {
+				elseif ($typeEtablissement == "Bar") {
 					if ($restaurantList[$indexTable][1]) {
 						echo "<p>Smoking : Oui</p>";
 					}
@@ -235,6 +239,49 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				}
 				echo "</p>";
 				?>
+
+			<h2 class="infos">Commentaires:</h2>
+				<div class="comment">
+					<p class="nameComment">Julie</p>
+					<p>21/15/2016</p>
+					<p class="star"><span style="color:black">Score :</span> 
+					<?php 
+						$numberStar = 4;
+						for ($star = 0; $star < 5; $star++) {
+							if ($star < $numberStar) {
+								echo "&#9733;";
+							}
+							else {
+								echo "&#9734";
+							}
+						} 
+					?>
+					</p>
+					<p>Très jolie endroit, j'ai adorer avec mon fils michelle et ma tante tanti tantina et dominique le fameux DSK</p>
+				</div>
+
+				<?php
+					for ($comment = 0; $comment < sizeof($commentList); $comment++) {
+						if ($commentList[$comment][0] == $idEtablissement) {
+							echo "<div class=\"comment\">";
+							echo "<p class=\"nameComment\">" . $commentList[$comment][1] . "</p>";
+							echo "<p>" . $commentList[$comment][2] . "</p>";
+							echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
+							$numberStar = $commentList[$comment][4];
+							for ($star = 0; $star < 5; $star++) {
+								if ($star < $numberStar) {
+									echo "&#9733;";
+								}
+								else {
+									echo "&#9734";
+								}
+							} 
+							echo "<p>" . $commentList[$comment][3] . "</p>";
+							echo "</div>";
+						}
+					}
+				?>
+
 		</div>
 
 		<br/><br/><br/><br/>
