@@ -35,12 +35,14 @@ Released   : 20130902
 			<ul>
 				<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
 				<li><a href="#" accesskey="2" title="Type here to research something">Research</a></li>
-				<li><a href="../login.php" accesskey="3" title="Connexion to our database"><?php
+				<li><?php
 				if(isset($_GET['pseudo'])) {
-					$pseudo = $_GET['pseudo'];
-					echo $pseudo;
+					//$pseudo = $_GET['pseudo'];
+					echo '<a href="./profil.php" accesskey="3" title="Connexion to our database">';
+					echo "Profil";
 				}
 				else{
+					echo '<a href="./login.php" accesskey="3" title="Connexion to our database">';
 					echo "Connexion";
 				}
 				 ?></a></li>
@@ -55,6 +57,22 @@ Released   : 20130902
 		</div>
 		<div id="welcome">
 			<div class="title">
+				<h1>
+				<?php 
+					if(isset($_GET['action'])){
+						$action = $_GET['action'];
+						$pseudo = $_GET['pseudo'];
+						if ($action=="login"){
+                        	echo "<div class='alert alert-info'>";
+                        	echo "<font size=5> Content de vous revoir ".$pseudo."!</font>";
+                        	echo "</div>";
+                    }elseif($action="added"){
+                    	echo "<div class='alert alert-info'>";
+                        echo "<font size=5> Bienvenu parmis nous, ".$pseudo."!</font>";
+                        echo "</div>";
+                    }
+                }
+                    ?></h1>
 				<h2>Nom de l'etablissement</h2>
 				<span class="byline"></span>
 			</div>

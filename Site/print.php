@@ -1,5 +1,5 @@
 <?php
-	include("connect.php");
+	include("../connect.php");
 	$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
 	$stmt->execute();
 

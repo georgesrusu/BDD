@@ -20,7 +20,7 @@
         <?php
                 error_reporting(E_ALL);
         ini_set('display_errors', 1);
-        include("connect.php");
+        include("../connect.php");
         if(isset($_POST['connexion'])){
             $pseudo=$_POST['identifiant'];
             $password=$_POST['password'];
@@ -44,7 +44,7 @@
                     $clientID=$result[0];
                     $isAdmin=$result[1];
                     if ($clientID>0){
-                        echo '<meta http-equiv="Refresh" content="0;URL=./Site/index.php?pseudo='.$pseudo.'&isAdmin='.$isAdmin.'">';
+                        echo '<meta http-equiv="Refresh" content="0;URL=./index.php?pseudo='.$pseudo.'&isAdmin='.$isAdmin.'&action=login">';
                     }
                 }
                 catch(PDOException $e) {
@@ -56,7 +56,7 @@
         if(isset($_POST['register'])) {
             $pseudo = $_POST['identifiant'];
             $password = $_POST['password'];
-            echo '<meta http-equiv="Refresh" content="0;URL=create_account.php">';
+            echo '<meta http-equiv="Refresh" content="0;URL=./create_account.php">';
         }
         ?></body>
 </html>

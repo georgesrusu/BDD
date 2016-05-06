@@ -16,7 +16,7 @@
         </form>
         <div>
         <?php
-        include("connect.php");
+        include("../connect.php");
         $date=date("Y-m-d");
         if(isset($_POST['register'])) {
             $pseudo = $_POST['identifiant'];
@@ -46,7 +46,7 @@
                     }
                 $clientID=$result[0];
                 $isAdmin=$result[1];
-                echo '<meta http-equiv="Refresh" content="0;URL=./Site/index.php?pseudo='.$pseudo.'&isAdmin='.$isAdmin.'">';
+                echo '<meta http-equiv="Refresh" content="0;URL=./index.php?pseudo='.$pseudo.'&isAdmin='.$isAdmin.'&action=added">';
             }}
             catch(PDOException $e) {
                 echo "Error: " . $e->getMessage()."<br/>";
