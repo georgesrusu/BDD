@@ -27,7 +27,7 @@ Released   : 20130902
 	$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
 	$stmt->execute();
 
-        // set the resulting array to associative
+    // set the resulting array to associative
 	$result = $stmt->fetchall(); //fetch
 
 	$i = $_GET['id'];
@@ -117,7 +117,6 @@ Released   : 20130902
 						</tr>";
 		}
 	}
-
 ?>
 
 <script src="http://maps.googleapis.com/maps/api/js"></script>
