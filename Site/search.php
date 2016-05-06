@@ -42,7 +42,7 @@ Released   : 20130902
 				<li class="current_page_item"><a href="#" accesskey="2" title="Type here to research something">Research</a></li>
 				<li><?php
 				if(isset($_SESSION['pseudo'])) {
-					echo '<a href="./profil.php" accesskey="3" title="Connexion to our database">';
+					echo '<a href="./profile.php" accesskey="3" title="Connexion to our database">';
 					echo "Profil";
 				}
 				else{
@@ -110,40 +110,48 @@ Released   : 20130902
                 	echo "<br/>";
                 	if (sizeof($result)==0){
                 		echo "<hr>";
-                		echo "<p><strong>0 resultat trouvé pour ";
-                		if ($type!=""){
-                			echo $type;
-                		}
-                		echo " ";
-                		if ($name!=""){
-                			echo $name;
-                		}
-                		if($zip!=""){
-                			echo $zip;
-                		}
-                		if($label!=""){
-                			echo $label;
+                		echo "<p><strong>0 resultat trouvé ";
+                		if( ($type!="") OR ($name!="") OR ($zip!="") OR ($label!="")){
+            				echo "pour ";
+                			if ($type!=""){
+                				echo $type;
+                			}
+                			echo " ";
+                			if ($name!=""){
+                				echo $name;
+                			}
+                			echo " ";
+                			if($zip!=""){
+                				echo $zip;
+                			}
+                			echo " ";
+                			if($label!=""){
+                				echo $label;
+                			}
                 		}
                 		echo "</strong></p>";
                 		echo "<hr>";
                 	}
                 	else{
                 		echo "<hr>";
-                		echo "<p><strong><a>".sizeof($result)." resultat trouvé pour ";
-                		if ($type!=""){
-                			echo $type;
-                		}
-                		echo " ";
-                		if ($name!=""){
-                			echo $name;
-                		}
-                		echo " ";
-                		if($zip!=""){
-                			echo $zip;
-                		}
-                		echo " ";
-                		if($label!=""){
-                			echo $label;
+                		echo "<p><strong><a>".sizeof($result)." resultat trouvé ";
+                		if( ($type!="") OR ($name!="") OR ($zip!="") OR ($label!="")){
+            				echo "pour ";
+                			if ($type!=""){
+                				echo $type;
+                			}
+                			echo " ";
+                			if ($name!=""){
+                				echo $name;
+                			}
+                			echo " ";
+                			if($zip!=""){
+                				echo $zip;
+                			}
+                			echo " ";
+                			if($label!=""){
+                				echo $label;
+                			}
                 		}
                 		echo "</a></strong></p>";
                 		echo "<hr>";
@@ -152,14 +160,14 @@ Released   : 20130902
       						echo "<hr>";
       						echo "<p><strong>".$result[$i][1]."</strong></p>";
       						echo "<p>".$result[$i][10]."</p>";
-            				echo "<p>".$result[$i][2].",".$result[$i][3].", ".$result[$i][4]." ".$result[$i][5]."</p>";
-            				echo "<p>telephone : ".$result[$i][8]."</p>";
-            				$siteWeb=$result[$i][9]!=""?$result[$i][9]:"aucun";
-            				echo "<p>site web : ".$siteWeb."</p>";
-            				echo "<strong><a href=#".$etablissementID.">Lire plus ...</a></strong>";
-            				echo "<hr>";
-            			}
-      				}
+           					echo "<p>".$result[$i][2].",".$result[$i][3].", ".$result[$i][4]." ".$result[$i][5]."</p>";
+           					echo "<p>telephone : ".$result[$i][8]."</p>";
+           					$siteWeb=$result[$i][9]!=""?$result[$i][9]:"aucun";
+           					echo "<p>site web : ".$siteWeb."</p>";
+           					echo "<strong><a href=#".$etablissementID.">Plus de details ...</a></strong>";
+           					echo "<hr>";
+           				}
+   					}    				
       			}
             	/*for ($i=0;$i<32;++$i){
             		echo "<hr>";
@@ -211,7 +219,7 @@ Released   : 20130902
 		</div>-->
 		<br/><br/><br/><br/>
 		<div id="copyright">
-			<span>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a></span>
+			<span>&copy; Eureka. All rights reserved. | Photos by <a href="http://eureka.com/"></a></span>
 			<span>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</span>
 		</div>
 	</div>

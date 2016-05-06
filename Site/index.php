@@ -3,6 +3,10 @@ session_start();
 if (!isset($_SESSION['pseudo'])){
 	$_SESSION['pseudo'] = $_GET['pseudo'];
 }
+if (!isset($_SESSION['isAdmin'])){
+	$_SESSION['isAdmin'] = $_GET['isAdmin'];
+}
+
 //if(!isset($_SESSION['cart_items'])){
     //$_SESSION['cart_items'] = array();
 ?>
@@ -45,7 +49,7 @@ Released   : 20130902
 				<li><?php
 				if(isset($_SESSION['pseudo'])) {
 					//$pseudo = $_GET['pseudo'];
-					echo '<a href="./profil.php" accesskey="3" title="Connexion to our database">';
+					echo '<a href="./profile.php" accesskey="3" title="Connexion to our database">';
 					echo "Profil";
 				}
 				else{
@@ -163,7 +167,7 @@ Released   : 20130902
 		</div>-->
 		<br/><br/><br/><br/>
 		<div id="copyright">
-			<span>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a></span>
+			<span>&copy; Eureka. All rights reserved. | Photos by <a href="http://eureka.com/"></a></span>
 			<span>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</span>
 		</div>
 	</div>

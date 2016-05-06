@@ -9,7 +9,7 @@
         <div class="formulaire">
         <form name="inscription" method="post" action="login.php">
             Identifiant : <input type="text" name="identifiant"/> <br/>
-            Password : <input type="password" name="password"/><br/>
+            Mot de passe : <input type="password" name="password"/><br/>
             <div class="button">
             <input type="submit" name="connexion" value="Connexion"/>
             <input type="submit" name="register" value="Register"/>
