@@ -50,7 +50,6 @@ Released   : 20130902
 					echo "Connexion";
 				}
 				 ?></a></li>
-				<li><a href="exemple.php?id=0">TEST id=0</a></li>
 
 			</ul>
 		</div>

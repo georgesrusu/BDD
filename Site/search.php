@@ -50,7 +50,6 @@ Released   : 20130902
 					echo "Connexion";
 				}
 				 ?></a></li>
-				<li><a href="exemple.php?id=0">TEST id=0</a></li>
 
 			</ul>
 		</div>
@@ -164,7 +163,7 @@ Released   : 20130902
            					echo "<p>telephone : ".$result[$i][8]."</p>";
            					$siteWeb=$result[$i][9]!=""?$result[$i][9]:"aucun";
            					echo "<p>site web : ".$siteWeb."</p>";
-           					echo "<strong><a href=#".$etablissementID.">Plus de details ...</a></strong>";
+           					echo '<strong><a href=./exemple.php?etablissementID='.$etablissementID.'>Plus de details ...</a></strong>';
            					echo "<hr>";
            				}
    					}    				
