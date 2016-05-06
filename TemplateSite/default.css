@@ -586,3 +586,15 @@
 	.daysClosed {
 		text-align: left;
 	}
+	.comment {
+    	border-style: groove;
+    	border-width: 2px;
+    	padding: 10px;
+    	border-radius: 5px;
+	}
+	.nameComment {
+		font-weight: bold;
+	}
+	.star {
+		color: orange;
+	}
