@@ -83,87 +83,17 @@ Released   : 20130902
                 }
                     ?></h1>
                 
-				<h2>Nom de l'etablissement</h2>
+				<h2>Bienvenue sur Eureka</h2>
 				<span class="byline"></span>
 			</div>
 
-			<table id="TEST">
-			   	<tr>
-			       	<th>Nom</th>
-			    	<th>Attribus</th>
-			    	<th></th>
-			   	</tr>
+			<p>Vous voici sur Eureka, le site web du référencement d'établissement publique de consommation.  Vous trouverez ici tous les restaurants, bars ou hotels les plus aventageux de Bruxelles !</p>
 
-			   	<tr>
-			       	<td>Nom</td>
-			       	<td>Chez Théo Sodexho ULB</td>
-			  	</tr>
-			   	<tr>
-			       	<td>Rue</td>
-			       	<td>Avenue Paul Héger</td>
-			   	</tr>
-			   	<tr>
-			   		<td>Num</td>
-			   		<td>22</td>
-			   	</tr>
-			   	<tr>
-			   		<td>Zip</td>
-			   		<td>1050</td>
-			   	</tr>
-			   	<tr>
-			   		<td>City</td>
-			   		<td>Ixelles</td>
-			   	</tr>
-			   	<tr>
-			   		<td>Position</td>
-			   		<td>4.381571</td>
-			   		<td>50.813257</td>
-			   	</tr>
-			   	<tr>
-			   		<td>Téléphone</td>
-			   		<td>02/650 49 35</td>
-			   	</tr>
-			   	<tr>
-			   		<td>Site</td>
-			   		<td>http://wwwdev.ulb.ac.be/restaurants/solbosch_s/r_pub.php3</td>
-			   	</tr>
+			<p>Rechercher dés maintenant un établissement : <a href="./search.php">Research</a></p>
 
-			</table>
 			<br/>
-
-			<!--<p>This is <strong>Privy</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
-			<ul class="actions">
-				<li><a href="#" class="button">Etiam posuere</a></li>
-			</ul>-->
 		</div>
-		<!--<div id="featured">
-			<div class="title">
-				<h2>Maecenas lectus sapien</h2>
-				<span class="byline">Integer sit amet aliquet pretium</span>
-			</div>
-			<ul class="style1">
-				<li class="first">
-					<p class="date"><a href="#">Jan<b>05</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Etiam non felis. Donec ut ante.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Jan<b>03</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie. Donec leo, vivamus fermentum nibh in augue praesent congue rutrum.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Jan<b>01</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Etiam non felis. Donec ut ante.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Dec<b>31</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie. Donec leo, vivamus fermentum nibh in augue praesent congue rutrum.</a></p>
-				</li>
-			</ul>
-		</div>-->
+
 		<br/><br/><br/><br/>
 		<div id="copyright">
 			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>
