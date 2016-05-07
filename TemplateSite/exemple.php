@@ -28,7 +28,7 @@ Released   : 20130902
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 
 <?php
-	include("connect.php");
+	include("../connect.php");
 	$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
 	$stmt->execute();
 
