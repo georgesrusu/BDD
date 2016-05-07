@@ -33,7 +33,7 @@ Released   : 20130902
 	<div id="header">
 		<div id="logo">
 			<img src="" alt="" />
-			<h1><a href="#">Eureka</a></h1>
+			<h1><a href="index.php">Eureka</a></h1>
 			<span>Created for <a href="https://www.ulb.ac.be" rel="nofollow">ULB Project</a></span>
 		</div>
 		<div id="menu">
@@ -157,7 +157,7 @@ Released   : 20130902
       						echo "<hr>";
       						echo "<p><strong>".$result[$i][1]."</strong></p>";
       						echo "<p>".$result[$i][10]."</p>";
-           					echo "<p>".$result[$i][2].",".$result[$i][3].", ".$result[$i][4]." ".$result[$i][5]."</p>";
+           					echo "<p>".$result[$i][2]." ".$result[$i][3].", ".$result[$i][5]." - ".$result[$i][4]."</p>";
            					echo "<p>telephone : ".$result[$i][8]."</p>";
            					$siteWeb=$result[$i][9]!=""?$result[$i][9]:"aucun";
            					echo "<p>site web : ".$siteWeb."</p>";
@@ -214,7 +214,7 @@ Released   : 20130902
 				</li>
 			</ul>
 		</div>-->
-		<br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<div id="copyright">
 			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>
 			<span>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</span>
