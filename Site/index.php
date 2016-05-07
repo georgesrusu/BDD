@@ -39,7 +39,7 @@ Released   : 20130902
 	<div id="header">
 		<div id="logo">
 			<img src="" alt="" />
-			<h1><a href="#">Eureka</a></h1>
+			<h1><a href="index.php">Eureka</a></h1>
 			<span>Created for <a href="https://www.ulb.ac.be" rel="nofollow">ULB Project</a></span>
 		</div>
 		<div id="menu">
