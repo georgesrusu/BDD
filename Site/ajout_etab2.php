@@ -102,6 +102,49 @@ Released   : 20130902
             	echo ' Livraison : ';
             	echo '<input type="radio" name="delivery" value="1" checked> Oui';
             	echo '<input type="radio" name="delivery" value="0" checked> Non<br>';
+               
+                echo ' Ouverture </br>';
+                echo 'Lundi : ';
+                echo '<input type="radio" name="lundi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="lundi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="lundi" value="2" checked> Matin';
+                echo '<input type="radio" name="lundi" value="3" checked> Après-midi</br>';
+
+                echo 'Mardi : ';
+                echo '<input type="radio" name="mardi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="mardi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="mardi" value="2" checked> Matin';
+                echo '<input type="radio" name="mardi" value="3" checked> Après-midi</br>';
+
+                echo 'Mercredi : ';
+                echo '<input type="radio" name="mercredi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="mercredi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="mercredi" value="2" checked> Matin';
+                echo '<input type="radio" name="mercredi" value="3" checked> Après-midi</br>';
+
+                echo 'Jeudi : ';
+                echo '<input type="radio" name="jeudi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="jeudi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="jeudi" value="2" checked> Matin';
+                echo '<input type="radio" name="jeudi" value="3" checked> Après-midi</br>';
+
+                echo 'Vendredi : ';
+                echo '<input type="radio" name="vendredi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="vendredi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="vendredi" value="2" checked> Matin';
+                echo '<input type="radio" name="vendredi" value="3" checked> Après-midi</br>';
+
+                echo 'Samedi : ';
+                echo '<input type="radio" name="samedi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="samedi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="samedi" value="2" checked> Matin';
+                echo '<input type="radio" name="samedi" value="3" checked> Après-midi</br>';
+
+                echo 'Dimanche : ';
+                echo '<input type="radio" name="dimanche" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="dimanche" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="dimanche" value="2" checked> Matin';
+                echo '<input type="radio" name="dimanche" value="3" checked> Après-midi';
             	//closedDays
             }
     		elseif($type=="Bar"){

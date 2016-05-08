@@ -76,7 +76,7 @@ Released   : 20130902
 		<p>
 		<div class="formulaire">
         <form name="etablissement" method="post" action="ajout_etab.php">
-            Nom de l'etablissement : <input type="text" name="name"/> <br/>
+            Nom de l'etablissement : <input type="text" name="name" placeholder="Champ obligatoire"/> <br/>
             Rue : <input type="text" name="street"/><br/>
             Numero : <input type="number" name="num"/><br/>
             Code Postal : <input type="number" name="zip"/><br/>
