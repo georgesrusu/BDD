@@ -102,6 +102,49 @@ Released   : 20130902
             	echo ' Livraison : ';
             	echo '<input type="radio" name="delivery" value="1" checked> Oui';
             	echo '<input type="radio" name="delivery" value="0" checked> Non<br>';
+               
+                echo ' Ouverture </br>';
+                echo 'Lundi : ';
+                echo '<input type="radio" name="lundi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="lundi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="lundi" value="2" checked> Matin';
+                echo '<input type="radio" name="lundi" value="3" checked> Après-midi</br>';
+
+                echo 'Mardi : ';
+                echo '<input type="radio" name="mardi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="mardi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="mardi" value="2" checked> Matin';
+                echo '<input type="radio" name="mardi" value="3" checked> Après-midi</br>';
+
+                echo 'Mercredi : ';
+                echo '<input type="radio" name="mercredi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="mercredi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="mercredi" value="2" checked> Matin';
+                echo '<input type="radio" name="mercredi" value="3" checked> Après-midi</br>';
+
+                echo 'Jeudi : ';
+                echo '<input type="radio" name="jeudi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="jeudi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="jeudi" value="2" checked> Matin';
+                echo '<input type="radio" name="jeudi" value="3" checked> Après-midi</br>';
+
+                echo 'Vendredi : ';
+                echo '<input type="radio" name="vendredi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="vendredi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="vendredi" value="2" checked> Matin';
+                echo '<input type="radio" name="vendredi" value="3" checked> Après-midi</br>';
+
+                echo 'Samedi : ';
+                echo '<input type="radio" name="samedi" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="samedi" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="samedi" value="2" checked> Matin';
+                echo '<input type="radio" name="samedi" value="3" checked> Après-midi</br>';
+
+                echo 'Dimanche : ';
+                echo '<input type="radio" name="dimanche" value="0" checked> Toute la journée';
+                echo '<input type="radio" name="dimanche" value="1" checked> Fermé toute la journée';
+                echo '<input type="radio" name="dimanche" value="2" checked> Matin';
+                echo '<input type="radio" name="dimanche" value="3" checked> Après-midi';
             	//closedDays
             }
     		elseif($type=="Bar"){
@@ -115,7 +158,7 @@ Released   : 20130902
     		elseif($type=="Hotel"){
     			echo ' Prix : <input type="number" name="price"/> <br/>';
     			echo ' Nombre de chambre : <input type="number" name="bedRooms"/> <br/>';
-    			echo ' Nombre d\'etoile : <input type="number" name="stars"/> <br/>';
+    			echo ' Nombre d\'etoile : <input type="number" name="stars" min="0" max="5"/> <br/>';
         	}
             echo ' <div class="button">';
             echo ' <input type="submit" name="add" value="Ajouter"/>';
@@ -127,56 +170,93 @@ Released   : 20130902
         </form></p>
         <?php
 		if(isset($_POST['add'])){
-			unset($_SESSION['table']);
-			$date=Date("Y-m-d");
-            try{
-		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
-               	$stmt = $conn->prepare($sql); 
-               	$stmt->execute();
-                $result=$stmt->fetch();
-                $adminID=$result[0];
+            $canLaunchQuery = 0;
+            if ($type == "Restaurant") {
+                $price = $_POST['price'];
+                $banquet = $_POST['banquet'];
+                $takeAway = $_POST['takeAway'];
+                $delivery = $_POST['delivery'];
 
-                $sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
-				$stmt = $conn->prepare($sql); 
-				$stmt->execute();
-				$result=$stmt->fetch();
-				if ($result==""){
-					$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$name.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
-    				$conn->exec($sql);
-					$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
-					$stmt = $conn->prepare($sql); 
-					$stmt->execute();
-					$result=$stmt->fetch();
-				}
-				$etablissementID=$result[0];
-				if ($type=="Restaurant"){
-					$price=$_POST['price'];
-					$banquet=$_POST['banquet'];
-					$takeAway=$_POST['takeAway'];
-					$delivery=$_POST['delivery'];
-					$closedDays="13512"; //a faire
-					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
-    			}
-    			elseif($type=="Bar"){
-    				$smoking=$_POST['smoking'];
-    				$snack=$_POST['snack'];
-    				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
-    			}
-    			elseif($type=="Hotel"){
-    				$price=$_POST['price'];
-    				$bedRooms=$_POST['bedRooms'];
-    				$stars=$_POST['stars'];
-    				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
-    			}
-    			$conn->exec($sql);
-				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
-    			$conn->exec($sql);
-    			echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
-		}
-		catch(PDOException $e) {
-         	echo "Error: " . $e->getMessage()."<br/>";
+                if (empty($price) or empty($banquet)) {
+                    echo '<script language="javascript">';
+                    echo 'alert("Something missing !")';
+                    echo '</script>';
+                }
+                else {
+                    $canLaunchQuery = 1;
+                }
+            }
+            elseif ($type == "Bar") {
+                $smoking = $_POST['smoking'];
+                $snack = $_POST['snack'];
+                $canLaunchQuery = 1;
+            }
+            elseif ($type == "Hotel") {
+                $price = $_POST['price'];
+                $bedRooms = $_POST['bedRooms'];
+                $stars = $_POST['stars'];
+
+                if (empty($price) or empty($bedRooms) or empty($stars)) {
+                    echo '<script language="javascript">';
+                    echo 'alert("Something missing !")';
+                    echo '</script>';
+                }
+                else {
+                    $canLaunchQuery = 1;
+                }
+            }
+            if ($canLaunchQuery) {
+    			unset($_SESSION['table']);
+    			$date=Date("Y-m-d");
+                try{
+    		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
+                   	$stmt = $conn->prepare($sql); 
+                   	$stmt->execute();
+                    $result=$stmt->fetch();
+                    $adminID=$result[0];
+
+                    $sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
+    				$stmt = $conn->prepare($sql); 
+    				$stmt->execute();
+    				$result=$stmt->fetch();
+    				if ($result==""){
+    					$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$name.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
+        				$conn->exec($sql);
+    					$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
+    					$stmt = $conn->prepare($sql); 
+    					$stmt->execute();
+    					$result=$stmt->fetch();
+    				}
+    				$etablissementID=$result[0];
+    				if ($type=="Restaurant"){
+    					$price=$_POST['price'];
+    					$banquet=$_POST['banquet'];
+    					$takeAway=$_POST['takeAway'];
+    					$delivery=$_POST['delivery'];
+    					$closedDays="13512"; //a faire
+    					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
+        			}
+        			elseif($type=="Bar"){
+        				$smoking=$_POST['smoking'];
+        				$snack=$_POST['snack'];
+        				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
+        			}
+        			elseif($type=="Hotel"){
+        				$price=$_POST['price'];
+        				$bedRooms=$_POST['bedRooms'];
+        				$stars=$_POST['stars'];
+        				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
+        			}
+        			$conn->exec($sql);
+    				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
+        			$conn->exec($sql);
+        			echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
+    		    }
+                catch(PDOException $e) {
+                    echo "Error: " . $e->getMessage()."<br/>";
+                }
+            }
         }
-    }
 
         
         elseif(isset($_POST['cancel'])) {
