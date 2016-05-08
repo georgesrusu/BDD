@@ -42,7 +42,7 @@ session_start();
                     if ($result>0){
                         $sql = 'UPDATE Utilisateur SET email="'.$email.'" WHERE identifiant="'.$_SESSION["pseudo"].'"';
                         $stmt = $conn->exec($sql); 
-                        echo '<meta http-equiv="Refresh" content="0;URL=./index.php?pseudo='.$_SESSION["pseudo"].'&isAdmin='.$_SESSION["isAdmin"].'">';
+                        echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
                     }
                 }
                 catch(PDOException $e) {
@@ -51,7 +51,7 @@ session_start();
             }
         }
         if(isset($_POST['cancel'])) {
-            echo '<meta http-equiv="Refresh" content="0;URL=./index.php?pseudo='.$_SESSION["pseudo"].'&isAdmin='.$_SESSION["isAdmin"].'">';
+            echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
         ?>
         </body>

@@ -3,8 +3,6 @@ session_start();
 include("../connect.php");
 				error_reporting(E_ALL);
        			ini_set('display_errors', 1);
-//if(!isset($_SESSION['cart_items'])){
-    //$_SESSION['cart_items'] = array();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -90,40 +88,74 @@ Released   : 20130902
 		</div>
 		<p>
 		<div class="formulaire">
-        <form name="etablissement" method="post" action="ajout_etab.php">
-            Nom de l'etablissement : <input type="text" name="name"/> <br/>
-            Rue : <input type="text" name="street"/><br/>
-            Numero : <input type="number" name="num"/><br/>
-            Code Postal : <input type="number" name="zip"/><br/>
-            Localite : <input type="text" name="city"/><br/>
-            Longitude : <input type="number" name="longitude"/><br/>
-            Latitude : <input type="number" name="latitude"/><br/>
-            Telephone : <input type="text" name="tel"/><br/>
-            Site : <input type="text" name="site"/><br/>
-            Type : <select name="type">
-    					<option value="Restaurant">Restaurant</option>
-    					<option value="Bar">Bar</option>
-    					<option value="Hotel">Hotel</option>
-  					</select><br/>
-            <div class="button">
-            <input type="submit" name="next" value="Ajouter"/>
-            <input type="submit" name="cancel" value="Annuler"/>
+        <form name="etablissement" method="post" action="ajout_etab2.php?">
+        	<?php
+        	if (!isset($_SESSION['table'])){
+        		echo "not set";
+           		$_SESSION['table']=unserialize(urldecode($_GET['param']));
+        	}
+        	if(isset($_SESSION['table'])){
+        		echo "set";
+    			$table= $_SESSION['table'];
+        		$name=$table[0];
+    			$street=$table[1];
+    			$num=$table[2];
+    			$zip=$table[3];
+    			$city=$table[4];
+    			$longitude=$table[5];
+    			$latitude=$table[6];
+    			$tel=$table[7];
+    			$site=$table[8];
+    			$type=$table[9];
+    	}
+    		echo $name;
+			echo $street;
+			echo $num;
+			echo $zip;
+			echo $city;
+			echo $longitude;
+			echo $latitude;
+    		echo $tel;
+    		echo $site;
+    		echo $type;
+        	if ($type=="Restaurant"){
+            	echo ' Prix : <input type="number" name="price"/> <br/>';
+            	echo ' Nombre de place pour un Banquet : <input type="number" name="banquet"/> <br/>';
+            	echo ' Emporter : ';
+            	echo '<input type="radio" name="takeAway" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="takeAway" value="0" checked> Non<br>';
+            	echo ' Livraison : ';
+            	echo '<input type="radio" name="delivery" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="delivery" value="0" checked> Non<br>';
+            	//closedDays
+            }
+    		elseif($type=="Bar"){
+    			echo ' Fumeur : ';
+            	echo '<input type="radio" name="smoking" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="smoking" value="0" checked> Non<br>';
+            	echo ' Snack : ';
+            	echo '<input type="radio" name="snack" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="snack" value="0" checked> Non<br>';
+            }
+    		elseif($type=="Hotel"){
+    			echo ' Prix : <input type="number" name="price"/> <br/>';
+    			echo ' Nombre de chambre : <input type="number" name="bedRooms"/> <br/>';
+    			echo ' Nombre d\'etoile : <input type="number" name="stars"/> <br/>';
+        	}
+            echo ' <div class="button">';
+            echo ' <input type="submit" name="add" value="Ajouter"/>';
+            echo ' <input type="submit" name="cancel" value="Annuler"/>';
+            echo ' <div>';
+        	echo ' </form></p>';
+        	?>
             <div>
         </form></p>
         <?php
-        if(isset($_POST['next'])){
-        	$table=array($_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$_POST['type']);
-			$name=$table[0];
-    		$street=$table[1];
-    		$num=$table[2];
-    		$zip=$table[3];
-    		$city=$table[4];
-    		$longitude=$table[5];
-    		$latitude=$table[6];
-    		$tel=$table[7];
-    		$site=$table[8];
-    		$type=$table[9];
-    		echo $name;
+		if(isset($_POST['add'])){
+			unset($_SESSION['table']);
+			echo "dans add";
+			$date=Date("Y-m-d");
+			echo $name;
 			echo $street;
 			echo $num;
 			echo $zip;
@@ -133,32 +165,58 @@ Released   : 20130902
     		echo $tel;
     		echo $site;
     		echo $type;
-			$url = urlencode(serialize($table));
-			$table=unserialize(urldecode($url));
-			echo "DECOD";
-			$name=$table[0];
-    		$street=$table[1];
-    		$num=$table[2];
-    		$zip=$table[3];
-    		$city=$table[4];
-    		$longitude=$table[5];
-    		$latitude=$table[6];
-    		$tel=$table[7];
-    		$site=$table[8];
-    		$type=$table[9];
-    		echo $name;
-			echo $street;
-			echo $num;
-			echo $zip;
-			echo $city;
-			echo $longitude;
-			echo $latitude;
-    		echo $tel;
-    		echo $site;
-    		echo $type;
-            echo '<meta http-equiv="Refresh" content="0;URL=./ajout_etab2.php?param='.$url.'">';
-            }
+            try{
+		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
+               	$stmt = $conn->prepare($sql); 
+               	$stmt->execute();
+                $result=$stmt->fetch();
+                $adminID=$result[0];
+
+                $sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
+				$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				$result=$stmt->fetch();
+				if ($result==""){
+					$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$name.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
+    				$conn->exec($sql);
+					$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
+					$stmt = $conn->prepare($sql); 
+					$stmt->execute();
+					$result=$stmt->fetch();
+				}
+				$etablissementID=$result[0];
+				if ($type=="Restaurant"){
+					$price=$_POST['price'];
+					$banquet=$_POST['banquet'];
+					$takeAway=$_POST['takeAway'];
+					$delivery=$_POST['delivery'];
+					$closedDays="13512"; //a faire
+					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
+    			}
+    			elseif($type=="Bar"){
+    				$smoking=$_POST['smoking'];
+    				$snack=$_POST['snack'];
+    				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
+    			}
+    			elseif($type=="Hotel"){
+    				$price=$_POST['price'];
+    				$bedRooms=$_POST['bedRooms'];
+    				$stars=$_POST['stars'];
+    				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
+    			}
+    			$conn->exec($sql);
+				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
+    			$conn->exec($sql);
+    			echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
+		}
+		catch(PDOException $e) {
+         	echo "Error: " . $e->getMessage()."<br/>";
+        }
+    }
+
+        
         elseif(isset($_POST['cancel'])) {
+        	unset($_SESSION['table']);
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
         ?>

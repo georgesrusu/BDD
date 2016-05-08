@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("../connect.php");
+				error_reporting(E_ALL);
+       			ini_set('display_errors', 1);
 //if(!isset($_SESSION['cart_items'])){
     //$_SESSION['cart_items'] = array();
 ?>
@@ -19,7 +21,7 @@ Released   : 20130902
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Mon profile</title>
+<title>Modifier un etablissement</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -33,7 +35,7 @@ Released   : 20130902
 	<div id="header">
 		<div id="logo">
 			<img src="" alt="" />
-			<h1><a href="index.php">Eureka</a></h1>
+			<h1><a href="#">Eureka</a></h1>
 			<span>Created for <a href="https://www.ulb.ac.be" rel="nofollow">ULB Project</a></span>
 		</div>
 		<div id="menu">
@@ -78,61 +80,88 @@ Released   : 20130902
                     ?></h1>
 			</div>
 
-			<?php echo '<h2>Profile de '.$_SESSION["pseudo"].'</h2>';?>
+			<?php echo "<h2>Modifer un etablissement</h2>";?>
 			<br/>
-
-			<!--<p>This is <strong>Privy</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
-			<ul class="actions">
-				<li><a href="#" class="button">Etiam posuere</a></li>
-			</ul>-->
 		</div>
-		<p><strong>Mes information :</strong></p>
 		<?php
 		try{
-			$sql = 'SELECT * FROM Utilisateur WHERE identifiant="'.$_SESSION['pseudo'].'"';
-			$stmt = $conn->prepare($sql); 
-			$stmt->execute();
-			$result=$stmt->fetch();
-			$ID=$result[0];
-			//$identifiant=$result[1];
-			$mot_de_passe=$result[2];
-			$email=$result[3];
-			$dateCreation=$result[4];
-		}catch(PDOException $e) {
+		    $sql = 'SELECT * FROM Etablissement';
+            $stmt = $conn->prepare($sql); 
+            $stmt->execute();
+            $result=$stmt->fetchall();
+            echo "<div style=\"overflow-x:scroll\">";
+            echo "<table>";
+        	echo "<tr>";
+        		echo "<th>ID</th>";
+        		echo "<th>Nom</th>";
+       			echo "<th>Rue</th>";
+        		echo "<th>Numero</th>";
+        		echo "<th>CodePostal</th>";
+        		echo "<th>Localite</th>";
+        		echo "<th>Longitude</th>";
+        		echo "<th>Latitude</th>";
+        		echo "<th>Telephone</th>";
+        		echo "<th>Site</th>";
+        	echo "</tr>";
+        	for ($i=0;$i<sizeof($result);++$i){
+        		echo "<tr>";
+        			echo "<th>".$result[$i][0]."</th>";
+        			echo "<th>".$result[$i][1]."</th>";
+       				echo "<th>".$result[$i][2]."</th>";
+        			echo "<th>".$result[$i][3]."</th>";
+        			echo "<th>".$result[$i][4]."</th>";
+        			echo "<th>".$result[$i][5]."</th>";
+        			echo "<th>".$result[$i][6]."</th>";
+        			echo "<th>".$result[$i][7]."</th>";
+        			echo "<th>".$result[$i][8]."</th>";
+        			echo "<th>".$result[$i][9]."</th>";
+        		echo "</tr>";
+        	}
+        	echo "</table>";
+        	echo "</div>";
+            }
+            catch(PDOException $e) {
          	echo "Error: " . $e->getMessage()."<br/>";
-        }
-        echo "<table>";
-        	echo "<tr>";
-        		echo "<th>Identifiant</th>";
-        		echo "<th>Mot de passe</th>";
-       			echo "<th>Email</th>";
-        		echo "<th>Date de Creation du compte</th>";
-        	echo "</tr>";
-        	echo "<tr>";
-        		echo "<td>".$_SESSION['pseudo']."</td>";
-        		echo "<td>";
-        		$mot_masc=str_repeat("*",strlen($mot_de_passe));
-        		echo $mot_masc;
-        		echo "</td>";
-       			echo "<td>".$email."</td>";
-        		echo "<td>".$dateCreation."</td>";
-        	echo "</tr>";
-
-        echo "</table>";
-		?>
-		<br/>
-		<p><strong>Action :</strong></p>
-		<a href="./deconnexion.php"><p>Se deconnecter</p></a>
-		<a href="./mod_mdp.php"><p>Modifier mot de passe</p></a>
-		<a href="./mod_email.php"><p>Modifier email</p></a>
-		<a href="./hist_acti.php"><p>Voir historique de mon activité</p></a>
-		<?php
-		if ($_SESSION["isAdmin"]==1){
-			echo '<a href="./ajout_etab.php"><p>Ajouter un etablissement</p></a>';
-			echo '<a href="./modif_etab.php"><p>Modifier un etablissement</p></a>';
-			echo '<a href="./index.php"><p>Supprimer un etablissement</p></a>';
-		}
-		?>
+        	}
+        	echo "<br/>";
+        	echo "<h2>Choisir un etablissement</h2>";
+        	echo "<p>Veuillez choisir l'etablissement avec l'id et completer uniquement les colonnes que vous voulez modifier </p>";
+        	?>
+        	<div style="overflow-x:scroll">
+            <table>
+        		<tr>
+        			<th>ID</th>
+        			<th>Nom</th>
+    	   			<th>Rue</th>
+        			<th>Numero</th>
+        			<th>CodePostal</th>
+      	  			<th>Localite</th>
+        			<th>Longitude</th>
+        			<th>Latitude</th>
+        			<th>Telephone</th>
+        			<th>Site</th>
+        		</tr>
+        		<tr>
+        			<form name="modif_etab" method="post" action="modif_etab.php">
+        				<td><input type="number" name="ID"/></td>
+        				<td><input type="text" name="name"/></td>
+        				<td><input type="text" name="street"/></td>
+        				<td><input type="number" name="num"/></td>
+        				<td><input type="number" name="zip"/></td>
+        				<td><input type="text" name="city"/></td>
+        				<td><input type="number" name="longitude"/></td>
+        				<td><input type="number" name="latitude"/></td>
+        				<td><input type="text" name="telephone"/></td>
+        				<td><input type="text" name="site"/></td>
+        			</form>
+        		</tr>
+        	</table>
+        	<div class="button">
+            	<input type="submit" name="next" value="Ajouter"/>
+            	<input type="submit" name="cancel" value="Annuler"/>
+      		</div>
+      	</div>
+ 		
 		<!--<div id="featured">
 			<div class="title">
 				<h2>Maecenas lectus sapien</h2>

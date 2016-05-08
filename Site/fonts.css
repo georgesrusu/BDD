@@ -421,3 +421,12 @@
 		.fa-vimeo-square:before{content:"\f194"}
 		.fa-turkish-lira:before,.fa-try:before{content:"\f195"}
 .alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
