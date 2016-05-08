@@ -19,7 +19,7 @@ Released   : 20130902
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Ajouter un etablissement</title>
+<title>Modifier un etablissement</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -63,7 +63,7 @@ Released   : 20130902
 			<div class="title">
 			</div>
 
-			<?php echo "<h2>Ajouter un etablissement</h2>";?>
+			<?php echo "<h2>Modifier un etablissement</h2>";?>
 			<br/>
 
 			<!--<p>This is <strong>Privy</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
@@ -71,10 +71,119 @@ Released   : 20130902
 				<li><a href="#" class="button">Etiam posuere</a></li>
 			</ul>-->
 		</div>
-		<p>
-		<div class="formulaire">
-        <form name="etablissement" method="post" action="ajout_etab2.php?">
-        	<?php
+		<?php
+		if (!isset($_SESSION['table2'])){
+        	echo "not set";
+           	$_SESSION['table2']=unserialize(urldecode($_GET['parama']));
+        }
+       	if(isset($_SESSION['table2'])){
+        	echo "set";
+    		$table= $_SESSION['table2'];
+    		$ID=$table[0];
+        	$name=$table[1];
+    		$street=$table[2];
+    		$num=$table[3];
+    		$zip=$table[4];
+    		$city=$table[5];
+    		$longitude=$table[6];
+    		$latitude=$table[7];
+    		$tel=$table[8];
+    		$site=$table[9];
+    		$type=$table[10];
+    	}
+    	echo "<div style=\"overflow-x:scroll\">";
+    	echo "<table>";
+        if ($type=="Restaurant"){
+            echo "<tr>";
+        		echo "<th>Prix</th>";
+       			echo "<th>Places banquet</th>";
+        		echo "<th>Emporter</th>";
+        		echo "<th>Livraison</th>";
+        		echo "<th>Fermeture</th>";
+        	echo "</tr>";
+        	try{
+		    	$sql = 'SELECT * FROM Restaurant WHERE ID="'.$ID.'"';
+            	$stmt = $conn->prepare($sql); 
+            	$stmt->execute();
+            	$result=$stmt->fetch();
+        		echo "<tr>";
+        			echo "<th>".$result[1]."</th>";
+        			echo "<th>".$result[2]."</th>";
+        			$emporter =$result[3]==1?"Oui":"Non";
+       				echo "<th>".$emporter."</th>";
+       				$livraison =$result[3]==1?"Oui":"Non";
+       				echo "<th>".$livraison."</th>";
+       				echo "<th>".$result[5]."</th>"; //fermeture a faire
+       			echo "</tr>";
+        	}
+        	catch(PDOException $e) {
+         		echo "Error: " . $e->getMessage()."<br/>";
+       		}
+        }
+    	elseif($type=="Bar"){
+    	try{
+		    	$sql = 'SELECT * FROM Bar WHERE ID="'.$ID.'"';
+            	$stmt = $conn->prepare($sql); 
+            	$stmt->execute();
+            	$result=$stmt->fetch();
+        		echo "<tr>";
+        			echo "<th>".$result[1]."</th>";
+        			echo "<th>".$result[2]."</th>";
+       			echo "</tr>";
+        	}
+        		catch(PDOException $e) {
+         			echo "Error: " . $e->getMessage()."<br/>";
+        		}		
+        }
+    		//elseif($type=="Hotel"){
+    			
+        //	}
+           echo "</table>";
+           echo "</div>";
+        	unset($_SESSION['table2']);?>
+		<?php /*try{
+		    $sql = 'SELECT * FROM Etablissement';
+            $stmt = $conn->prepare($sql); 
+            $stmt->execute();
+            $result=$stmt->fetchall();
+            echo "<div style=\"overflow-x:scroll\">";
+            echo "<table>";
+        	echo "<tr>";
+        		echo "<th>ID</th>";
+        		echo "<th>Nom</th>";
+       			echo "<th>Rue</th>";
+        		echo "<th>Numero</th>";
+        		echo "<th>CodePostal</th>";
+        		echo "<th>Localite</th>";
+        		echo "<th>Longitude</th>";
+        		echo "<th>Latitude</th>";
+        		echo "<th>Telephone</th>";
+        		echo "<th>Site</th>";
+        	echo "</tr>";
+        	for ($i=0;$i<sizeof($result);++$i){
+        		echo "<tr>";
+        			echo "<th>".$result[$i][0]."</th>";
+        			echo "<th>".$result[$i][1]."</th>";
+       				echo "<th>".$result[$i][2]."</th>";
+        			echo "<th>".$result[$i][3]."</th>";
+        			echo "<th>".$result[$i][4]."</th>";
+        			echo "<th>".$result[$i][5]."</th>";
+        			echo "<th>".$result[$i][6]."</th>";
+        			echo "<th>".$result[$i][7]."</th>";
+        			echo "<th>".$result[$i][8]."</th>";
+        			echo "<th>".$result[$i][9]."</th>";
+        		echo "</tr>";
+        	}
+        	echo "</table>";
+        	echo "</div>";
+            }
+            catch(PDOException $e) {
+         	echo "Error: " . $e->getMessage()."<br/>";
+        	}
+        	echo "<br/>";
+        	echo "<h2>Choisir un etablissement</h2>";
+        	echo "<p>Veuillez choisir l'etablissement avec l'id et completer uniquement les colonnes que vous voulez modifier </p>";
+       
         	if (!isset($_SESSION['table'])){
         		echo "not set";
            		$_SESSION['table']=unserialize(urldecode($_GET['param']));
@@ -182,7 +291,7 @@ Released   : 20130902
         elseif(isset($_POST['cancel'])) {
         	unset($_SESSION['table']);
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
-        }
+        }*/
         ?>
 		<br/><br/><br/><br/>
 		<div id="copyright">

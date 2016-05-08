@@ -63,21 +63,6 @@ Released   : 20130902
 		</div>
 		<div id="profile">
 			<div class="title">
-				<h1>
-				<?php 
-					if(isset($_GET['action'])){
-						$action = $_GET['action'];
-						if ($action=="login"){
-                        	echo "<div class='alert alert-info'>";
-                        	echo "<font size=5> Content de vous revoir ".$_SESSION['pseudo']."!</font>";
-                        	echo "</div>";
-                    }elseif($action="added"){
-                    	echo "<div class='alert alert-info'>";
-                        echo "<font size=5> Bienvenu parmis nous, ".$_SESSION['pseudo']."!</font>";
-                        echo "</div>";
-                    }
-                }
-                    ?></h1>
 			</div>
 
 			<?php echo "<h2>Modifer un etablissement</h2>";?>
@@ -105,16 +90,16 @@ Released   : 20130902
         	echo "</tr>";
         	for ($i=0;$i<sizeof($result);++$i){
         		echo "<tr>";
-        			echo "<th>".$result[$i][0]."</th>";
-        			echo "<th>".$result[$i][1]."</th>";
-       				echo "<th>".$result[$i][2]."</th>";
-        			echo "<th>".$result[$i][3]."</th>";
-        			echo "<th>".$result[$i][4]."</th>";
-        			echo "<th>".$result[$i][5]."</th>";
-        			echo "<th>".$result[$i][6]."</th>";
-        			echo "<th>".$result[$i][7]."</th>";
-        			echo "<th>".$result[$i][8]."</th>";
-        			echo "<th>".$result[$i][9]."</th>";
+        			echo "<td>".$result[$i][0]."</td>";
+        			echo "<td>".$result[$i][1]."</td>";
+       				echo "<td>".$result[$i][2]."</td>";
+        			echo "<td>".$result[$i][3]."</td>";
+        			echo "<td>".$result[$i][4]."</td>";
+        			echo "<td>".$result[$i][5]."</td>";
+        			echo "<td>".$result[$i][6]."</td>";
+        			echo "<td>".$result[$i][7]."</td>";
+        			echo "<td>".$result[$i][8]."</td>";
+        			echo "<td>".$result[$i][9]."</td>";
         		echo "</tr>";
         	}
         	echo "</table>";
@@ -151,17 +136,36 @@ Released   : 20130902
         				<td><input type="text" name="city"/></td>
         				<td><input type="number" name="longitude"/></td>
         				<td><input type="number" name="latitude"/></td>
-        				<td><input type="text" name="telephone"/></td>
+        				<td><input type="text" name="tel"/></td>
         				<td><input type="text" name="site"/></td>
-        			</form>
         		</tr>
         	</table>
         	<div class="button">
             	<input type="submit" name="next" value="Ajouter"/>
             	<input type="submit" name="cancel" value="Annuler"/>
-      		</div>
+      		</div></form>
       	</div>
- 		
+      	<?php
+ 		if(isset($_POST['next'])){
+ 			try{
+ 				$sql = 'SELECT type FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+            	$stmt = $conn->prepare($sql); 
+            	$stmt->execute();
+            	$result=$stmt->fetch();
+            	$type=$result[0];
+            	$table=array($_POST['ID'],$_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$type);
+            	$url = urlencode(serialize($table));
+            	echo '<meta http-equiv="Refresh" content="0;URL=./modif_etab2.php?parama='.$url.'">';
+
+ 			}catch(PDOException $e) {
+         		echo "Error: " . $e->getMessage()."<br/>";
+        	}
+ 
+        }
+        elseif(isset($_POST['cancel'])) {
+            echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
+        }
+        ?>
 		<!--<div id="featured">
 			<div class="title">
 				<h2>Maecenas lectus sapien</h2>

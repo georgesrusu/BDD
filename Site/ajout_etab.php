@@ -63,21 +63,6 @@ Released   : 20130902
 		</div>
 		<div id="profile">
 			<div class="title">
-				<h1>
-				<?php 
-					if(isset($_GET['action'])){
-						$action = $_GET['action'];
-						if ($action=="login"){
-                        	echo "<div class='alert alert-info'>";
-                        	echo "<font size=5> Content de vous revoir ".$_SESSION['pseudo']."!</font>";
-                        	echo "</div>";
-                    }elseif($action="added"){
-                    	echo "<div class='alert alert-info'>";
-                        echo "<font size=5> Bienvenu parmis nous, ".$_SESSION['pseudo']."!</font>";
-                        echo "</div>";
-                    }
-                }
-                    ?></h1>
 			</div>
 
 			<?php echo "<h2>Ajouter un etablissement</h2>";?>
@@ -113,49 +98,7 @@ Released   : 20130902
         <?php
         if(isset($_POST['next'])){
         	$table=array($_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$_POST['type']);
-			$name=$table[0];
-    		$street=$table[1];
-    		$num=$table[2];
-    		$zip=$table[3];
-    		$city=$table[4];
-    		$longitude=$table[5];
-    		$latitude=$table[6];
-    		$tel=$table[7];
-    		$site=$table[8];
-    		$type=$table[9];
-    		echo $name;
-			echo $street;
-			echo $num;
-			echo $zip;
-			echo $city;
-			echo $longitude;
-			echo $latitude;
-    		echo $tel;
-    		echo $site;
-    		echo $type;
 			$url = urlencode(serialize($table));
-			$table=unserialize(urldecode($url));
-			echo "DECOD";
-			$name=$table[0];
-    		$street=$table[1];
-    		$num=$table[2];
-    		$zip=$table[3];
-    		$city=$table[4];
-    		$longitude=$table[5];
-    		$latitude=$table[6];
-    		$tel=$table[7];
-    		$site=$table[8];
-    		$type=$table[9];
-    		echo $name;
-			echo $street;
-			echo $num;
-			echo $zip;
-			echo $city;
-			echo $longitude;
-			echo $latitude;
-    		echo $tel;
-    		echo $site;
-    		echo $type;
             echo '<meta http-equiv="Refresh" content="0;URL=./ajout_etab2.php?param='.$url.'">';
             }
         elseif(isset($_POST['cancel'])) {
