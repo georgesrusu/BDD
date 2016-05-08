@@ -112,6 +112,7 @@ Released   : 20130902
         	echo "<h2>Choisir un etablissement</h2>";
         	echo "<p>Veuillez choisir l'etablissement avec l'id et completer uniquement les colonnes que vous voulez modifier </p>";
         	?>
+            <form name="modif_etab" method="post" action="modif_etab.php">
         	<div style="overflow-x:scroll">
             <table>
         		<tr>
@@ -127,7 +128,6 @@ Released   : 20130902
         			<th>Site</th>
         		</tr>
         		<tr>
-        			<form name="modif_etab" method="post" action="modif_etab.php">
         				<td><input type="number" name="ID"/></td>
         				<td><input type="text" name="name"/></td>
         				<td><input type="text" name="street"/></td>

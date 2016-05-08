@@ -86,6 +86,7 @@ Released   : 20130902
             Telephone : <input type="text" name="tel"/><br/>
             Site : <input type="text" name="site"/><br/>
             Type : <select name="type">
+            			<option value=""></option>
     					<option value="Restaurant">Restaurant</option>
     					<option value="Bar">Bar</option>
     					<option value="Hotel">Hotel</option>
@@ -97,10 +98,29 @@ Released   : 20130902
         </form></p>
         <?php
         if(isset($_POST['next'])){
-        	$table=array($_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$_POST['type']);
-			$url = urlencode(serialize($table));
-            echo '<meta http-equiv="Refresh" content="0;URL=./ajout_etab2.php?param='.$url.'">';
-            }
+        	$nameEta = $_POST['name'];
+        	$street = $_POST['street'];
+        	$num = $_POST['num'];
+        	$zip = $_POST['zip'];
+        	$city = $_POST['city'];
+        	$long = $_POST['longitude'];
+        	$lat = $_POST['latitude'];
+        	$tel = $_POST['tel'];
+        	$site = $_POST['site'];
+        	$typeEta = $_POST['type'];
+        	if (empty($nameEta) or empty($street) or empty($num) or empty($zip) or empty($city) or empty($long) or empty($lat) or empty($tel) or empty($typeEta)) {
+        		echo '<script language="javascript">';
+                echo 'alert("Something missing !")';
+                echo '</script>';
+
+        	}
+        	else {
+	        	$table=array($nameEta,$street,$num,$zip,$city,$long,$lat,$tel,$site,$typeEta);
+	        	print_r($table);
+				$url = urlencode(serialize($table));
+	            echo '<meta http-equiv="Refresh" content="0;URL=./ajout_etab2.php?param='.$url.'">';
+	       	}
+        }
         elseif(isset($_POST['cancel'])) {
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
