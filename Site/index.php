@@ -33,6 +33,20 @@ Released   : 20130902
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+<?php
+	include("../connect.php");
+	try{
+		$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
+		$stmt->execute();
+
+    // set the resulting array to associative
+		$etablissementList = $stmt->fetchall(); //fetch
+	}
+	catch(PDOException $e) {
+        echo "Error: " . $e->getMessage()."<br/>";
+    }
+?>
+
 </head>
 <body>
 <div id="page" class="container">
@@ -90,6 +104,25 @@ Released   : 20130902
 			<p>Vous voici sur Eureka, le site web du référencement d'établissement publique de consommation.  Vous trouverez ici tous les restaurants, bars ou hotels les plus aventageux de Bruxelles !</p>
 
 			<p>Rechercher dés maintenant un établissement : <a href="./search.php">Research</a></p>
+
+			</br>
+			<p>Quelques nouveaux établissements : </p>
+			<?php
+				for ($elem=sizeof($etablissementList); $elem > sizeof($etablissementList) - 3; $elem--) { 
+					$temp = $elem - 1;
+					$etablissementID=$etablissementList[$temp][0];
+					echo "<hr>";
+					echo "<p><strong>".$etablissementList[$temp][1]."</strong></p>";
+					echo "<p>".$etablissementList[$temp][10]."</p>";
+					echo "<p>".$etablissementList[$temp][2]." ".$etablissementList[$temp][3].", ".$etablissementList[$temp][5]." - ".$etablissementList[$temp][4]."</p>";
+					echo "<p>telephone : ".$etablissementList[$temp][8]."</p>";
+					$siteWeb=$etablissementList[$temp][9]!=""?$etablissementList[$temp][9]:"aucun";
+					echo "<p>site web : ".$siteWeb."</p>";
+					echo '<strong><a href=./exemple.php?etablissementID='.$etablissementID.'>Plus de details ...</a></strong>';
+					echo "<hr>";
+					echo "</br>";
+				}
+			?>
 
 			<br/>
 		</div>

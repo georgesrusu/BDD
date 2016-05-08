@@ -233,7 +233,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						}
 					}
 
-					echo "	<table border=0 style=\"width:40%\">";
+					echo "	<table class=\"tableH\" border=\"0\" style=\"width:40%\">";
 					closedPrint("Lundi", $ouverture[0]);
 					closedPrint("Mardi", $ouverture[1]);
 					closedPrint("Mercredi", $ouverture[2]);
@@ -302,16 +302,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					if ($labelList[$label][0] == $idEtablissement) {
 						if (!in_array($labelList[$label][2], $labelArray)) {
 							array_push($labelArray, $labelList[$label][2]);
-							array_push($countArray, 1);
+							array_push($countArray, (int)1);
 						}
 						else {
-							$id = array_keys($labelArray, $labelList[$label][2]);
-							$countArray[$id] = $countArray[$id] + 1;
+							$idArray = array_keys($labelArray, $labelList[$label][2]);
+							$countArray[$idArray[0]] = $countArray[$idArray[0]] + 1;
 						}
 					}
 				}
 				for ($label=0; $label < count($labelArray); $label++) { 
-					#echo "<p>" . $labelArray[$label] . "</p>";
 					echo "	<tr>
 								<td>" . $labelArray[$label] . "</td>
 								<td>" . $countArray[$label] . "</td>
