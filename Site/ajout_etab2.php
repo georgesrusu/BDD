@@ -97,19 +97,19 @@ Released   : 20130902
             	echo ' Prix : <input type="number" name="price"/> <br/>';
             	echo ' Nombre de place pour un Banquet : <input type="number" name="banquet"/> <br/>';
             	echo ' Emporter : ';
-            	echo '<input type="radio" name="takeAway" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="takeAway" value="1" checked> Oui';
             	echo '<input type="radio" name="takeAway" value="0" checked> Non<br>';
             	echo ' Livraison : ';
-            	echo '<input type="radio" name="delivery" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="delivery" value="1" checked> Oui';
             	echo '<input type="radio" name="delivery" value="0" checked> Non<br>';
             	//closedDays
             }
     		elseif($type=="Bar"){
     			echo ' Fumeur : ';
-            	echo '<input type="radio" name="smoking" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="smoking" value="1" checked> Oui';
             	echo '<input type="radio" name="smoking" value="0" checked> Non<br>';
             	echo ' Snack : ';
-            	echo '<input type="radio" name="snack" value="1" checked> Oui<br>';
+            	echo '<input type="radio" name="snack" value="1" checked> Oui';
             	echo '<input type="radio" name="snack" value="0" checked> Non<br>';
             }
     		elseif($type=="Hotel"){
