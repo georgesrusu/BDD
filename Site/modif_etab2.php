@@ -109,11 +109,12 @@ Released   : 20130902
         		echo "<tr>";
         			echo "<th>".$result[1]."</th>";
         			echo "<th>".$result[2]."</th>";
-        			$emporter =$result[3]==1?"Oui":"Non";
-       				echo "<th>".$emporter."</th>";
-       				$livraison =$result[3]==1?"Oui":"Non";
-       				echo "<th>".$livraison."</th>";
-       				echo "<th>".$result[5]."</th>"; //fermeture a faire
+        			//$emporter =$result[3]==1?"Oui":"Non";
+       				echo "<th>".$emporter =$result[3]==1?"Oui":"Non"."</th>";
+       				//$livraison =$result[3]==1?"Oui":"Non";
+       				echo "<th>".$livraison =$result[3]==1?"Oui":"Non"."</th>";
+       				echo "<th>".$result[5]."</th>"; 
+       				//fermeture a faire
        			echo "</tr>";
         	}
         	catch(PDOException $e) {
@@ -121,27 +122,201 @@ Released   : 20130902
        		}
         }
     	elseif($type=="Bar"){
-    	try{
+    		echo "<tr>";
+        		echo "<th>Fumeur</th>";
+       			echo "<th>Petite Restauration</th>";
+        	echo "</tr>";
+    		try{
 		    	$sql = 'SELECT * FROM Bar WHERE ID="'.$ID.'"';
             	$stmt = $conn->prepare($sql); 
             	$stmt->execute();
             	$result=$stmt->fetch();
         		echo "<tr>";
-        			echo "<th>".$result[1]."</th>";
-        			echo "<th>".$result[2]."</th>";
+        		// $emporter =$result[3]==1?"Oui":"Non";
+        			echo "<th>".$fumeur =$result[1]==1?"Oui":"Non"."</th>";
+        			echo "<th>".$petiteRestauration=$result[2]==1?"Oui":"Non"."</th>";
        			echo "</tr>";
         	}
         		catch(PDOException $e) {
          			echo "Error: " . $e->getMessage()."<br/>";
         		}		
         }
-    		//elseif($type=="Hotel"){
-    			
-        //	}
-           echo "</table>";
-           echo "</div>";
-        	unset($_SESSION['table2']);?>
-		<?php /*try{
+    	elseif($type=="Hotel"){
+    		echo "<tr>";
+        	echo "<th>Prix</th>";
+       		echo "<th>Nombre de chambres</th>";
+       		echo "<th>Nombre d'etoiles'</th>";
+        	echo "</tr>";
+    		try{
+		    	$sql = 'SELECT * FROM Hotel WHERE ID="'.$ID.'"';
+            	$stmt = $conn->prepare($sql); 
+            	$stmt->execute();
+            	$result=$stmt->fetch();
+        		echo "<tr>";
+        			echo "<th>".$result[1]."</th>";
+        			echo "<th>".$result[2]."</th>";
+        			echo "<th>".$result[3]."</th>";
+       			echo "</tr>";
+        	}
+        	catch(PDOException $e) {
+         		echo "Error: " . $e->getMessage()."<br/>";
+       		}		
+       	}
+        echo "</table>";
+        echo "</div>";
+        echo "<br/>";
+        echo "<p>Veuillez remplir les colonnes que vous voulez modifier </p>";
+        echo '<form name="modif_etab2" method="post" action="modif_etab2.php">';
+      	echo "<div style=\"overflow-x:scroll\">";
+    	echo "<table>";
+        if ($type=="Restaurant"){
+            echo "<tr>";
+        		echo "<th>Prix</th>";
+       			echo "<th>Places banquet</th>";
+        		echo "<th>Emporter</th>";
+        		echo "<th>Livraison</th>";
+        		echo "<th>Fermeture</th>";
+        	echo "</tr>";
+        	echo "<tr>";
+        			echo '<td><input type="number" name="price"/></td>';
+        			echo '<td><input type="number" name="banquet"/></td>';
+        			//$emporter =$result[3]==1?"Oui":"Non";
+       				echo '<td><input type="radio" name="takeAway" value="1" checked> Oui';
+       				echo '<input type="radio" name="takeAway" value="0" checked> Non<br></td>';
+       				//$livraison =$result[3]==1?"Oui":"Non";
+       				echo '<td><input type="radio" name="delivery" value="1" checked> Oui';
+            		echo '<input type="radio" name="delivery" value="0" checked> Non<br></td>';
+       				echo "<td>".$result[5]."</th>"; //fermeture
+       				//fermeture a faire
+       			echo "</tr>";
+        	
+        }elseif($type=="Bar"){
+    		echo "<tr>";
+        		echo "<th>Fumeur</th>";
+       			echo "<th>Petite Restauration</th>";
+        	echo "</tr>";
+        	echo "<tr>";
+       			echo '<td><input type="radio" name="smoking" value="1" checked> Oui';
+       			echo '<input type="radio" name="smoking" value="0" checked> Non<br></td>';
+       			//$livraison =$result[3]==1?"Oui":"Non";
+       			echo '<td><input type="radio" name="snack" value="1" checked> Oui';
+           		echo '<input type="radio" name="snack" value="0" checked> Non<br></td>';
+ 			echo "</tr>";    		
+        }
+    	elseif($type=="Hotel"){
+    		echo "<tr>";
+        		echo "<th>Prix</th>";
+       			echo "<th>Nombre de chambres</th>";
+       			echo "<th>Nombre d'etoiles'</th>";
+        	echo "</tr>";
+        	echo "<tr>";
+       			echo '<td><input type="number" name="price"/></td>';
+        		echo '<td><input type="number" name="bedRooms"/></td>';
+        		echo '<td><input type="number" name="stars"/></td>';
+ 			echo "</tr>";    	
+        }
+        echo "</table>";
+        echo '<div class="button">';
+            	echo '<input type="submit" name="update" value="Ok"/>';
+            	echo '<input type="submit" name="cancel" value="Annuler"/>';
+      		echo '</div></form>';
+        echo "</div>";
+
+        if(isset($_POST['update'])){
+			unset($_SESSION['table2']);
+			$date=Date("Y-m-d");
+			if ($type=="Restaurant"){
+				$price=$_POST['price'];
+				$banquet=$_POST['banquet'];
+				$takeAway=$_POST['takeAway'];
+				$delivery=$_POST['delivery'];
+				$closedDays="13512"; //a faire ---
+				$sql = 'UPDATE Restaurant SET ';
+				if ($price!=""){
+					$sql=$sql.'prix="'.$price.'", ';
+				}
+				if ($banquet!=""){
+					$sql=$sql.'banquet="'.$banquet.'", ';
+				}	
+				if ($takeAway!=""){
+					$sql=$sql.'emporter="'.$takeAway.'", ';
+				}	
+				if ($delivery!=""){
+					$sql=$sql.'livraison="'.$delivery.'", ';
+				}	
+				//clossed days,
+				if ($closedDays!=""){
+					$sql=$sql.'fermeture="'.$closedDays.'", ';
+				}
+				$sql=substr($sql, 0, -2);
+				
+			}
+    		elseif($type=="Bar"){
+    			$smoking=$_POST['smoking'];
+    			$snack=$_POST['snack'];
+   				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
+   			}
+   			elseif($type=="Hotel"){
+    			$price=$_POST['price'];
+    			$bedRooms=$_POST['bedRooms'];
+   				$stars=$_POST['stars'];
+   				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
+   			}
+            /*try{
+		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
+               	$stmt = $conn->prepare($sql); 
+               	$stmt->execute();
+                $result=$stmt->fetch();
+                $adminID=$result[0];
+
+                $sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
+				$stmt = $conn->prepare($sql); 
+				$stmt->execute();
+				$result=$stmt->fetch();
+				if ($result==""){
+					$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$name.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
+    				$conn->exec($sql);
+					$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
+					$stmt = $conn->prepare($sql); 
+					$stmt->execute();
+					$result=$stmt->fetch();
+				}
+				$etablissementID=$result[0];
+				if ($type=="Restaurant"){
+					$price=$_POST['price'];
+					$banquet=$_POST['banquet'];
+					$takeAway=$_POST['takeAway'];
+					$delivery=$_POST['delivery'];
+					$closedDays="13512"; //a faire
+					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
+    			}
+    			elseif($type=="Bar"){
+    				$smoking=$_POST['smoking'];
+    				$snack=$_POST['snack'];
+    				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
+    			}
+    			elseif($type=="Hotel"){
+    				$price=$_POST['price'];
+    				$bedRooms=$_POST['bedRooms'];
+    				$stars=$_POST['stars'];
+    				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
+    			}
+    			$conn->exec($sql);
+				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
+    			$conn->exec($sql);
+    			echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
+		}
+		catch(PDOException $e) {
+         	echo "Error: " . $e->getMessage()."<br/>";
+        }*/
+    	}elseif(isset($_POST['cancel'])) {
+        	unset($_SESSION['table2']);
+            echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
+        }
+    	
+        	?>
+        	
+     	 <?php/*try{
 		    $sql = 'SELECT * FROM Etablissement';
             $stmt = $conn->prepare($sql); 
             $stmt->execute();
@@ -235,63 +410,7 @@ Released   : 20130902
             <div>
         </form></p>
         <?php
-		if(isset($_POST['add'])){
-			unset($_SESSION['table']);
-			$date=Date("Y-m-d");
-            try{
-		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
-               	$stmt = $conn->prepare($sql); 
-               	$stmt->execute();
-                $result=$stmt->fetch();
-                $adminID=$result[0];
-
-                $sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
-				$stmt = $conn->prepare($sql); 
-				$stmt->execute();
-				$result=$stmt->fetch();
-				if ($result==""){
-					$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$name.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
-    				$conn->exec($sql);
-					$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
-					$stmt = $conn->prepare($sql); 
-					$stmt->execute();
-					$result=$stmt->fetch();
-				}
-				$etablissementID=$result[0];
-				if ($type=="Restaurant"){
-					$price=$_POST['price'];
-					$banquet=$_POST['banquet'];
-					$takeAway=$_POST['takeAway'];
-					$delivery=$_POST['delivery'];
-					$closedDays="13512"; //a faire
-					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
-    			}
-    			elseif($type=="Bar"){
-    				$smoking=$_POST['smoking'];
-    				$snack=$_POST['snack'];
-    				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
-    			}
-    			elseif($type=="Hotel"){
-    				$price=$_POST['price'];
-    				$bedRooms=$_POST['bedRooms'];
-    				$stars=$_POST['stars'];
-    				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
-    			}
-    			$conn->exec($sql);
-				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
-    			$conn->exec($sql);
-    			echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
-		}
-		catch(PDOException $e) {
-         	echo "Error: " . $e->getMessage()."<br/>";
-        }
-    }
-
-        
-        elseif(isset($_POST['cancel'])) {
-        	unset($_SESSION['table']);
-            echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
-        }*/
+		*/
         ?>
 		<br/><br/><br/><br/>
 		<div id="copyright">
