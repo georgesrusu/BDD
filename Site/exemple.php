@@ -376,6 +376,46 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				}
 			?>
 			</table>
+
+			<p><strong>Ajouter un tag : </strong></p>
+			<?php 
+				if(isset($_SESSION['pseudo'])) {
+					echo '<form name="label" method="post" action="./exemple.php?etablissementID='.$etablissementID.'">';
+					echo '<select name="labelSelect">';
+					for ($tagPrint = 0; $tagPrint < count($labelArray); $tagPrint++) {
+						echo '<option value="'.$tagPrint.'">' . $labelArray[$tagPrint] . '</option>';
+					}
+					echo '</select>';
+					echo '
+					<div class="button">
+            		<input type="submit" name="envoyer" value="Submit"/>
+      				</div>';
+					//echo '</form>';
+
+					//echo '<form name="labelAutre" method="post" action="exemple.php?etablissementID='.$etablissementID.'">';
+					echo '</br><input type="text" name="labelText" placeholder="Label">';
+					echo '<div class="button">';
+					echo '<input type="submit" name="labelAutreSend" value="Send">';
+					echo '</div></form>';
+				}
+				else{
+					//Si non connecté
+					echo '<p>Veuillez vous connecter</p>'; 
+				}
+				
+				if (isset($_POST['envoyer'])) {
+					echo "<p>Passage tag pris</p>";
+					#Si tag pris dans la site des tag:
+					#Donc prendre l'option choisit dans la liste
+				}
+				elseif (isset($_POST['labelAutreSend'])) {
+					echo "<p>Passage nouveau tag</p>";
+					#User crée un nouveau tag
+					#donc récuperer du input text
+				}
+
+			?>
+
 		</div>
 
 		<br/><br/><br/><br/>
