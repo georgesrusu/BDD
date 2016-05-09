@@ -289,6 +289,22 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					}
 				?>
 
+				</br>
+				<p><strong>Ajouter un commentaire : </strong></p>
+				<?php 
+				if(isset($_SESSION['pseudo'])) {
+					//Si connecté
+					echo '<p>Score : <input type="number" min="0" max="5" name="score"/></p>';
+					echo '<p><textarea rows="6" cols="75" placeholder="Votre commentaire"></textarea></p>';
+					echo '<input type="submit" name="accept" value="Commenter">';
+				}
+				else{
+					//Si non connecté
+					echo '<p>Veuillez vous connecter</p>';
+				}
+				?>
+				</br>
+
 			<h2 class="infos">Tags de l'établissement:</h2>
 			<table width="50%" border="1" align="center">
 				<tr>
