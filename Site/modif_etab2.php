@@ -225,13 +225,49 @@ Released   : 20130902
         if(isset($_POST['update'])){
 			unset($_SESSION['table2']);
 			$date=Date("Y-m-d");
+			$sql='UPDATE Etablissement WHERE ID="'.$ID.'" SET ';
+			if ($name!=""){
+				$sql=$sql.'nom="'.$name.'", ';
+			}
+			if($street!=""){
+				$sql=$sql.'rue="'.$street.'", ';
+			}
+			if($num!=""){
+				$sql=$sql.'numero="'.$num.'", ';
+			}
+			if($zip!=""){
+				$sql=$sql.'codePostal="'.$zip.'", ';
+			}
+			if($city!=""){
+				$sql=$sql.'localite="'.$city.'", ';
+			}
+			if($longitude!=""){
+				$sql=$sql.'longitude="'.$longitude.'", ';
+			}
+			if($latitude!=""){
+				$sql=$sql.'latitude="'.$latitude.'", ';
+			}
+			if($tel!=""){
+				$sql=$sql.'telephone="'.$tel.'", ';
+			}
+			if($site!=""){
+				$sql=$sql.'lienWeb="'.$site.'", ';
+			}
+			$sql=substr($sql, 0, -2);
+			try {
+				$conn->exec($sql);
+			}catch(PDOException $e) {
+                echo "Error: " . $e->getMessage()."<br/>";
+            }
+
+
 			if ($type=="Restaurant"){
 				$price=$_POST['price'];
 				$banquet=$_POST['banquet'];
 				$takeAway=$_POST['takeAway'];
 				$delivery=$_POST['delivery'];
 				$closedDays="13512"; //a faire ---
-				$sql = 'UPDATE Restaurant SET ';
+				$sql = 'UPDATE Restaurant WHERE ID="'.$ID.'" SET ';
 				if ($price!=""){
 					$sql=$sql.'prix="'.$price.'", ';
 				}
@@ -248,20 +284,43 @@ Released   : 20130902
 				if ($closedDays!=""){
 					$sql=$sql.'fermeture="'.$closedDays.'", ';
 				}
-				$sql=substr($sql, 0, -2);
 				
 			}
     		elseif($type=="Bar"){
     			$smoking=$_POST['smoking'];
     			$snack=$_POST['snack'];
-   				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
+   				$sql = 'UPDATE Bar WHERE ID="'.$ID.'" SET ';
+   				if ($smoking!=""){
+					$sql=$sql.'fumeur="'.$smoking.'", ';
+				}
+				if ($snack!=""){
+					$sql=$sql.'petiteRestauration="'.$snack.'", ';
+				}	
+
    			}
    			elseif($type=="Hotel"){
     			$price=$_POST['price'];
     			$bedRooms=$_POST['bedRooms'];
    				$stars=$_POST['stars'];
-   				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
+   				$sql = 'UPDATE Hotel WHERE ID="'.$ID.'" SET ';
+   				if ($price!=""){
+					$sql=$sql.'prix="'.$price.'", ';
+				}
+				if ($bedRooms!=""){
+					$sql=$sql.'nbChambres="'.$bedRooms.'", ';
+				}	
+				if ($stars!=""){
+					$sql=$sql.'nbEtoiles="'.$stars.'", ';
+				}
    			}
+   			$sql=substr($sql, 0, -2);
+   			try {
+				$conn->exec($sql);
+				echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
+			}catch(PDOException $e) {
+                echo "Error: " . $e->getMessage()."<br/>";
+            }
+
             /*try{
 		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
                	$stmt = $conn->prepare($sql); 
