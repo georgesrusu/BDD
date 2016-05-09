@@ -195,11 +195,7 @@ Released   : 20130902
                 $sa = $_POST['samedi'];
                 $di = $_POST['dimanche'];
 
-                echo "<p>***TESTE OUVERTURE***</p>";
-                echo "<p>Lundi = ".$lu." - Mardi = ".$ma." - Mercredi = ".$me."</p>";
-
                 $fermetureDays = $lu . $ma . $me . $je . $vdd . $sa . $di;
-                echo "<p>HEURE FINAL : " . $fermeture . "</p>";
 
                 if (empty($price) or empty($banquet)) {
                     echo '<script language="javascript">';
@@ -258,7 +254,7 @@ Released   : 20130902
     					$takeAway=$_POST['takeAway'];
     					$delivery=$_POST['delivery'];
     					$closedDays="13512"; //a faire
-    					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
+    					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$fermetureDays.'")';
         			}
         			elseif($type=="Bar"){
         				$smoking=$_POST['smoking'];
