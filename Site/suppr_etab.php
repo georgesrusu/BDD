@@ -21,7 +21,7 @@ Released   : 20130902
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Modifier un etablissement</title>
+<title>Supprimer un etablissement</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -65,7 +65,7 @@ Released   : 20130902
 			<div class="title">
 			</div>
 
-			<?php echo "<h2>Modifer un etablissement</h2>";?>
+			<?php echo "<h2>Supprimer un etablissement</h2>";?>
 			<br/>
 		</div>
 		<?php
@@ -110,98 +110,59 @@ Released   : 20130902
         	}
         	echo "<br/>";
         	echo "<h2>Choisir un etablissement</h2>";
-        	echo "<p>Veuillez choisir l'etablissement avec l'id et completer uniquement les colonnes que vous voulez modifier </p>";
+        	echo "<p>Veuillez choisir l'etablissement l'id de l'etablissement a supprimer.</p>";
         	?>
-        	<form name="modif_etab" method="post" action="modif_etab.php">
+        	<form name="modif_etab" method="post" action="suppr_etab.php">
         	<div style="overflow-x:scroll">
             <table>
         		<tr>
         			<th>ID</th>
-        			<th>Nom</th>
-    	   			<th>Rue</th>
-        			<th>Numero</th>
-        			<th>CodePostal</th>
-      	  			<th>Localite</th>
-        			<th>Longitude</th>
-        			<th>Latitude</th>
-        			<th>Telephone</th>
-        			<th>Site</th>
         		</tr>
         		<tr>
-        				<td><input type="number" name="ID"/></td>
-        				<td><input type="text" name="name"/></td>
-        				<td><input type="text" name="street"/></td>
-        				<td><input type="number" name="num"/></td>
-        				<td><input type="number" name="zip"/></td>
-        				<td><input type="text" name="city"/></td>
-        				<td><input type="number" name="longitude"/></td>
-        				<td><input type="number" name="latitude"/></td>
-        				<td><input type="text" name="tel"/></td>
-        				<td><input type="text" name="site"/></td>
+        			<td><input type="number" name="ID"/></td>
         		</tr>
         	</table>
         	<div class="button">
-            	<input type="submit" name="next" value="Modifier"/>
+            	<input type="submit" name="del" value="Supprimer"/>
             	<input type="submit" name="cancel" value="Annuler"/>
       		</div></form>
       	</div>
+        <a href="./suppr_etab.php">Appuyez pour rafraichir la page</a> <!--HREF="javascript:history.go(0)"-->
       	<?php
- 		if(isset($_POST['next'])){
- 			try{
- 				$sql = 'SELECT type FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
-            	$stmt = $conn->prepare($sql); 
-            	$stmt->execute();
-            	$result=$stmt->fetch();
-            	$type=$result[0];
-            	$table=array($_POST['ID'],$_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$type);
-            	if (empty($_POST['ID'])) {
-        			echo '<script language="javascript">';
-                	echo 'alert("ID is missing !")';
-                	echo '</script>';
-
-        		}
-        		else {
-            	$url = urlencode(serialize($table));
-            	echo '<meta http-equiv="Refresh" content="0;URL=./modif_etab2.php?parama='.$url.'">';
-           	 	}
-
- 			}catch(PDOException $e) {
-         		echo "Error: " . $e->getMessage()."<br/>";
-        	}
- 
+ 		if(isset($_POST['del'])){
+            if (empty($_POST['ID'])) {
+                echo '<script language="javascript">';
+                echo 'alert("ID is missing !")';
+                echo '</script>';
+            }
+            else {
+ 			    try{
+                    $sql = 'SELECT type FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+                    $stmt = $conn->prepare($sql); 
+                    $stmt->execute();
+                    $result=$stmt->fetch();
+                    $type=$result[0];
+                    if($type!=""){
+ 				        $sql = 'DELETE FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+                        $conn->exec($sql);
+                        $sql = 'DELETE FROM '.$type.' WHERE ID="'.$_POST['ID'].'"';
+                        $conn->exec($sql);
+            	       echo "<p style=\"color:blue;\">Etablissement supprime avec succes !</p>";
+                    }
+                    else{
+                        echo '<script language="javascript">';
+                        echo 'alert("ID doesn\'t exist !")';
+                        echo '</script>';
+                    }
+ 			    }catch(PDOException $e) {
+             		echo "Error: " . $e->getMessage()."<br/>";
+            	}   
+            }
         }
         elseif(isset($_POST['cancel'])) {
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
         ?>
-		<!--<div id="featured">
-			<div class="title">
-				<h2>Maecenas lectus sapien</h2>
-				<span class="byline">Integer sit amet aliquet pretium</span>
-			</div>
-			<ul class="style1">
-				<li class="first">
-					<p class="date"><a href="#">Jan<b>05</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Etiam non felis. Donec ut ante.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Jan<b>03</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie. Donec leo, vivamus fermentum nibh in augue praesent congue rutrum.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Jan<b>01</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Etiam non felis. Donec ut ante.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Dec<b>31</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie. Donec leo, vivamus fermentum nibh in augue praesent congue rutrum.</a></p>
-				</li>
-			</ul>
-		</div>-->
 		<br/><br/><br/><br/>
 		<div id="copyright">
 			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>

@@ -116,7 +116,6 @@ Released   : 20130902
         	}
         	else {
 	        	$table=array($nameEta,$street,$num,$zip,$city,$long,$lat,$tel,$site,$typeEta);
-	        	print_r($table);
 				$url = urlencode(serialize($table));
 	            echo '<meta http-equiv="Refresh" content="0;URL=./ajout_etab2.php?param='.$url.'">';
 	       	}
