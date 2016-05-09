@@ -180,6 +180,10 @@ Released   : 20130902
         	echo "<tr>";
         			echo '<td><input type="number" name="price"/></td>';
         			echo '<td><input type="number" name="banquet"/></td>';
+
+                    //TODO: MAX COMPLETER
+                    echo '<td><input type="number" name="closedDays"/></td>';
+
         			//$emporter =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="takeAway" value="1" checked> Oui';
        				echo '<input type="radio" name="takeAway" value="0" checked> Non<br></td>';
@@ -285,7 +289,11 @@ Released   : 20130902
 				$banquet=$_POST['banquet'];
 				$takeAway=$_POST['takeAway'];
 				$delivery=$_POST['delivery'];
-				$closedDays="13512"; //a faire ---
+
+                $closedDays = $_POST['closedDays'];
+				#$closedDays="13512"; //a faire --- #TODO: A ENLEVER
+				
+                #$sql = 'UPDATE Restaurant WHERE ID="'.$ID.'" SET ';
 				$sql = 'UPDATE Restaurant SET ';
 				if ($price!=""){
 					$sql=$sql.'prix="'.$price.'" ,';
