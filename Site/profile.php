@@ -130,7 +130,7 @@ Released   : 20130902
 		if ($_SESSION["isAdmin"]==1){
 			echo '<a href="./ajout_etab.php"><p>Ajouter un etablissement</p></a>';
 			echo '<a href="./modif_etab.php"><p>Modifier un etablissement</p></a>';
-			echo '<a href="./index.php"><p>Supprimer un etablissement</p></a>';
+			echo '<a href="./suppr_etab.php"><p>Supprimer un etablissement</p></a>';
 		}
 		?>
 		<!--<div id="featured">

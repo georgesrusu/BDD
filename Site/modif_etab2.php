@@ -217,7 +217,7 @@ Released   : 20130902
         }
         echo "</table>";
         echo '<div class="button">';
-            	echo '<input type="submit" name="update" value="Ok"/>';
+            	echo '<input type="submit" name="update" value="Modifier"/>';
             	echo '<input type="submit" name="cancel" value="Annuler"/>';
       		echo '</div></form>';
         echo "</div>";
