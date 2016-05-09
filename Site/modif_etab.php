@@ -154,8 +154,16 @@ Released   : 20130902
             	$result=$stmt->fetch();
             	$type=$result[0];
             	$table=array($_POST['ID'],$_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$type);
+            	if (empty($_POST['ID'])) {
+        			echo '<script language="javascript">';
+                	echo 'alert("ID is missing !")';
+                	echo '</script>';
+
+        		}
+        		else {
             	$url = urlencode(serialize($table));
             	echo '<meta http-equiv="Refresh" content="0;URL=./modif_etab2.php?parama='.$url.'">';
+           	 	}
 
  			}catch(PDOException $e) {
          		echo "Error: " . $e->getMessage()."<br/>";

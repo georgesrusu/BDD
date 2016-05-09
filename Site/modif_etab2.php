@@ -225,40 +225,56 @@ Released   : 20130902
         if(isset($_POST['update'])){
 			unset($_SESSION['table2']);
 			$date=Date("Y-m-d");
-			$sql='UPDATE Etablissement WHERE ID="'.$ID.'" SET ';
-			if ($name!=""){
-				$sql=$sql.'nom="'.$name.'", ';
-			}
-			if($street!=""){
-				$sql=$sql.'rue="'.$street.'", ';
-			}
-			if($num!=""){
-				$sql=$sql.'numero="'.$num.'", ';
-			}
-			if($zip!=""){
-				$sql=$sql.'codePostal="'.$zip.'", ';
-			}
-			if($city!=""){
-				$sql=$sql.'localite="'.$city.'", ';
-			}
-			if($longitude!=""){
-				$sql=$sql.'longitude="'.$longitude.'", ';
-			}
-			if($latitude!=""){
-				$sql=$sql.'latitude="'.$latitude.'", ';
-			}
-			if($tel!=""){
-				$sql=$sql.'telephone="'.$tel.'", ';
-			}
-			if($site!=""){
-				$sql=$sql.'lienWeb="'.$site.'", ';
-			}
-			$sql=substr($sql, 0, -2);
-			try {
-				$conn->exec($sql);
-			}catch(PDOException $e) {
-                echo "Error: " . $e->getMessage()."<br/>";
-            }
+			if (!empty($name) or !empty($street) or !empty($num) or !empty($zip) or !empty($city) or !empty($longitude) or !empty($latitude) or !empty($tel) or !empty($site)) {
+				$sql='UPDATE Etablissement SET ';
+				$cut=0;
+				if ($name!=""){
+					$sql=$sql.'nom="'.$name.'", ';
+					$cut=1;
+				}
+				if($street!=""){
+					$sql=$sql.'rue="'.$street.'", ';
+					$cut=1;
+				}
+				if($num!=""){
+					$sql=$sql.'numero="'.$num.'", ';
+					$cut=1;
+				}
+				if($zip!=""){
+					$sql=$sql.'codePostal="'.$zip.'", ';
+					$cut=1;
+				}
+				if($city!=""){
+					$sql=$sql.'localite="'.$city.'", ';
+					$cut=1;
+				}
+				if($longitude!=""){
+					$sql=$sql.'longitude="'.$longitude.'", ';
+					$cut=1;
+				}
+				if($latitude!=""){
+					$sql=$sql.'latitude="'.$latitude.'", ';
+					$cut=1;
+				}
+				if($tel!=""){
+					$sql=$sql.'telephone="'.$tel.'", ';
+					$cut=1;
+				}
+				if($site!=""){
+					$sql=$sql.'lienWeb="'.$site.'", ';
+					$cut=1;
+				}
+				if($cut){
+					$sql=substr($sql, 0, -2);
+   					$sql=$sql.' WHERE ID="'.$ID.'"';
+   				}
+   				echo $sql;
+				try {
+					$conn->exec($sql);
+				}catch(PDOException $e) {
+                	echo "Error: " . $e->getMessage()."<br/>";
+            	}
+   			}
 
 
 			if ($type=="Restaurant"){
@@ -267,12 +283,12 @@ Released   : 20130902
 				$takeAway=$_POST['takeAway'];
 				$delivery=$_POST['delivery'];
 				$closedDays="13512"; //a faire ---
-				$sql = 'UPDATE Restaurant WHERE ID="'.$ID.'" SET ';
+				$sql = 'UPDATE Restaurant SET ';
 				if ($price!=""){
 					$sql=$sql.'prix="'.$price.'", ';
 				}
 				if ($banquet!=""){
-					$sql=$sql.'banquet="'.$banquet.'", ';
+					$sql=$sql.'placesBanquet="'.$banquet.'", ';
 				}	
 				if ($takeAway!=""){
 					$sql=$sql.'emporter="'.$takeAway.'", ';
@@ -289,7 +305,7 @@ Released   : 20130902
     		elseif($type=="Bar"){
     			$smoking=$_POST['smoking'];
     			$snack=$_POST['snack'];
-   				$sql = 'UPDATE Bar WHERE ID="'.$ID.'" SET ';
+   				$sql = 'UPDATE Bar SET ';
    				if ($smoking!=""){
 					$sql=$sql.'fumeur="'.$smoking.'", ';
 				}
@@ -302,7 +318,7 @@ Released   : 20130902
     			$price=$_POST['price'];
     			$bedRooms=$_POST['bedRooms'];
    				$stars=$_POST['stars'];
-   				$sql = 'UPDATE Hotel WHERE ID="'.$ID.'" SET ';
+   				$sql = 'UPDATE Hotel SET ';
    				if ($price!=""){
 					$sql=$sql.'prix="'.$price.'", ';
 				}
@@ -313,7 +329,10 @@ Released   : 20130902
 					$sql=$sql.'nbEtoiles="'.$stars.'", ';
 				}
    			}
+   			echo "<br/>";
    			$sql=substr($sql, 0, -2);
+   			$sql=$sql.' WHERE ID="'.$ID.'"';
+   			echo $sql;
    			try {
 				$conn->exec($sql);
 				echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
@@ -321,156 +340,12 @@ Released   : 20130902
                 echo "Error: " . $e->getMessage()."<br/>";
             }
 
-            /*try{
-		    	$sql = 'SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION["pseudo"].'"';
-               	$stmt = $conn->prepare($sql); 
-               	$stmt->execute();
-                $result=$stmt->fetch();
-                $adminID=$result[0];
-
-                $sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
-				$stmt = $conn->prepare($sql); 
-				$stmt->execute();
-				$result=$stmt->fetch();
-				if ($result==""){
-					$sql = 'INSERT INTO Etablissement (nom,rue,numero,codePostal,localite,longitude,latitude,telephone,lienWeb,type) VALUES ("'.$name.'","'.$street.'","'.(int)$num.'","'.(int)$zip.'","'.$city.'","'.(float)$longitude.'","'.(float)$latitude.'","'.$tel.'","'.$site.'","'.$type.'")';
-    				$conn->exec($sql);
-					$sql = 'SELECT ID FROM Etablissement WHERE nom="'.$name.'"';
-					$stmt = $conn->prepare($sql); 
-					$stmt->execute();
-					$result=$stmt->fetch();
-				}
-				$etablissementID=$result[0];
-				if ($type=="Restaurant"){
-					$price=$_POST['price'];
-					$banquet=$_POST['banquet'];
-					$takeAway=$_POST['takeAway'];
-					$delivery=$_POST['delivery'];
-					$closedDays="13512"; //a faire
-					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
-    			}
-    			elseif($type=="Bar"){
-    				$smoking=$_POST['smoking'];
-    				$snack=$_POST['snack'];
-    				$sql = 'INSERT INTO Bar (ID,fumeur,petiteRestauration) VALUES ("'.$etablissementID.'","'.$smoking.'","'.$snack.'")';
-    			}
-    			elseif($type=="Hotel"){
-    				$price=$_POST['price'];
-    				$bedRooms=$_POST['bedRooms'];
-    				$stars=$_POST['stars'];
-    				$sql = 'INSERT INTO Hotel (ID,prix,nbChambres,nbEtoiles) VALUES ("'.$etablissementID.'","'.(float)$price.'","'.(int)$bedRooms.'","'.(int)$stars.'")';
-    			}
-    			$conn->exec($sql);
-				$sql = 'INSERT INTO ModificationAdmin (etablissementID,adminID,dateCreation) VALUES ("'.$etablissementID.'","'.$adminID.'","'.$date.'")';
-    			$conn->exec($sql);
-    			echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
-		}
-		catch(PDOException $e) {
-         	echo "Error: " . $e->getMessage()."<br/>";
-        }*/
+           
     	}elseif(isset($_POST['cancel'])) {
         	unset($_SESSION['table2']);
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
-    	
-        	?>
-        	
-     	 <?php/*try{
-		    $sql = 'SELECT * FROM Etablissement';
-            $stmt = $conn->prepare($sql); 
-            $stmt->execute();
-            $result=$stmt->fetchall();
-            echo "<div style=\"overflow-x:scroll\">";
-            echo "<table>";
-        	echo "<tr>";
-        		echo "<th>ID</th>";
-        		echo "<th>Nom</th>";
-       			echo "<th>Rue</th>";
-        		echo "<th>Numero</th>";
-        		echo "<th>CodePostal</th>";
-        		echo "<th>Localite</th>";
-        		echo "<th>Longitude</th>";
-        		echo "<th>Latitude</th>";
-        		echo "<th>Telephone</th>";
-        		echo "<th>Site</th>";
-        	echo "</tr>";
-        	for ($i=0;$i<sizeof($result);++$i){
-        		echo "<tr>";
-        			echo "<th>".$result[$i][0]."</th>";
-        			echo "<th>".$result[$i][1]."</th>";
-       				echo "<th>".$result[$i][2]."</th>";
-        			echo "<th>".$result[$i][3]."</th>";
-        			echo "<th>".$result[$i][4]."</th>";
-        			echo "<th>".$result[$i][5]."</th>";
-        			echo "<th>".$result[$i][6]."</th>";
-        			echo "<th>".$result[$i][7]."</th>";
-        			echo "<th>".$result[$i][8]."</th>";
-        			echo "<th>".$result[$i][9]."</th>";
-        		echo "</tr>";
-        	}
-        	echo "</table>";
-        	echo "</div>";
-            }
-            catch(PDOException $e) {
-         	echo "Error: " . $e->getMessage()."<br/>";
-        	}
-        	echo "<br/>";
-        	echo "<h2>Choisir un etablissement</h2>";
-        	echo "<p>Veuillez choisir l'etablissement avec l'id et completer uniquement les colonnes que vous voulez modifier </p>";
-       
-        	if (!isset($_SESSION['table'])){
-        		echo "not set";
-           		$_SESSION['table']=unserialize(urldecode($_GET['param']));
-        	}
-        	if(isset($_SESSION['table'])){
-        		echo "set";
-    			$table= $_SESSION['table'];
-        		$name=$table[0];
-    			$street=$table[1];
-    			$num=$table[2];
-    			$zip=$table[3];
-    			$city=$table[4];
-    			$longitude=$table[5];
-    			$latitude=$table[6];
-    			$tel=$table[7];
-    			$site=$table[8];
-    			$type=$table[9];
-    	}
-        	if ($type=="Restaurant"){
-            	echo ' Prix : <input type="number" name="price"/> <br/>';
-            	echo ' Nombre de place pour un Banquet : <input type="number" name="banquet"/> <br/>';
-            	echo ' Emporter : ';
-            	echo '<input type="radio" name="takeAway" value="1" checked> Oui<br>';
-            	echo '<input type="radio" name="takeAway" value="0" checked> Non<br>';
-            	echo ' Livraison : ';
-            	echo '<input type="radio" name="delivery" value="1" checked> Oui<br>';
-            	echo '<input type="radio" name="delivery" value="0" checked> Non<br>';
-            	//closedDays
-            }
-    		elseif($type=="Bar"){
-    			echo ' Fumeur : ';
-            	echo '<input type="radio" name="smoking" value="1" checked> Oui<br>';
-            	echo '<input type="radio" name="smoking" value="0" checked> Non<br>';
-            	echo ' Snack : ';
-            	echo '<input type="radio" name="snack" value="1" checked> Oui<br>';
-            	echo '<input type="radio" name="snack" value="0" checked> Non<br>';
-            }
-    		elseif($type=="Hotel"){
-    			echo ' Prix : <input type="number" name="price"/> <br/>';
-    			echo ' Nombre de chambre : <input type="number" name="bedRooms"/> <br/>';
-    			echo ' Nombre d\'etoile : <input type="number" name="stars"/> <br/>';
-        	}
-            echo ' <div class="button">';
-            echo ' <input type="submit" name="add" value="Ajouter"/>';
-            echo ' <input type="submit" name="cancel" value="Annuler"/>';
-            echo ' <div>';
-        	echo ' </form></p>';
-        	?>
-            <div>
-        </form></p>
-        <?php
-		*/
-        ?>
+    	?>
 		<br/><br/><br/><br/>
 		<div id="copyright">
 			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>
