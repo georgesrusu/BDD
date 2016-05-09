@@ -195,11 +195,7 @@ Released   : 20130902
                 $sa = $_POST['samedi'];
                 $di = $_POST['dimanche'];
 
-                echo "<p>***TESTE OUVERTURE***</p>";
-                echo "<p>Lundi = ".$lu." - Mardi = ".$ma." - Mercredi = ".$me."</p>";
-
                 $fermetureDays = $lu . $ma . $me . $je . $vdd . $sa . $di;
-                echo "<p>HEURE FINAL : " . $fermeture . "</p>";
 
                 if (empty($price) or empty($banquet)) {
                     echo '<script language="javascript">';
