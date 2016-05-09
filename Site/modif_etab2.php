@@ -181,8 +181,7 @@ Released   : 20130902
         			echo '<td><input type="number" name="price"/></td>';
         			echo '<td><input type="number" name="banquet"/></td>';
 
-                    //TODO: MAX COMPLETER
-                    echo '<td><input type="number" name="closedDays"/></td>';
+                    //TODO: MAX COMPLETE
 
         			//$emporter =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="takeAway" value="1" checked> Oui';
@@ -190,7 +189,8 @@ Released   : 20130902
        				//$livraison =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="delivery" value="1" checked> Oui';
             		echo '<input type="radio" name="delivery" value="0" checked> Non<br></td>';
-       				echo "<td>".$result[5]."</th>"; //fermeture
+       				//echo "<td>".$result[5]."</th>"; //fermeture
+                echo '<td><input type="number" name="closedDays"/></td>';
        				//fermeture a faire
        			echo "</tr>";
         	
@@ -221,7 +221,7 @@ Released   : 20130902
         }
         echo "</table>";
         echo '<div class="button">';
-            	echo '<input type="submit" name="update" value="Modifier"/>';
+            	echo '<input type="submit" name="update" value="Update"/>';
             	echo '<input type="submit" name="cancel" value="Annuler"/>';
       		echo '</div></form>';
         echo "</div>";
@@ -275,12 +275,15 @@ Released   : 20130902
    				echo $sql;
 				try {
 					$conn->exec($sql);
+					if($type="Hotel"){
+						$hotel_status=1;
+					}
 				}catch(PDOException $e) {
                 	echo "Error: " . $e->getMessage()."<br/>";
             	}
    			}
 
-
+   			echo $type;
 			if ($type=="Restaurant"){
 				$price=$_POST['price'];
 				$banquet=$_POST['banquet'];
@@ -293,21 +296,30 @@ Released   : 20130902
                 #$sql = 'UPDATE Restaurant WHERE ID="'.$ID.'" SET ';
 				$sql = 'UPDATE Restaurant SET ';
 				if ($price!=""){
-					$sql=$sql.'prix="'.$price.'", ';
+					$sql=$sql.'prix="'.$price.'" ,';
 				}
 				if ($banquet!=""){
-					$sql=$sql.'placesBanquet="'.$banquet.'", ';
+					$sql=$sql.'placesBanquet="'.$banquet.'" ,';
 				}	
 				if ($takeAway!=""){
-					$sql=$sql.'emporter="'.$takeAway.'", ';
+					$sql=$sql.'emporter="'.$takeAway.'" ,';
 				}	
 				if ($delivery!=""){
-					$sql=$sql.'livraison="'.$delivery.'", ';
+					$sql=$sql.'livraison="'.$delivery.'" ,';
 				}	
 				//clossed days,
 				if ($closedDays!=""){
-					$sql=$sql.'fermeture="'.$closedDays.'", ';
+					$sql=$sql.'fermeture="'.$closedDays.'" ,';
 				}
+				$sql=substr($sql, 0, -1);
+   				$sql=$sql.' WHERE ID="'.$ID.'"';
+   				echo "<br/>";
+				try {
+					$conn->exec($sql);
+					echo "<p style=\"color:blue;\">Etablissement modifie avec succes !</p>";
+				}catch(PDOException $e) {
+               		echo "Error: " . $e->getMessage()."<br/>";
+           		}
 				
 			}
     		elseif($type=="Bar"){
@@ -315,45 +327,59 @@ Released   : 20130902
     			$snack=$_POST['snack'];
    				$sql = 'UPDATE Bar SET ';
    				if ($smoking!=""){
-					$sql=$sql.'fumeur="'.$smoking.'", ';
+					$sql=$sql.'fumeur="'.$smoking.'" ,';
 				}
 				if ($snack!=""){
-					$sql=$sql.'petiteRestauration="'.$snack.'", ';
-				}	
+					$sql=$sql.'petiteRestauration="'.$snack.'" ,';
+				}
+				$sql=substr($sql, 0, -1);
+   				$sql=$sql.' WHERE ID="'.$ID.'"';
+   				echo "<br/>";
+   				try {
+					$conn->exec($sql);
+					echo "<p style=\"color:blue;\">Etablissement modifie avec succes !</p>";
+				}catch(PDOException $e) {
+               		echo "Error: " . $e->getMessage()."<br/>";
+           		}
 
    			}
    			elseif($type=="Hotel"){
     			$price=$_POST['price'];
     			$bedRooms=$_POST['bedRooms'];
    				$stars=$_POST['stars'];
-   				$sql = 'UPDATE Hotel SET ';
-   				if ($price!=""){
-					$sql=$sql.'prix="'.$price.'", ';
-				}
-				if ($bedRooms!=""){
-					$sql=$sql.'nbChambres="'.$bedRooms.'", ';
-				}	
-				if ($stars!=""){
-					$sql=$sql.'nbEtoiles="'.$stars.'", ';
-				}
+   				if (!empty($price) OR !empty($bedRooms) OR !empty($stars)){
+   					$sql = 'UPDATE Hotel SET ';
+   					if ($price!=""){
+						$sql=$sql.'prix="'.$price.'" ,';
+					}
+					if ($bedRooms!=""){
+						$sql=$sql.'nbChambres="'.$bedRooms.'" ,';
+					}	
+					if ($stars!=""){
+						$sql=$sql.'nbEtoiles="'.$stars.'" ,';
+					}
+					$sql=substr($sql, 0, -1);
+   					$sql=$sql.' WHERE ID="'.$ID.'"';
+   					echo "<br/>";
+   					try {
+						$conn->exec($sql);
+						echo "<p style=\"color:blue;\">Etablissement modifie avec succes !</p>";
+					}catch(PDOException $e) {
+                		echo "Error: " . $e->getMessage()."<br/>";
+            		}
+   				}
+   				if($hotel_status){
+   					echo "<p style=\"color:blue;\">Etablissement modifie avec succes !</p>";
+   				}
    			}
-   			echo "<br/>";
-   			$sql=substr($sql, 0, -2);
-   			$sql=$sql.' WHERE ID="'.$ID.'"';
-   			echo $sql;
-   			try {
-				$conn->exec($sql);
-				echo "<p style=\"color:blue;\">Etablissement ajouté avec succes !</p>";
-			}catch(PDOException $e) {
-                echo "Error: " . $e->getMessage()."<br/>";
-            }
 
            
     	}elseif(isset($_POST['cancel'])) {
         	unset($_SESSION['table2']);
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
-    	?>
+    	
+        	?>
 		<br/><br/><br/><br/>
 		<div id="copyright">
 			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>

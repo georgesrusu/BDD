@@ -140,29 +140,37 @@ Released   : 20130902
         				<td><input type="text" name="site"/></td>
         		</tr>
         	</table>
+        	</div>
         	<div class="button">
             	<input type="submit" name="next" value="Modifier"/>
             	<input type="submit" name="cancel" value="Annuler"/>
       		</div></form>
-      	</div>
       	<?php
  		if(isset($_POST['next'])){
  			try{
- 				$sql = 'SELECT type FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
-            	$stmt = $conn->prepare($sql); 
-            	$stmt->execute();
-            	$result=$stmt->fetch();
-            	$type=$result[0];
-            	$table=array($_POST['ID'],$_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$type);
-            	if (empty($_POST['ID'])) {
+ 				if (empty($_POST['ID'])) {
         			echo '<script language="javascript">';
                 	echo 'alert("ID is missing !")';
                 	echo '</script>';
-
         		}
         		else {
-            	$url = urlencode(serialize($table));
-            	echo '<meta http-equiv="Refresh" content="0;URL=./modif_etab2.php?parama='.$url.'">';
+        			echo $_POST['ID'];
+ 					$sql = 'SELECT type FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+            		$stmt = $conn->prepare($sql); 
+            		$stmt->execute();
+            		$result=$stmt->fetch();
+            		$type=$result[0];
+            		echo $type;
+            		if ($type!=""){
+            			$table=array($_POST['ID'],$_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$type);
+            			$url = urlencode(serialize($table));
+            			echo '<meta http-equiv="Refresh" content="0;URL=./modif_etab2.php?parama='.$url.'">';
+           	 		}
+           	 		else{
+						echo '<script language="javascript">';
+                		echo 'alert("ID doesn\'t exist !")';
+                		echo '</script>';
+           	 		}
            	 	}
 
  			}catch(PDOException $e) {
