@@ -180,6 +180,10 @@ Released   : 20130902
         	echo "<tr>";
         			echo '<td><input type="number" name="price"/></td>';
         			echo '<td><input type="number" name="banquet"/></td>';
+
+                    //TODO: MAX COMPLETER
+                    //echo '<td><input type="number" name="fermeture"/></td>';
+
         			//$emporter =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="takeAway" value="1" checked> Oui';
        				echo '<input type="radio" name="takeAway" value="0" checked> Non<br></td>';
