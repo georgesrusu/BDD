@@ -53,7 +53,7 @@ Released   : 20130902
 					echo "Connexion";
 				}
 				 ?></a></li>
-
+				<li><a href="./requetePage.php" accesskey="4" >Request</a></li>
 			</ul>
 		</div>
 	</div>

@@ -53,6 +53,7 @@ Released   : 20130902
 					echo "Connexion";
 				}
 				 ?></a></li>
+                 <li><a href="./requetePage.php" accesskey="4" >Request</a></li>
 
 			</ul>
 		</div>
@@ -113,7 +114,7 @@ Released   : 20130902
         	echo "<p>Veuillez choisir l'etablissement avec l'id et completer uniquement les colonnes que vous voulez modifier </p>";
         	?>
         	<form name="modif_etab" method="post" action="modif_etab.php">
-        	<div style="overflow-x:scroll">
+        	<div style="overflow-x:scroll;">
             <table>
         		<tr>
         			<th>ID</th>

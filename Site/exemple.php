@@ -168,6 +168,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					echo "Connexion";
 				}
 				 ?></a></li>
+				 <li><a href="./requetePage.php" accesskey="4" >Request</a></li>
 			</ul>
 		</div>
 	</div>
