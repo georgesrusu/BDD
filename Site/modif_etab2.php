@@ -181,8 +181,7 @@ Released   : 20130902
         			echo '<td><input type="number" name="price"/></td>';
         			echo '<td><input type="number" name="banquet"/></td>';
 
-                    //TODO: MAX COMPLETER
-                    echo '<td><input type="number" name="closedDays"/></td>';
+                    //TODO: MAX COMPLETE
 
         			//$emporter =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="takeAway" value="1" checked> Oui';
@@ -190,7 +189,8 @@ Released   : 20130902
        				//$livraison =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="delivery" value="1" checked> Oui';
             		echo '<input type="radio" name="delivery" value="0" checked> Non<br></td>';
-       				echo "<td>".$result[5]."</th>"; //fermeture
+       				//echo "<td>".$result[5]."</th>"; //fermeture
+                echo '<td><input type="number" name="closedDays"/></td>';
        				//fermeture a faire
        			echo "</tr>";
         	
