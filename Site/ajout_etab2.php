@@ -258,7 +258,7 @@ Released   : 20130902
     					$takeAway=$_POST['takeAway'];
     					$delivery=$_POST['delivery'];
     					$closedDays="13512"; //a faire
-    					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$closedDays.'")';
+    					$sql = 'INSERT INTO Restaurant (ID,prix,placesBanquet,emporter,livraison,fermeture) VALUES ("'.$etablissementID.'","'.$price.'","'.$banquet.'","'.$takeAway.'","'.$delivery.'","'.$fermetureDays.'")';
         			}
         			elseif($type=="Bar"){
         				$smoking=$_POST['smoking'];
