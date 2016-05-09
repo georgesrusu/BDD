@@ -288,6 +288,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						}
 					}
 				?>
+				</br>
+				<p>Ajouter un commentaire : </p>
+           		<p>Score : <input type="number" min="0" max="5" name="score" placeholder="Votre score"/></p>
+				<p><textarea rows="6" cols="75"></textarea></p>
+				<input type="submit" name="accept" value="Commenter">
+				</br>
 
 			<h2 class="infos">Tags de l'établissement:</h2>
 			<table width="50%" border="1" align="center">
