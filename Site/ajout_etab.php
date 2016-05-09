@@ -77,13 +77,13 @@ Released   : 20130902
 		<div class="formulaire">
         <form name="etablissement" method="post" action="ajout_etab.php">
             Nom de l'etablissement : <input type="text" name="name" placeholder="Champ obligatoire"/> <br/>
-            Rue : <input type="text" name="street"/><br/>
-            Numero : <input type="number" name="num"/><br/>
-            Code Postal : <input type="number" name="zip"/><br/>
-            Localite : <input type="text" name="city"/><br/>
-            Longitude : <input type="number" name="longitude"/><br/>
-            Latitude : <input type="number" name="latitude"/><br/>
-            Telephone : <input type="text" name="tel"/><br/>
+            Rue : <input type="text" name="street" placeholder="Champ obligatoire"/><br/>
+            Numero : <input type="number" name="num" placeholder="Champ obligatoire"/><br/>
+            Code Postal : <input type="number" name="zip" placeholder="Champ obligatoire"/><br/>
+            Localite : <input type="text" name="city" placeholder="Champ obligatoire"/><br/>
+            Longitude : <input type="number" name="longitude" placeholder="Champ obligatoire"/><br/>
+            Latitude : <input type="number" name="latitude" placeholder="Champ obligatoire"/><br/>
+            Telephone : <input type="text" name="tel" placeholder="Champ obligatoire"/><br/>
             Site : <input type="text" name="site"/><br/>
             Type : <select name="type">
             			<option value=""></option>
