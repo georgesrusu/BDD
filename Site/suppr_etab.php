@@ -127,7 +127,6 @@ Released   : 20130902
             	<input type="submit" name="cancel" value="Annuler"/>
       		</div></form>
       	</div>
-        <a href="./suppr_etab.php">Appuyez pour rafraichir la page</a> <!--HREF="javascript:history.go(0)"-->
       	<?php
  		if(isset($_POST['del'])){
             if (empty($_POST['ID'])) {
@@ -154,6 +153,7 @@ Released   : 20130902
                         echo 'alert("ID doesn\'t exist !")';
                         echo '</script>';
                     }
+                    echo '<meta http-equiv="Refresh" content="0;URL=./suppr_etab.php">';
  			    }catch(PDOException $e) {
              		echo "Error: " . $e->getMessage()."<br/>";
             	}   
