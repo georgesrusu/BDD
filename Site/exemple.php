@@ -279,6 +279,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 			<h2 class="infos">Commentaires:</h2>
 				<?php
+					$total_stars=0;
+					$total_comment=0;
 					for ($comment = 0; $comment < sizeof($commentList); $comment++) {
 						if ($commentList[$comment][0] == $idEtablissement) {
 							echo "<div class=\"comment\">";
@@ -286,6 +288,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 							echo "<p>" . $commentList[$comment][2] . "</p>";
 							echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
 							$numberStar = $commentList[$comment][4];
+							$total_stars+=$numberStar;
 							for ($star = 0; $star < 5; $star++) {
 								if ($star < $numberStar) {
 									echo "&#9733;";
@@ -296,9 +299,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
 							} 
 							echo "<p>" . $commentList[$comment][3] . "</p>";
 							echo "</div>";
+							$total_comment+=1;
 						}
 					}
 				?>
+				</br>
+				<p><strong>Moyenne des scores : </strong> <?php 
+				$moyenne_stars=$total_stars/$total_comment;
+				echo "<p class=\"star\"><span style=\"color:black\"></span>";
+				for ($star = 0; $star < 5; $star++) {
+					if ($star < $moyenne_stars) {
+						echo "&#9733;";
+					}
+					else {
+						echo "&#9734";
+					}
+				} 
+				?></p>
 
 				</br>
 				<p><strong>Ajouter un commentaire : </strong></p>
