@@ -1,0 +1,16 @@
+R1 :select clientID from Commentaire where etablissementID in (select etablissementID from Commentaire where clientID in (select ID from Utilisateur where identifiant="Brenda") and score>=4); //etablissement au moins 3
+
+select c.clientID,c.score,u.ID,u.identifiant from Commentaire c, Utilisateur u WHERE u.identifiant="Brenda" AND u.ID=c.clientID AND c.score>=4 group by c.etablissement having count(c.etablissement)>=3;
+
+
+la BONNE ?? juste confirmation
+
+R1:
+
+select clientID from Commentaire where etablissementID in (select etablissementID from Commentaire where clientID in (select ID from Utilisateur where identifiant="Brenda") and score>=4) group by clientID having count(etablissementID)>=3;
+
+R3: confirmation ???
+select distinct e.ID from Etablissement e where not exists (select * from Commentaire c where c.etablissementID=e.ID) or exists (select * from Commentaire c where c.etablissementID=e.ID group by e.ID having count(*)<=1);
+
+R4: confirmation ???
+select m.adminID,m.etablissementID from ModificationAdmin m where not exists (select * from Commentaire where clientID=m.adminID and etablissementID=m.etablissementID);
