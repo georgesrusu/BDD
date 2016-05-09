@@ -1,5 +1,7 @@
 <?php
 session_start();
+				error_reporting(E_ALL);
+       			ini_set('display_errors', 1);
 //if(!isset($_SESSION['cart_items'])){
     //$_SESSION['cart_items'] = array();
 ?>
@@ -177,6 +179,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				<?php echo "<h2>".$result[$i][1]."</h2>";?>
 				<span class="byline"></span>
 			</div>
+			<?php 
+			$action=$_GET['action'];
+			if ($action=="com_added"){
+				echo "<p style=\"color:blue;\">Commentaire ajoute avec succes !</p>";
+			}
+			?>
 			<h2 class="infos">Informations sur leurs services:</h2>
 				<?php
 
@@ -293,15 +301,49 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				<p><strong>Ajouter un commentaire : </strong></p>
 				<?php 
 				if(isset($_SESSION['pseudo'])) {
-					//Si connecté
-					echo '<p>Score : <input type="number" min="0" max="5" name="score"/></p>';
-					echo '<p><textarea rows="6" cols="75" placeholder="Votre commentaire"></textarea></p>';
-					echo '<input type="submit" name="accept" value="Commenter">';
+					$etablissementID=$i+1;
+					echo '<form name="commentaire" method="post" action="exemple.php?etablissementID='.$etablissementID.'">';
+						echo '<p>Score : <input type="number" min="0" max="5" name="score"/></p>';
+						echo '<p><textarea rows="6" cols="75" name="commentaire" placeholder="Votre commentaire"></textarea></p>';
+						echo '<div class="button">';
+							echo '<input type="submit" name="comment" value="Commenter">';
+						echo '</div></form>';
 				}
 				else{
 					//Si non connecté
 					echo '<p>Veuillez vous connecter</p>';
 				}
+				if(isset($_POST['comment'])){
+					$score=$_POST['score'];
+					$texte=$_POST['commentaire'];
+					$date=date("Y-m-d");
+					try{
+						$sql='SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION['pseudo'].'"';
+						$stmt = $conn->prepare($sql); 
+            			$stmt->execute();
+            			$result=$stmt->fetch();
+            			$clientID=$result[0];
+						$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$etablissementID.'" AND clientID="'.$clientID.'" AND dateCreation="'.$date.'"';
+            			$stmt = $conn->prepare($sql); 
+            			$stmt->execute();
+            			$result=$stmt->fetch();
+            			if($result[0]==""){
+            				$sql='INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$date.'","'.$texte.'","'.$score.'")';
+            				$conn->exec($sql);
+            				echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$etablissementID.'&action=com_added">';
+            			}
+            			else{
+            				echo '<script language="javascript">';
+                			echo 'alert("Vous ne pouvez plus faire un Commentaire aujourd\'hui!")';
+                			echo '</script>';
+            			}
+            		}catch(PDOException $e) {
+         				echo "Error: " . $e->getMessage()."<br/>";
+        			}
+				}
+
+
+
 				?>
 				</br>
 
