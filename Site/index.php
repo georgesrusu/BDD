@@ -1,5 +1,11 @@
 <?php
 session_start();
+/*if (isset($_SESSION['table2']){
+	unset($_SESSION['table2']);
+}
+if (isset($_SESSION['table']){
+    unset($_SESSION['table']);
+}*/
 if (!isset($_SESSION['pseudo'])){
 	$_SESSION['pseudo'] = $_GET['pseudo'];
 }

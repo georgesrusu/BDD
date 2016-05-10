@@ -1,0 +1,30 @@
+R1 :select clientID from Commentaire where etablissementID in (select etablissementID from Commentaire where clientID in (select ID from Utilisateur where identifiant="Brenda") and score>=4); //etablissement au moins 3
+
+select c.clientID,c.score,u.ID,u.identifiant from Commentaire c, Utilisateur u WHERE u.identifiant="Brenda" AND u.ID=c.clientID AND c.score>=4 group by c.etablissement having count(c.etablissement)>=3;
+
+
+la BONNE ?? juste confirmation
+
+R1:
+
+SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM Commentaire WHERE etablissementID IN (SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING count(etablissementID)>=3)
+
+R2:
+
+
+
+R3:
+
+SELECT nom FROM Etablissement WHERE ID IN (SELECT DISTINCT e.ID FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID HAVING count(*)<=1))
+
+R4:
+
+SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT m.adminID FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire WHERE clientID=m.adminID AND etablissementID=m.etablissementID))
+
+R5:
+
+SELECT nom FROM Etablissement e,Commentaire c WHERE e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3 ORDER BY avg(c.score) DESC
+
+R6:
+
+SELECT l.texte FROM Label l,Commentaire c WHERE l.etablissementID=c.etablissementID GROUP BY texte HAVING count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC

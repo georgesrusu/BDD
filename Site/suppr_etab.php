@@ -45,7 +45,7 @@ Released   : 20130902
 				<li class="current_page_item"><?php
 				if(isset($_SESSION['pseudo'])) {
 					//$pseudo = $_GET['pseudo'];
-					echo '<a href="./Profile.php" accesskey="3" title="Connexion to our database">';
+					echo '<a href="./profile.php" accesskey="3" title="Connexion to our database">';
 					echo "Profil";
 				}
 				else{
@@ -53,6 +53,7 @@ Released   : 20130902
 					echo "Connexion";
 				}
 				 ?></a></li>
+                 <li><a href="./requetePage.php" accesskey="4" >Request</a></li>
 
 			</ul>
 		</div>
@@ -67,6 +68,12 @@ Released   : 20130902
 
 			<?php echo "<h2>Supprimer un etablissement</h2>";?>
 			<br/>
+            <?php 
+            $action=$_GET['action'];
+            if($action=="deleted"){
+                echo "<p style=\"color:blue;\">Etablissement supprime avec succes !</p>";
+            }
+            ?>
 		</div>
 		<?php
 		try{
@@ -142,18 +149,23 @@ Released   : 20130902
                     $result=$stmt->fetch();
                     $type=$result[0];
                     if($type!=""){
- 				        $sql = 'DELETE FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+                         $sql = 'DELETE FROM Commentaire WHERE etablissementID="'.$_POST['ID'].'"';
+                        $conn->exec($sql);
+                        $sql = 'DELETE FROM Label WHERE etablissementID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
                         $sql = 'DELETE FROM '.$type.' WHERE ID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
-            	       echo "<p style=\"color:blue;\">Etablissement supprime avec succes !</p>";
+                        $sql = 'DELETE FROM ModificationAdmin WHERE etablissementID="'.$_POST['ID'].'"';
+                        $conn->exec($sql);
+ 				        $sql = 'DELETE FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+                        $conn->exec($sql);
                     }
                     else{
                         echo '<script language="javascript">';
                         echo 'alert("ID doesn\'t exist !")';
                         echo '</script>';
                     }
-                    echo '<meta http-equiv="Refresh" content="0;URL=./suppr_etab.php">';
+                    echo '<meta http-equiv="Refresh" content="0;URL=./suppr_etab.php?action=deleted">';
  			    }catch(PDOException $e) {
              		echo "Error: " . $e->getMessage()."<br/>";
             	}   

@@ -42,6 +42,7 @@ Released   : 20130902
 		$idEtablissement = $result[$i][0];
 		$typeEtablissement = $result[$i][10];
 
+
 		$stmt = $conn->prepare("SELECT * FROM Commentaire"); 
 		$stmt->execute();
 		$commentList = $stmt->fetchall(); //fetch
@@ -167,6 +168,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					echo "Connexion";
 				}
 				 ?></a></li>
+				 <li><a href="./requetePage.php" accesskey="4" >Request</a></li>
 			</ul>
 		</div>
 	</div>
@@ -183,6 +185,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			$action=$_GET['action'];
 			if ($action=="com_added"){
 				echo "<p style=\"color:blue;\">Commentaire ajoute avec succes !</p>";
+			}elseif($action=="label_added"){
+				echo "<p style=\"color:blue;\">Label ajoute avec succes !</p>";
 			}
 			?>
 			<h2 class="infos">Informations sur leurs services:</h2>
@@ -296,6 +300,28 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						}
 					}
 				?>
+				</br>
+				<p><strong>Moyenne des scores : </strong> <?php 
+				try{
+					$etablissementID=$i+1;
+					$sql='SELECT AVG(score) FROM Commentaire WHERE etablissementID="'.$etablissementID.'"';
+					$stmt = $conn->prepare($sql); 
+            		$stmt->execute();
+            		$result=$stmt->fetch();
+            		$moyenne_stars=$result[0];
+            		echo "<p class=\"star\"><span style=\"color:black\"></span>";
+					for ($star = 0; $star < 5; $star++) {
+						if ($star < $moyenne_stars) {
+							echo "&#9733;";
+						}
+						else {
+							echo "&#9734";
+						}
+					} 
+				}catch(PDOException $e) {
+         				echo "Error: " . $e->getMessage()."<br/>";
+        			}
+				?></p>
 
 				</br>
 				<p><strong>Ajouter un commentaire : </strong></p>
@@ -308,6 +334,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 						echo '<div class="button">';
 							echo '<input type="submit" name="comment" value="Commenter">';
 						echo '</div></form>';
+					try{
+						$sql='SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION['pseudo'].'"';
+						$stmt = $conn->prepare($sql); 
+            			$stmt->execute();
+            			$result=$stmt->fetch();
+           				$clientID=$result[0];
+           			}catch(PDOException $e) {
+         				echo "Error: " . $e->getMessage()."<br/>";
+        			}
 				}
 				else{
 					//Si non connecté
@@ -318,11 +353,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					$texte=$_POST['commentaire'];
 					$date=date("Y-m-d");
 					try{
-						$sql='SELECT ID FROM Utilisateur WHERE identifiant="'.$_SESSION['pseudo'].'"';
-						$stmt = $conn->prepare($sql); 
-            			$stmt->execute();
-            			$result=$stmt->fetch();
-            			$clientID=$result[0];
 						$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$etablissementID.'" AND clientID="'.$clientID.'" AND dateCreation="'.$date.'"';
             			$stmt = $conn->prepare($sql); 
             			$stmt->execute();
@@ -383,7 +413,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					echo '<form name="label" method="post" action="./exemple.php?etablissementID='.$etablissementID.'">';
 					echo '<select name="labelSelect">';
 					for ($tagPrint = 0; $tagPrint < count($labelArray); $tagPrint++) {
-						echo '<option value="'.$tagPrint.'">' . $labelArray[$tagPrint] . '</option>';
+						echo '<option value="'.$labelArray[$tagPrint].'">' . $labelArray[$tagPrint] . '</option>';
 					}
 					echo '</select>';
 					echo '
@@ -404,12 +434,36 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				}
 				
 				if (isset($_POST['envoyer'])) {
-					echo "<p>Passage tag pris</p>";
-					#Si tag pris dans la site des tag:
-					#Donc prendre l'option choisit dans la liste
+					try{
+						$sql = 'SELECT * FROM Label WHERE etablissementID="'.$etablissementID.'" AND clientID="'.$clientID.'" AND texte="'.$_POST['labelSelect'].'"';
+            			$stmt = $conn->prepare($sql); 
+            			$stmt->execute();
+            			$result=$stmt->fetch();
+            			if($result[0]==""){
+            				$sql='INSERT INTO Label (etablissementID,clientID,texte) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$_POST['labelSelect'].'")';
+            				$conn->exec($sql);
+            				echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$etablissementID.'&action=label_added">';
+            			}
+            			else{
+            				echo '<script language="javascript">';
+                			echo 'alert("Vous ne pouvez plus apposer ce tag !")';
+                			echo '</script>';
+            			}
+            		}catch(PDOException $e) {
+         				echo "Error: " . $e->getMessage()."<br/>";
+        			}
 				}
 				elseif (isset($_POST['labelAutreSend'])) {
-					echo "<p>Passage nouveau tag</p>";
+					if($_POST['labelText']!=""){
+						$sql='INSERT INTO Label (etablissementID,clientID,texte) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$_POST['labelText'].'")';
+            			$conn->exec($sql);
+            			echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$etablissementID.'&action=label_added">';
+            		}
+            		else{
+            			echo '<script language="javascript">';
+               			echo 'alert("Le Tag est vide !")';
+               			echo '</script>';
+            		}
 					#User crée un nouveau tag
 					#donc récuperer du input text
 				}
@@ -420,7 +474,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 		<br/><br/><br/><br/>
 		<div id="copyright">
-			<span>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a></span>
+			<span>&copy; Untitled. All rights reserved.</span>
 			<span>Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</span>
 		</div>
 	</div>

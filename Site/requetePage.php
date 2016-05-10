@@ -6,7 +6,6 @@ if (!isset($_SESSION['pseudo'])){
 if (!isset($_SESSION['isAdmin'])){
 	$_SESSION['isAdmin'] = $_GET['isAdmin'];
 }
-
 //if(!isset($_SESSION['cart_items'])){
     //$_SESSION['cart_items'] = array();
 ?>
@@ -85,23 +84,64 @@ Released   : 20130902
 			</div>
 
 			<p>Veuillez choisir une requete dans le menu déroulant :
-
-			<select name="request">
-				<option value="request1">Request n°1</option>
-				<option value="request2">Request n°2</option>
-				<option value="request3">Request n°3</option>
-				<option value="request4">Request n°4</option>
-				<option value="request5">Request n°5</option>
-				<option value="request6">Request n°6</option>
-			</select>
+			<form name="requete" method="post" action="./requetePage.php">
+				<select name="request">
+					<option value="request1">Request n°1</option>
+					<option value="request2">Request n°2</option>
+					<option value="request3">Request n°3</option>
+					<option value="request4">Request n°4</option>
+					<option value="request5">Request n°5</option>
+					<option value="request6">Request n°6</option>
+				</select>
 			</p>
-			<input type="submit" name="executer" value="Executer" action="requetePage.php"/>
-
+			<div>
+			<input type="submit" name="executer" value="Executer"/>
+		</div></form>
 			<?php
 				if (isset($_POST['executer'])) {
 					#TODO: LANCER LES PAGES DE REQUETES
-					echo "<p>TESTE : " . $_POST['request'] . "</p>";
-				}
+					//
+					if($_POST['request']=="request1"){
+						echo "<p><strong>La requete 1 est :</strong> Tous les utilisateurs qui apprécient au moins 3 établissements que l’utilisateur \"Brenda\" apprécie.</p>";
+						$sql='SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM Commentaire WHERE etablissementID IN (SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING count(etablissementID)>=3)';
+					}
+					elseif($_POST['request']=="request2"){
+						echo "<p><strong>La requete 2 est :</strong> Tous les établissements qu’apprécie au moins un utilisateur qui apprécie tous les établissements que
+						\"Brenda\" apprécie.<p>";
+						$sql='SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM Commentaire WHERE etablissementID IN (SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING count(etablissementID)>=3)';
+					}
+					elseif($_POST['request']=="request3"){
+						echo "<p><strong>La requete 3 est :</strong> Tous les établissements pour lesquels il y a au plus un commentaire.</p>";
+						$sql='SELECT nom FROM Etablissement WHERE ID IN (SELECT DISTINCT e.ID FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID HAVING count(*)<=1))';
+					}
+					elseif($_POST['request']=="request4"){
+						echo "<p><strong>La requete 4 est :</strong> La liste des administrateurs n’ayant pas commenté tous les établissements qu’ils ont crées.</p>";
+						$sql='SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT m.adminID FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire WHERE clientID=m.adminID AND etablissementID=m.etablissementID))';
+					}
+					elseif($_POST['request']=="request5"){
+    					$sql = "SET sql_mode = ''";
+    					$conn->exec($sql);	//sinon erreur group by clause chez george pie seulement
+						echo "<p><strong>La requete 5 est :</strong> La liste des établissements ayant au minimum trois commentaires, classée selon la moyenne des scores attribués.</p>";
+						$sql='SELECT nom FROM Etablissement e,Commentaire c WHERE e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3 ORDER BY avg(c.score) DESC';
+					}
+					elseif($_POST['request']=="request6"){
+						echo "<p><strong>La requete 6 est :</strong> La liste des établissements ayant au minimum trois commentaires, classée selon la moyenne des scores attribués.</p>";
+						$sql='SELECT l.texte FROM Label l,Commentaire c WHERE l.etablissementID=c.etablissementID GROUP BY texte HAVING count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC';
+					}
+					try{
+						$stmt = $conn->prepare($sql); 
+            			$stmt->execute();
+            			$result=$stmt->fetchall();
+            			echo "<p><strong>Les resultat sont:</strong></p>";
+            			for($i=0;$i<sizeof($result);++$i){
+            				$res.=$result[$i][0].", ";
+            			}
+            			$res=substr($res, 0, -2);
+            			echo $res;
+					}catch(PDOException $e) {
+         			echo "Error: " . $e->getMessage()."<br/>";
+         			}
+        		}
 			?>
 
 
