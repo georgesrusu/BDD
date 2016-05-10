@@ -68,6 +68,12 @@ Released   : 20130902
 
 			<?php echo "<h2>Supprimer un etablissement</h2>";?>
 			<br/>
+            <?php 
+            $action=$_GET['action'];
+            if($action=="deleted"){
+                echo "<p style=\"color:blue;\">Etablissement supprime avec succes !</p>";
+            }
+            ?>
 		</div>
 		<?php
 		try{
@@ -153,14 +159,13 @@ Released   : 20130902
                         $conn->exec($sql);
  				        $sql = 'DELETE FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
-            	       echo "<p style=\"color:blue;\">Etablissement supprime avec succes !</p>";
                     }
                     else{
                         echo '<script language="javascript">';
                         echo 'alert("ID doesn\'t exist !")';
                         echo '</script>';
                     }
-                    echo '<meta http-equiv="Refresh" content="0;URL=./suppr_etab.php">';
+                    echo '<meta http-equiv="Refresh" content="0;URL=./suppr_etab.php?action=deleted">';
  			    }catch(PDOException $e) {
              		echo "Error: " . $e->getMessage()."<br/>";
             	}   
