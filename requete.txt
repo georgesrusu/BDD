@@ -8,9 +8,31 @@ la BONNE ?? juste confirmation
 R1:
 
 select clientID from Commentaire where etablissementID in (select etablissementID from Commentaire where clientID in (select ID from Utilisateur where identifiant="Brenda") and score>=4) group by clientID having count(etablissementID)>=3;
+LA BONNE///
+select identifiant from Utilisateur where ID in (select clientID from Commentaire where etablissementID in (select etablissementID from Commentaire where clientID in (select ID from Utilisateur where identifiant="Brenda") and score>=4) group by clientID having count(etablissementID)>=3);
+
+//deuxieme avec condition
+select identifiant from Utilisateur where ID in (select clientID from Commentaire where etablissementID in (select etablissementID from Commentaire where clientID in (select ID from Utilisateur where identifiant="Brenda") and score>=4) group by clientID having count(etablissementID)>=3) and identifiant !="Brenda";
 
 R3: confirmation ???
-select distinct e.ID from Etablissement e where not exists (select * from Commentaire c where c.etablissementID=e.ID) or exists (select * from Commentaire c where c.etablissementID=e.ID group by e.ID having count(*)<=1);
+select distinct e.ID from Etablissement e where not exists (select * from Commentaire c where c.etablissementID=e.ID) or exists (select * from Commentaire c where c.etablissementID=e.ID group by e.ID having count(*)<=1); //	avec ou sans distinct
+//BONNNN
+select nom from Etablissement where ID in (select distinct e.ID from Etablissement e where not exists (select * from Commentaire c where c.etablissementID=e.ID) or exists (select * from Commentaire c where c.etablissementID=e.ID group by e.ID having count(*)<=1));
 
 R4: confirmation ???
 select m.adminID,m.etablissementID from ModificationAdmin m where not exists (select * from Commentaire where clientID=m.adminID and etablissementID=m.etablissementID);
+/BONNN
+select identifiant from Utilisateur where ID in (select m.adminID from ModificationAdmin m where not exists (select * from Commentaire where clientID=m.adminID and etablissementID=m.etablissementID));
+
+R5:
+
+select ID from Etablissement where ID in (select etablissementID from Commentaire where ID=etablissementID group by etablissementID having count(*)>=3) ;
+//manque average
+
+
+
+
+
+select AVG(score) from Commentaire where etablissmentID in(select etablissementID from Commentaire where etablissementID in (select ID from Etablissement where ID in (select etablissementID from Commentaire where ID=etablissementID group by etablissementID having count(*)>=3))) group by AVG(score) having avg(score);
+
+select nom from Etablissement where ID in (select etablissementID from Commentaire where etablissementID in (select ID from Etablissement where ID in (select etablissementID from Commentaire where ID=etablissementID group by etablissementID having count(*)>=3)) group by etablissementID having avg(score));
