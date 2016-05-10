@@ -43,7 +43,7 @@ Released   : 20130902
 				<li class="current_page_item"><?php
 				if(isset($_SESSION['pseudo'])) {
 					//$pseudo = $_GET['pseudo'];
-					echo '<a href="./Profile.php" accesskey="3" title="Connexion to our database">';
+					echo '<a href="./profile.php" accesskey="3" title="Connexion to our database">';
 					echo "Profil";
 				}
 				else{
