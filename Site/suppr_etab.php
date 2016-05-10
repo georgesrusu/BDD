@@ -143,15 +143,15 @@ Released   : 20130902
                     $result=$stmt->fetch();
                     $type=$result[0];
                     if($type!=""){
- 				        $sql = 'DELETE FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
+                         $sql = 'DELETE FROM Commentaire WHERE etablissementID="'.$_POST['ID'].'"';
+                        $conn->exec($sql);
+                        $sql = 'DELETE FROM Label WHERE etablissementID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
                         $sql = 'DELETE FROM '.$type.' WHERE ID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
                         $sql = 'DELETE FROM ModificationAdmin WHERE etablissementID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
-                        $sql = 'DELETE FROM Commentaire WHERE etablissementID="'.$_POST['ID'].'"';
-                        $conn->exec($sql);
-                        $sql = 'DELETE FROM Label WHERE etablissementID="'.$_POST['ID'].'"';
+ 				        $sql = 'DELETE FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
                         $conn->exec($sql);
             	       echo "<p style=\"color:blue;\">Etablissement supprime avec succes !</p>";
                     }
