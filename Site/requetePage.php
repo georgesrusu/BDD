@@ -6,6 +6,12 @@ if (!isset($_SESSION['pseudo'])){
 if (!isset($_SESSION['isAdmin'])){
 	$_SESSION['isAdmin'] = $_GET['isAdmin'];
 }
+if (isset($_SESSION['table2']){
+	unset($_SESSION['table2']);
+}
+if (isset($_SESSION['table']){
+    unset($_SESSION['table']);
+}
 
 //if(!isset($_SESSION['cart_items'])){
     //$_SESSION['cart_items'] = array();
