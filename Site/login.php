@@ -50,7 +50,6 @@
                 }
             }
         }
-        #TODO: QUERY creation de compte
         elseif(isset($_POST['register'])) {
             $pseudo = $_POST['identifiant'];
             $password = $_POST['password'];

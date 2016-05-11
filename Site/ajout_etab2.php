@@ -1,8 +1,6 @@
 <?php
 session_start();
 include("../connect.php");
-				error_reporting(E_ALL);
-       			ini_set('display_errors', 1);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -66,21 +64,15 @@ Released   : 20130902
 			<?php echo "<h2>Ajouter un etablissement</h2>";?>
 			<br/>
 
-			<!--<p>This is <strong>Privy</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
-			<ul class="actions">
-				<li><a href="#" class="button">Etiam posuere</a></li>
-			</ul>-->
 		</div>
 		<p>
 		<div class="formulaire">
         <form name="etablissement" method="post" action="ajout_etab2.php?">
         	<?php
         	if (!isset($_SESSION['table'])){
-        		echo "not set";
            		$_SESSION['table']=unserialize(urldecode($_GET['param']));
         	}
         	if(isset($_SESSION['table'])){
-        		echo "set";
     			$table= $_SESSION['table'];
         		$name=$table[0];
     			$street=$table[1];
@@ -94,8 +86,8 @@ Released   : 20130902
     			$type=$table[9];
     	}
         	if ($type=="Restaurant"){
-            	echo ' Prix : <input type="number" name="price"/> <br/>';
-            	echo ' Nombre de place pour un Banquet : <input type="number" name="banquet"/> <br/>';
+            	echo ' Prix : <input type="number" min="0" name="price"/> <br/>';
+            	echo ' Nombre de place pour un Banquet : <input type="number" min="0" name="banquet"/> <br/>';
             	echo ' Emporter : ';
             	echo '<input type="radio" name="takeAway" value="1" checked> Oui';
             	echo '<input type="radio" name="takeAway" value="0" checked> Non<br>';
@@ -164,9 +156,9 @@ Released   : 20130902
             	echo '<input type="radio" name="snack" value="0" checked> Non<br>';
             }
     		elseif($type=="Hotel"){
-    			echo ' Prix : <input type="number" name="price"/> <br/>';
-    			echo ' Nombre de chambre : <input type="number" name="bedRooms"/> <br/>';
-    			echo ' Nombre d\'etoile : <input type="number" name="stars" min="0" max="5"/> <br/>';
+    			echo ' Prix : <input type="number" min="0" name="price"/> <br/>';
+    			echo ' Nombre de chambre : <input type="number" min="0" name="bedRooms"/> <br/>';
+    			echo ' Nombre d\'etoile : <input type="number" min="0" name="stars" min="0" max="5"/> <br/>';
         	}
             echo ' <div class="button">';
             echo ' <input type="submit" name="add" value="Ajouter"/>';

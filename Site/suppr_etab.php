@@ -1,10 +1,6 @@
 <?php
 session_start();
 include("../connect.php");
-				error_reporting(E_ALL);
-       			ini_set('display_errors', 1);
-//if(!isset($_SESSION['cart_items'])){
-    //$_SESSION['cart_items'] = array();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--

@@ -1,11 +1,5 @@
 <?php
 session_start();
-/*if (isset($_SESSION['table2']){
-	unset($_SESSION['table2']);
-}
-if (isset($_SESSION['table']){
-    unset($_SESSION['table']);
-}*/
 if (!isset($_SESSION['pseudo'])){
 	$_SESSION['pseudo'] = $_GET['pseudo'];
 }
@@ -13,8 +7,6 @@ if (!isset($_SESSION['isAdmin'])){
 	$_SESSION['isAdmin'] = $_GET['isAdmin'];
 }
 
-//if(!isset($_SESSION['cart_items'])){
-    //$_SESSION['cart_items'] = array();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
