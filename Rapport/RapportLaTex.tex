@@ -67,4 +67,60 @@ En ce qui concerne l'ajout d'un label, nous avons decidé d'avoir une table ("Lis
 
 En ce qui concerne le disctinction entre utilisateur et admin, nous avons une colonne, isAdmin qui grace a un boolean ou bien a un int (0 ou 1) nous permet de savoir si le client est admin ou bien un simple utilisateur. L'héritage présent dans le schéma permet donc de voir ce qu'un admin peut faire en plus qu'un client standard. C'est même opération supplémentaire que peut faire un admin sont stocké dans une nouvelle table (Modification) qui va permettre de récupérer chaque modification d'un établissement, c'est à dire sont type de modification (Création, suppression ou modification) ainsi que sa date, l'admin qui a opéré et l'établissement concerné.\\
 
+\newpage
+\section{Requetes}
+\subsection{R1}
+\subsection{R2}
+	$a \leftarrow \pi (\sigma_{Identifiant="Brenda"}(Utilisateur))$
+
+	$b \leftarrow a \ast Commentaire$
+
+	$c \leftarrow \sigma_{score > 3}(b)$\\
+
+	$d \leftarrow \sigma_{score > 3}(Commentaire)$
+
+	$e \leftarrow \pi_{etablissementID, clientID}(d - c)$
+
+	$f \leftarrow e \div c$
+
+	$g \leftarrow \pi_{Nom}(f \bowtie_{clientID=ID} Utilisateur)$
+
+\subsection{R3}
+\subsection{R4}
+	$a \leftarrow \pi_{etablissementID, clientID}(ModificationAdmin)$
+
+	$b \leftarrow \pi_{etablissementID}(Commentaire)$
+
+	$c \leftarrow a \ast b$
+
+	$d \leftarrow \pi_{etablissementID, clientID}(c)$
+
+	$e \leftarrow a - d$
+
+	$f \leftarrow \pi_{identitifant}(e \bowtie_{clientID=ID} Utilisateur)$
+
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
