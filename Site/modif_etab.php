@@ -1,10 +1,7 @@
 <?php
 session_start();
 include("../connect.php");
-				error_reporting(E_ALL);
-       			ini_set('display_errors', 1);
-//if(!isset($_SESSION['cart_items'])){
-    //$_SESSION['cart_items'] = array();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -129,14 +126,14 @@ Released   : 20130902
         			<th>Site</th>
         		</tr>
         		<tr>
-        				<td><input type="number" name="ID"/></td>
+        				<td><input type="number" min="0" name="ID"/></td>
         				<td><input type="text" name="name"/></td>
         				<td><input type="text" name="street"/></td>
-        				<td><input type="number" name="num"/></td>
-        				<td><input type="number" name="zip"/></td>
+        				<td><input type="number" min="0" name="num"/></td>
+        				<td><input type="number" min="0" name="zip"/></td>
         				<td><input type="text" name="city"/></td>
-        				<td><input type="number" name="longitude"/></td>
-        				<td><input type="number" name="latitude"/></td>
+        				<td><input type="number" min="0" name="longitude"/></td>
+        				<td><input type="number" min="0" name="latitude"/></td>
         				<td><input type="text" name="tel"/></td>
         				<td><input type="text" name="site"/></td>
         		</tr>
@@ -183,34 +180,6 @@ Released   : 20130902
             echo '<meta http-equiv="Refresh" content="0;URL=./index.php">';
         }
         ?>
-		<!--<div id="featured">
-			<div class="title">
-				<h2>Maecenas lectus sapien</h2>
-				<span class="byline">Integer sit amet aliquet pretium</span>
-			</div>
-			<ul class="style1">
-				<li class="first">
-					<p class="date"><a href="#">Jan<b>05</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Etiam non felis. Donec ut ante.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Jan<b>03</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie. Donec leo, vivamus fermentum nibh in augue praesent congue rutrum.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Jan<b>01</b></a></p>
-					<h3>Amet sed volutpat mauris</h3>
-					<p><a href="#">Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Etiam non felis. Donec ut ante.</a></p>
-				</li>
-				<li>
-					<p class="date"><a href="#">Dec<b>31</b></a></p>
-					<h3>Sagittis diam dolor amet</h3>
-					<p><a href="#">Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie. Donec leo, vivamus fermentum nibh in augue praesent congue rutrum.</a></p>
-				</li>
-			</ul>
-		</div>-->
 		<br/><br/><br/><br/>
 		<div id="copyright">
 			<span>&copy; Eureka. All rights reserved. <a href="http://eureka.com/"></a></span>

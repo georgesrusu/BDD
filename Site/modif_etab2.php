@@ -1,8 +1,6 @@
 <?php
 session_start();
 include("../connect.php");
-				error_reporting(E_ALL);
-       			ini_set('display_errors', 1);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
@@ -66,19 +64,12 @@ Released   : 20130902
 
 			<?php echo "<h2>Modifier un etablissement</h2>";?>
 			<br/>
-
-			<!--<p>This is <strong>Privy</strong>, a free, fully standards-compliant CSS template designed by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are from <a href="http://fotogrph.com/"> Fotogrph</a>. This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so you're pretty much free to do whatever you want with it (even use it commercially) provided you give us credit for it. Have fun :) </p>
-			<ul class="actions">
-				<li><a href="#" class="button">Etiam posuere</a></li>
-			</ul>-->
 		</div>
 		<?php
 		if (!isset($_SESSION['table2'])){
-        	echo "not set";
            	$_SESSION['table2']=unserialize(urldecode($_GET['parama']));
         }
        	if(isset($_SESSION['table2'])){
-        	echo "set";
     		$table= $_SESSION['table2'];
     		$ID=$table[0];
         	$name=$table[1];
@@ -103,7 +94,7 @@ Released   : 20130902
         		echo "<th>Fermeture</th>";
         	echo "</tr>";
         	try{
-		    	$sql = 'SELECT * FROM Restaurant WHERE ID="'.$ID.'"';
+		    	    $sql = 'SELECT * FROM Restaurant WHERE ID="'.$ID.'"';
             	$stmt = $conn->prepare($sql); 
             	$stmt->execute();
             	$result=$stmt->fetch();
@@ -176,13 +167,11 @@ Released   : 20130902
        			echo "<th>Places banquet</th>";
         		echo "<th>Emporter</th>";
         		echo "<th>Livraison</th>";
-        		echo "<th>Fermeture</th>";
+        		//echo "<th>Fermeture</th>";
         	echo "</tr>";
         	echo "<tr>";
-        			echo '<td><input type="number" name="price"/></td>';
-        			echo '<td><input type="number" name="banquet"/></td>';
-
-                    //TODO: MAX COMPLETE
+        			echo '<td><input type="number" min="0" name="price"/></td>';
+        			echo '<td><input type="number" min="0" name="banquet"/></td>';
 
         			//$emporter =$result[3]==1?"Oui":"Non";
        				echo '<td><input type="radio" name="takeAway" value="1" checked> Oui';
@@ -191,9 +180,60 @@ Released   : 20130902
        				echo '<td><input type="radio" name="delivery" value="1" checked> Oui';
             		echo '<input type="radio" name="delivery" value="0" checked> Non<br></td>';
        				//echo "<td>".$result[5]."</th>"; //fermeture
-                echo '<td><input type="number" name="closedDays"/></td>';
+                //echo '<td><input type="number" name="closedDays"/></td>';
        				//fermeture a faire
        			echo "</tr>";
+            echo "</table><br/>";
+             echo '<p> Ouverture : </p>';
+                echo "<table class=\"tableH\" border=\"0\" style=\"width:100%\">";
+                echo '<tr><td>Lundi : </td>';
+                echo '<td><input type="radio" name="lundi" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="lundi" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="lundi" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="lundi" value="2" checked> Après-midi</td></br>';
+                echo "</tr>";
+
+                echo '<tr><td>Mardi : </td>';
+                echo '<td><input type="radio" name="mardi" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="mardi" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="mardi" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="mardi" value="2" checked> Après-midi</td></br>';
+                echo '</tr>';
+
+                echo '<tr><td>Mercredi</td>';
+                echo '<td><input type="radio" name="mercredi" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="mercredi" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="mercredi" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="mercredi" value="2" checked> Après-midi</td></br>';
+                echo '</tr>';
+
+                echo '<tr><td>Jeudi : </td>';
+                echo '<td><input type="radio" name="jeudi" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="jeudi" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="jeudi" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="jeudi" value="2" checked> Après-midi</td></br>';
+                echo '</tr>';
+
+                echo '<tr><td>Vendredi</td>';
+                echo '<td><input type="radio" name="vendredi" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="vendredi" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="vendredi" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="vendredi" value="2" checked> Après-midi</td></br>';
+                echo '</tr>';
+
+                echo '<tr><td>Samedi :</td> ';
+                echo '<td><input type="radio" name="samedi" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="samedi" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="samedi" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="samedi" value="2" checked> Après-midi</td></br>';
+                echo '</tr>';
+
+                echo '<tr><td>Dimanche</td>';
+                echo '<td><input type="radio" name="dimanche" value="0" checked> Toute la journée</td>';
+                echo '<td><input type="radio" name="dimanche" value="1" checked> Fermé toute la journée</td>';
+                echo '<td><input type="radio" name="dimanche" value="3" checked> Matin</td>';
+                echo '<td><input type="radio" name="dimanche" value="2" checked> Après-midi</td>';
+                echo '</tr></table>';
         	
         }elseif($type=="Bar"){
     		echo "<tr>";
@@ -215,9 +255,9 @@ Released   : 20130902
        			echo "<th>Nombre d'etoiles'</th>";
         	echo "</tr>";
         	echo "<tr>";
-       			echo '<td><input type="number" name="price"/></td>';
-        		echo '<td><input type="number" name="bedRooms"/></td>';
-        		echo '<td><input type="number" name="stars"/></td>';
+       			echo '<td><input type="number" min="0" name="price"/></td>';
+        		echo '<td><input type="number" min="0" name="bedRooms"/></td>';
+        		echo '<td><input type="number" min="0" name="stars"/></td>';
  			echo "</tr>";    	
         }
         echo "</table>";
@@ -290,11 +330,14 @@ Released   : 20130902
 				$banquet=$_POST['banquet'];
 				$takeAway=$_POST['takeAway'];
 				$delivery=$_POST['delivery'];
-
-                $closedDays = $_POST['closedDays'];
-				#$closedDays="13512"; //a faire --- #TODO: A ENLEVER
-				
-                #$sql = 'UPDATE Restaurant WHERE ID="'.$ID.'" SET ';
+        $lu = $_POST['lundi'];
+        $ma = $_POST['mardi'];
+        $me = $_POST['mercredi'];
+        $je = $_POST['jeudi'];
+        $vdd = $_POST['vendredi'];
+        $sa = $_POST['samedi'];
+        $di = $_POST['dimanche'];
+        $closedDays = $lu . $ma . $me . $je . $vdd . $sa . $di;
 				$sql = 'UPDATE Restaurant SET ';
 				if ($price!=""){
 					$sql=$sql.'prix="'.$price.'" ,';
