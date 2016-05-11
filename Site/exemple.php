@@ -27,31 +27,9 @@ Released   : 20130902
 
 <?php
 	include("../connect.php");
-	try{
-		$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
-		$stmt->execute();
-
-    // set the resulting array to associative
-		$result = $stmt->fetchall(); //fetch
-
-		$i = $_GET['etablissementID']-1;
-		$idEtablissement = $result[$i][0];
-		$typeEtablissement = $result[$i][10];
-
-
-		$stmt = $conn->prepare("SELECT * FROM Commentaire"); 
-		$stmt->execute();
-		$commentList = $stmt->fetchall(); //fetch
-
-		$stmt = $conn->prepare("SELECT * FROM Utilisateur"); 
-		$stmt->execute();
-		$userList = $stmt->fetchall(); //fetch
-
-		$stmt = $conn->prepare("SELECT * FROM Label"); 
-		$stmt->execute();
-		$labelList = $stmt->fetchall(); //fetch
-
-
+	//try{
+		$ID = $_GET['etablissementID'];
+		/*
 		if ($typeEtablissement == "Restaurant") {
 			$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
 			$stmt->execute();
@@ -59,7 +37,7 @@ Released   : 20130902
 			$restaurantList = $stmt->fetchall();
 
 			for ($rest=0; $rest < sizeof($restaurantList); $rest++) { 
-				if ($idEtablissement == $restaurantList[$rest][0]) {
+				if ($ID == $restaurantList[$rest][0]) {
 					$indexTable = $rest;
 				}
 			}
@@ -71,7 +49,7 @@ Released   : 20130902
 			$restaurantList = $stmt->fetchall();
 
 			for ($bar=0; $bar < sizeof($restaurantList); $bar++) { 
-				if ($idEtablissement == $restaurantList[$bar][0]) {
+				if ($ID == $restaurantList[$bar][0]) {
 					$indexTable = $bar;
 				}
 			}
@@ -84,15 +62,15 @@ Released   : 20130902
 			$restaurantList = $stmt->fetchall();
 
 			for ($hot=0; $hot < sizeof($restaurantList); $hot++) { 
-				if ($idEtablissement == $restaurantList[$hot][0]) {
+				if ($ID == $restaurantList[$i][$hot]) {
 					$indexTable = $hot;
 				}
 			}
-		}
-	}
-	catch(PDOException $e) {
-        echo "Error: " . $e->getMessage()."<br/>";
-    }
+		}*/
+	//}
+	//catch(PDOException $e) {
+      //  echo "Error: " . $e->getMessage()."<br/>";
+    //}
 
 	function closedPrint($day, $id) {
 		if ($id == "0") {
@@ -127,18 +105,18 @@ Released   : 20130902
 	}
 ?>
 
-<script src="http://maps.googleapis.com/maps/api/js"></script>
+<!--<script src="http://maps.googleapis.com/maps/api/js"></script>
 <script>
 function initialize() {
   var mapProp = {
-    center:new google.maps.LatLng(<?=$result[$i][7]?>,<?=$result[$i][6]?>),
+    center:new google.maps.LatLng(<?=50.8133?>,<?=4.38157?>),
     zoom:18,
     mapTypeId:google.maps.MapTypeId.ROADMAP
   };
   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 }
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+google.maps.event.addDomListener(window, 'load', initialize());
+</script>-->
 
 </head>
 <body>
@@ -173,7 +151,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		</div>
 		<div id="welcome">
 			<div class="title">
-				<?php echo "<h2>".$result[$i][1]."</h2>";?>
+				<?php 
+				try{
+					$sql = 'SELECT * FROM Etablissement WHERE ID="'.$ID.'"';
+                   	$stmt = $conn->prepare($sql); 
+                   	$stmt->execute();
+                    $result=$stmt->fetch();
+				}
+				catch(PDOException $e) {
+        			echo "Error: " . $e->getMessage()."<br/>";
+    			}
+
+				echo "<h2>".$result[1]."</h2>";?>
 				<span class="byline"></span>
 			</div>
 			<?php 
@@ -186,52 +175,32 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			?>
 			<h2 class="infos">Informations sur leurs services:</h2>
 				<?php
-
-				if ($typeEtablissement == "Restaurant") {
-
-					if ($restaurantList[$indexTable][3]) {
+				try{
+					$sql = 'SELECT * FROM '.$result[10].' WHERE ID="'.$ID.'"';
+                   	$stmt = $conn->prepare($sql); 
+                   	$stmt->execute();
+                    $etab=$stmt->fetch();
+				}
+				catch(PDOException $e) {
+        			echo "Error: " . $e->getMessage()."<br/>";
+    			}
+				if ($result[10] == "Restaurant") {
+					if ($etab[3]) {
 						echo "<p>TakeAway : Oui</p>";
 					}
 					else {
 						echo "<p>TakeAway : Non</p>";
 					}
-					if ($restaurantList[$indexTable][4]) {
+					if ($etab[4]) {
 						echo "<p>Livraison à domicile : Oui</p>";
 					}
 					else {
 						echo "<p>Livraison à domicile : Non</p>";
 					}
-					echo "<p>Fourchette de prix : " . $restaurantList[$indexTable][1] . "€</p>";
-					echo "<p>Banquet maximum : " . $restaurantList[$indexTable][2] . " personnes</p>";
-				}
-				elseif ($typeEtablissement == "Bar") {
-					if ($restaurantList[$indexTable][1]) {
-						echo "<p>Smoking : Oui</p>";
-					}
-					else {
-						echo "<p>Smoking : Non</p>";
-					}
-
-					if ($restaurantList[$indexTable][2]) {
-						echo "<p>Snack : Oui<p>";
-					}
-					else {
-						echo "<p>Snack : Non</p>";
-					}
-				}
-				elseif ($typeEtablissement == "Hotel") {
-					echo "<p>Etoiles : " . $restaurantList[$indexTable][3] . "</p>";
-					echo "<p>Capacité : " . $restaurantList[$indexTable][2] . " chambres</p>";
-					echo "<p>Fourchette de prix : " . $restaurantList[$indexTable][1] . "€</p>";
-				}
-				?>
-
-			<br/>
-
-			<?php 
-				if ($typeEtablissement == "Restaurant") {
+					echo "<p>Fourchette de prix : " . $etab[1] . "€</p>";
+					echo "<p>Banquet maximum : " . $etab[2] . " personnes</p><br/>";
 					echo "<h2 class=\"infos\">Ouverture:</h2>";
-					$ouverture = (string)$restaurantList[$indexTable][5];
+					$ouverture = (string)$etab[5];
 
 					if (strlen($ouverture) < 7) {
 						$numberOfMiss = 7 - strlen($ouverture);
@@ -251,21 +220,57 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					echo "</table>";
 					echo "<br/>";
 				}
-			?>
+				elseif ($result[10] == "Bar") {
+
+					if ($etab[1]) {
+						echo "<p>Smoking : Oui</p>";
+					}
+					else {
+						echo "<p>Smoking : Non</p>";
+					}
+
+					if ($etab[2]) {
+						echo "<p>Snack : Oui<p>";
+					}
+					else {
+						echo "<p>Snack : Non</p>";
+					}
+				}
+				elseif ($result[10] == "Hotel") {
+					echo "<p>Etoiles : " . $etab[3] . "</p>";
+					echo "<p>Capacité : " . $etab[2] . " chambres</p>";
+					echo "<p>Fourchette de prix : " . $etab[1] . "€</p>";
+				}
+				?>
+
+			<br/>
 
 			<h2 class="infos">Localisation:</h2>
 				<?php 
-				echo "<p>" . $result[$i][2] . " " . $result[$i][3] . ", " . $result[$i][5] . " - " . $result[$i][4] . "</p>";
-				echo "<p>Coordonnées : " . $result[$i][7] . " - " . $result[$i][6] . "</p>";
+				echo "<p>" . $result[2] . " " . $result[3] . ", " . $result[5] . " - " . $result[4] . "</p>";
+				echo "<p>Coordonnées : " . $result[7] . " - " . $result[6] . "</p>";
 				?>
-				<div id="googleMap" style="width:400;height:250px;"></div>
+				<div id="googleMap" style="width:400;height:250px;">
+				<script src="http://maps.googleapis.com/maps/api/js"></script>
+				<script>
+				function initialize() {
+  					var mapProp = {
+    				center:new google.maps.LatLng(<?=$result[7]?>,<?=$result[6]?>),
+    				zoom:18,
+    				mapTypeId:google.maps.MapTypeId.ROADMAP
+  					};
+  					var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+					}
+					google.maps.event.addDomListener(window, 'load', initialize());
+				</script></div>
+				<br/>
 
 			<h2 class="infos">Contact:</h2>
 				<?php
-				echo "<p>Téléphone : " . $result[$i][8] ."</p>";
+				echo "<p>Téléphone : " . $result[8] ."</p>";
 				echo "<p>Site web : ";
-				if ($result[$i][9]) {
-					echo $result[$i][9];
+				if ($result[9]) {
+					echo $result[9];
 				}
 				else {
 					echo "Aucun";
@@ -275,31 +280,46 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 			<h2 class="infos">Commentaires:</h2>
 				<?php
-					for ($comment = 0; $comment < sizeof($commentList); $comment++) {
-						if ($commentList[$comment][0] == $idEtablissement) {
-							echo "<div class=\"comment\">";
-							echo "<p class=\"nameComment\">" . $userList[$commentList[$comment][1]-1][1] . "</p>";
-							echo "<p>" . $commentList[$comment][2] . "</p>";
-							echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
-							$numberStar = $commentList[$comment][4];
-							for ($star = 0; $star < 5; $star++) {
-								if ($star < $numberStar) {
-									echo "&#9733;";
-								}
-								else {
-									echo "&#9734";
-								}
-							} 
-							echo "<p>" . $commentList[$comment][3] . "</p>";
-							echo "</div>";
+				try{
+					$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$ID.'"';
+                   	$stmt = $conn->prepare($sql); 
+                   	$stmt->execute();
+                    $com=$stmt->fetchall();
+				}
+				catch(PDOException $e) {
+        			echo "Error: " . $e->getMessage()."<br/>";
+    			}
+				for ($i = 0; $i < sizeof($com); ++$i) {
+						echo "<div class=\"comment\">";
+						try{
+							$sql = 'SELECT identifiant FROM Utilisateur WHERE ID="'.$com[$i][1].'"';
+                   			$stmt = $conn->prepare($sql); 
+                   			$stmt->execute();
+                    		$nom=$stmt->fetch();
 						}
+						catch(PDOException $e) {
+        				echo "Error: " . $e->getMessage()."<br/>";
+    					}
+						echo "<p class=\"nameComment\">" . $nom[0] . "</p>";
+						echo "<p>" . $com[$i][2] . "</p>";
+						echo "<p class=\"star\"><span style=\"color:black\">Score :</span>";
+						$numberStar = $com[$i][4];
+						for ($star = 0; $star < 5; $star++) {
+							if ($star < $numberStar) {
+								echo "&#9733;";
+							}
+							else {
+								echo "&#9734";
+							}
+						} 
+						echo "<p>" . $com[$i][3] . "</p>";
+						echo "</div>";
 					}
 				?>
 				</br>
 				<p><strong>Moyenne des scores : </strong> <?php 
 				try{
-					$etablissementID=$i+1;
-					$sql='SELECT AVG(score) FROM Commentaire WHERE etablissementID="'.$etablissementID.'"';
+					$sql='SELECT AVG(score) FROM Commentaire WHERE etablissementID="'.$ID.'"';
 					$stmt = $conn->prepare($sql); 
             		$stmt->execute();
             		$result=$stmt->fetch();
@@ -322,9 +342,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				<p><strong>Ajouter un commentaire : </strong></p>
 				<?php 
 				if(isset($_SESSION['pseudo'])) {
-					$etablissementID=$i+1;
-					echo '<form name="commentaire" method="post" action="exemple.php?etablissementID='.$etablissementID.'">';
-						echo '<p>Score : <input type="number" min="0" max="5" name="score"/></p>';
+					echo '<form name="commentaire" method="post" action="exemple.php?etablissementID='.$ID.'">';
+						echo '<p>Score : <input type="number" min="0" max="5" value="0" name="score"/></p>';
 						echo '<p><textarea rows="6" cols="75" name="commentaire" placeholder="Votre commentaire"></textarea></p>';
 						echo '<div class="button">';
 							echo '<input type="submit" name="comment" value="Commenter">';
@@ -348,14 +367,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					$texte=$_POST['commentaire'];
 					$date=date("Y-m-d");
 					try{
-						$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$etablissementID.'" AND clientID="'.$clientID.'" AND dateCreation="'.$date.'"';
+						$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$ID.'" AND clientID="'.$clientID.'" AND dateCreation="'.$date.'"';
             			$stmt = $conn->prepare($sql); 
             			$stmt->execute();
             			$result=$stmt->fetch();
             			if($result[0]==""){
-            				$sql='INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$date.'","'.$texte.'","'.$score.'")';
+            				$sql='INSERT INTO Commentaire (etablissementID,clientID,dateCreation,texte,score) VALUES ("'.$ID.'","'.$clientID.'","'.$date.'","'.$texte.'","'.$score.'")';
             				$conn->exec($sql);
-            				echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$etablissementID.'&action=com_added">';
+            				echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$ID.'&action=com_added">';
             			}
             			else{
             				echo '<script language="javascript">';
@@ -376,24 +395,32 @@ google.maps.event.addDomListener(window, 'load', initialize);
 					<th>Apposé</th>
 				</tr>
 			<?php
-				$labelArray = array();
-				$countArray = array();
-				for ($label = 0; $label < sizeof($labelList); $label++) {
-					if ($labelList[$label][0] == $idEtablissement) {
-						if (!in_array($labelList[$label][2], $labelArray)) {
-							array_push($labelArray, $labelList[$label][2]);
-							array_push($countArray, (int)1);
-						}
-						else {
-							$idArray = array_keys($labelArray, $labelList[$label][2]);
-							$countArray[$idArray[0]] = $countArray[$idArray[0]] + 1;
-						}
-					}
+				try{
+					$sql = 'SELECT * FROM Label WHERE etablissementID="'.$ID.'"';
+                   	$stmt = $conn->prepare($sql); 
+                   	$stmt->execute();
+                    $label=$stmt->fetchall();
 				}
-				for ($label=0; $label < count($labelArray); $label++) { 
+				catch(PDOException $e) {
+        			echo "Error: " . $e->getMessage()."<br/>";
+    			}
+    			$labelArray=array();
+				$countArray = array();
+				for ($i = 0; $i < sizeof($label); $i++) {
+					if (!in_array($label[$i][2], $labelArray)) {
+						array_push($labelArray, $label[$i][2]);
+						array_push($countArray, (int)1);
+					}
+					else {
+						$idArray = array_keys($labelArray, $label[$i][2]);
+						$countArray[$idArray[0]] = $countArray[$idArray[0]] + 1;
+					}
+				
+				}
+				for ($i=0; $i < count($labelArray); ++$i) { 
 					echo "	<tr>
-								<td>" . $labelArray[$label] . "</td>
-								<td>" . $countArray[$label] . "</td>
+								<td>" . $labelArray[$i] . "</td>
+								<td>" . $countArray[$i] . "</td>
 							</tr>";
 				}
 			?>
@@ -402,10 +429,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			<p><strong>Ajouter un tag : </strong></p>
 			<?php 
 				if(isset($_SESSION['pseudo'])) {
-					echo '<form name="label" method="post" action="./exemple.php?etablissementID='.$etablissementID.'">';
+					echo '<form name="label" method="post" action="./exemple.php?etablissementID='.$ID.'">';
 					echo '<select name="labelSelect">';
-					for ($tagPrint = 0; $tagPrint < count($labelArray); $tagPrint++) {
-						echo '<option value="'.$labelArray[$tagPrint].'">' . $labelArray[$tagPrint] . '</option>';
+					for ($i = 0; $i < count($labelArray); ++$i) {
+						echo '<option value="'.$labelArray[$i].'">' . $labelArray[$i] . '</option>';
 					}
 					echo '</select>';
 					echo '
@@ -427,14 +454,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				
 				if (isset($_POST['envoyer'])) {
 					try{
-						$sql = 'SELECT * FROM Label WHERE etablissementID="'.$etablissementID.'" AND clientID="'.$clientID.'" AND texte="'.$_POST['labelSelect'].'"';
+						$sql = 'SELECT * FROM Label WHERE etablissementID="'.$ID.'" AND clientID="'.$clientID.'" AND texte="'.$_POST['labelSelect'].'"';
             			$stmt = $conn->prepare($sql); 
             			$stmt->execute();
             			$result=$stmt->fetch();
             			if($result[0]==""){
-            				$sql='INSERT INTO Label (etablissementID,clientID,texte) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$_POST['labelSelect'].'")';
+            				$sql='INSERT INTO Label (etablissementID,clientID,texte) VALUES ("'.$ID.'","'.$clientID.'","'.$_POST['labelSelect'].'")';
             				$conn->exec($sql);
-            				echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$etablissementID.'&action=label_added">';
+            				echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$ID.'&action=label_added">';
             			}
             			else{
             				echo '<script language="javascript">';
@@ -447,9 +474,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				}
 				elseif (isset($_POST['labelAutreSend'])) {
 					if($_POST['labelText']!=""){
-						$sql='INSERT INTO Label (etablissementID,clientID,texte) VALUES ("'.$etablissementID.'","'.$clientID.'","'.$_POST['labelText'].'")';
+						$sql='INSERT INTO Label (etablissementID,clientID,texte) VALUES ("'.$ID.'","'.$clientID.'","'.$_POST['labelText'].'")';
             			$conn->exec($sql);
-            			echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$etablissementID.'&action=label_added">';
+            			echo '<meta http-equiv="Refresh" content="0;URL=./exemple.php?etablissementID='.$ID.'&action=label_added">';
             		}
             		else{
             			echo '<script language="javascript">';
