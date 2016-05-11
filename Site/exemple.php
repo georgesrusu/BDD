@@ -281,7 +281,7 @@ google.maps.event.addDomListener(window, 'load', initialize());
 			<h2 class="infos">Commentaires:</h2>
 				<?php
 				try{
-					$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$ID.'"';
+					$sql = 'SELECT * FROM Commentaire WHERE etablissementID="'.$ID.'" ORDER BY dateCreation DESC';
                    	$stmt = $conn->prepare($sql); 
                    	$stmt->execute();
                     $com=$stmt->fetchall();

@@ -91,7 +91,7 @@ Released   : 20130902
                 $result=$stmt->fetch();
                 $clientID=$result[0];
 
-               	$sql = 'SELECT * FROM Commentaire WHERE clientID="'.$clientID.'"';
+               	$sql = 'SELECT * FROM Commentaire WHERE clientID="'.$clientID.'" ORDER BY dateCreation DESC';
                 $stmt = $conn->prepare($sql); 
                 $stmt->execute();
                 $result=$stmt->fetchall();
