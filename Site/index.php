@@ -1,5 +1,6 @@
 <?php
 session_start();
+include("../connect.php");
 if (!isset($_SESSION['pseudo'])){
 	$_SESSION['pseudo'] = $_GET['pseudo'];
 }
@@ -31,20 +32,6 @@ Released   : 20130902
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-<?php
-	include("../connect.php");
-	try{
-		$stmt = $conn->prepare("SELECT * FROM Etablissement"); 
-		$stmt->execute();
-
-    // set the resulting array to associative
-		$etablissementList = $stmt->fetchall(); //fetch
-	}
-	catch(PDOException $e) {
-        echo "Error: " . $e->getMessage()."<br/>";
-    }
-?>
-
 </head>
 <body>
 <div id="page" class="container">
@@ -106,20 +93,34 @@ Released   : 20130902
 			</br>
 			<p>Quelques nouveaux établissements : </p>
 			<?php
-				for ($elem=sizeof($etablissementList); $elem > sizeof($etablissementList) - 3; $elem--) { 
-					$temp = $elem - 1;
-					$etablissementID=$etablissementList[$temp][0];
-					echo "<hr>";
-					echo "<p><strong>".$etablissementList[$temp][1]."</strong></p>";
-					echo "<p>".$etablissementList[$temp][10]."</p>";
-					echo "<p>".$etablissementList[$temp][2]." ".$etablissementList[$temp][3].", ".$etablissementList[$temp][5]." - ".$etablissementList[$temp][4]."</p>";
-					echo "<p>telephone : ".$etablissementList[$temp][8]."</p>";
-					$siteWeb=$etablissementList[$temp][9]!=""?$etablissementList[$temp][9]:"aucun";
-					echo "<p>site web : ".$siteWeb."</p>";
-					echo '<strong><a href=./exemple.php?etablissementID='.$etablissementID.'>Plus de details ...</a></strong>';
-					echo "<hr>";
-					echo "</br>";
-				}
+				try{
+					$sql="SELECT etablissementID FROM ModificationAdmin ORDER BY dateCreation DESC LIMIT 5"; 
+					$stmt = $conn->prepare($sql); 
+                   	$stmt->execute();
+					$last_added = $stmt->fetchall(); //fetch
+					echo sizeof($last_added);
+					for ($i=0;$i<sizeof($last_added);++$i){
+						echo $last_added[$i][0];
+						$sql='SELECT * FROM Etablissement WHERE ID="'.$last_added[$i][0].'"';
+						$stmt = $conn->prepare($sql); 
+                   		$stmt->execute();
+						$etab = $stmt->fetch();
+						echo $etab[1];
+						echo "<hr>";
+						echo "<p><strong>".$etab[1]."</strong></p>";
+						echo "<p>".$etab[10]."</p>";
+						echo "<p>".$etab[2]." ".$etab[3].", ".$etab[5]." - ".$etab[4]."</p>";
+						echo "<p>telephone : ".$etab[8]."</p>";
+						$siteWeb=$etab[9]!=""?$etab[9]:"aucun";
+						echo "<p>site web : ".$siteWeb."</p>";
+						echo '<strong><a href=./exemple.php?etablissementID='.$etab[0].'>Plus de details ...</a></strong>';
+						echo "<hr>";
+						echo "</br>";
+						}
+					}
+					catch(PDOException $e) {
+        				echo "Error: " . $e->getMessage()."<br/>";
+    				}
 			?>
 
 			<br/>

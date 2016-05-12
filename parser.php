@@ -600,8 +600,6 @@
     	}
 	}
 	function parse(){
-		error_reporting(E_ALL);
-		ini_set('display_errors', 1);
 		include("connect.php");
 		if ($conn_succes){
 			echo "CONNEXION SUCCESS<br/>";
