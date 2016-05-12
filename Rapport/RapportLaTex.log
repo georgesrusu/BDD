@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  11 MAY 2016 16:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  12 MAY 2016 16:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -305,12 +305,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--69
 
  []
 
-[4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
 
  []
 
-[6] (./RapportLaTex.aux) ) 
+[5] (./RapportLaTex.aux) ) 
 Here is how much of TeX's memory you used:
  4406 strings out of 493089
  64424 string characters out of 6134843
@@ -329,10 +329,10 @@ ts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmti12.pfb>
-Output written on RapportLaTex.pdf (6 pages, 327349 bytes).
+Output written on RapportLaTex.pdf (5 pages, 327623 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 66 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -70,7 +70,6 @@ En ce qui concerne le disctinction entre utilisateur et admin, nous avons une co
 \section{Installation}
 Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la base de données qui contiendra toutes les informations qui seront utilisées par l'application.  Pour ce faire le premier fichier à éxécuter est Create-DB.php, en vérifiant que le fichier header\_connect.php se connectera bien au bon serveur.  Une fois fait la nouvelle base de donnée Eureka à été crée ainsi que toutes ses tables.  AFIN de ne pas commencer avec une application vide, nous allons parsons des informations se trouvant dans des fichiers XML.  Pour ce faire, nous éxécutons parser.php, qui comme l'indique son nom s'occupe de parser les fichiers XML et de remplir la base de donnée avec les données obtenues.  L'application est maintenant bien installé et il est possible désormais de l'utiliser correctement.
 
-\newpage
 \section{Requetes}
 \subsection{R1}
 	$a \leftarrow \sigma_{identifiant="Brenda"}(Utilisateur)$
@@ -96,6 +95,10 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 	$g \leftarrow \pi_{Nom}(f \bowtie_{clientID=ID} Utilisateur)$
 
 \subsection{R3}
+	$a \leftarrow \pi_{etablissementID}(Etablissement)$
+
+	$b \leftarrow \sigma_{etablissemntID \ IN \ (a) \wedge \#Etablissement \ <= \ 1}(Commentaire)$
+
 \subsection{R4}
 	$a \leftarrow \pi_{etablissementID, clientID}(ModificationAdmin)$
 
