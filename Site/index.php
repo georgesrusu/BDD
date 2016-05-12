@@ -98,14 +98,11 @@ Released   : 20130902
 					$stmt = $conn->prepare($sql); 
                    	$stmt->execute();
 					$last_added = $stmt->fetchall(); //fetch
-					echo sizeof($last_added);
 					for ($i=0;$i<sizeof($last_added);++$i){
-						echo $last_added[$i][0];
 						$sql='SELECT * FROM Etablissement WHERE ID="'.$last_added[$i][0].'"';
 						$stmt = $conn->prepare($sql); 
                    		$stmt->execute();
 						$etab = $stmt->fetch();
-						echo $etab[1];
 						echo "<hr>";
 						echo "<p><strong>".$etab[1]."</strong></p>";
 						echo "<p>".$etab[10]."</p>";
