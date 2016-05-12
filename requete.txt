@@ -9,7 +9,7 @@ select nom from Etablissement where ID in(select distinct etablissementID from C
 
 R3:
 
-SELECT nom FROM Etablissement WHERE ID IN (SELECT DISTINCT e.ID FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID HAVING count(*)<=1))
+SELECT DISTINCT e.nom FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID HAVING count(*)<=1)
 
 R4:
 
