@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  12 MAY 2016 16:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.10)  12 MAY 2016 22:20
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **RapportLaTex.tex
 (./RapportLaTex.tex
@@ -95,15 +96,15 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 94.
+Package graphics Info: Driver file: pdftex.def on input line 95.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
@@ -260,79 +261,281 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 3.
-)
+ [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write3
 \openout3 = `RapportLaTex.toc'.
 
- [1
+ [2] <UML_FINAL.png, id=12, 843.15pt x 529.98pt>
+File: UML_FINAL.png Graphic file (type png)
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] <BDD-UM
-L-2Final.pdf, id=9, 804.28226pt x 391.18547pt>
-File: BDD-UML-2Final.pdf Graphic file (type pdf)
-
-<use BDD-UML-2Final.pdf>
-Package pdftex.def Info: BDD-UML-2Final.pdf used on input line 21.
-(pdftex.def)             Requested size: 482.57307pt x 234.71309pt.
-
-Overfull \hbox (92.57307pt too wide) in paragraph at lines 21--22
-[]  
- []
-
-[2 <./BDD-UML-2Final.pdf>]
-Overfull \hbox (17.228pt too wide) in paragraph at lines 50--52
-\OT1/cmr/m/n/12 AdminID r^^Sef^^Serence Client.ID; Eta-blis-se-men-tID r^^Sef^^
-Serence Eta-blis-se-ment.ID 
+<use UML_FINAL.png>
+Package pdftex.def Info: UML_FINAL.png used on input line 21.
+(pdftex.def)             Requested size: 590.20097pt x 370.98346pt.
+ [3 <./UML_FINAL.png>] [4]
+Overfull \hbox (30.69713pt too wide) in paragraph at lines 57--58
+[]\OT1/cmr/m/n/12 Pour ex-pli-quer notre sch^^Sema UML plus haut, nous avons ch
+oisi l'impl^^Sementation
  []
 
 
-Overfull \hbox (51.17625pt too wide) in paragraph at lines 57--59
-\OT1/cmr/m/n/12 ID r^^Sef^^Serence Client.ID; Eta-blis-se-men-tID r^^Sef^^Seren
-ce Com-men-taire.EtablissementID 
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+(../Create-DB.php [5]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 1.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <6> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 1.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 5.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 7.
+
+Overfull \hbox (49.99939pt too wide) in paragraph at lines 24--25
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (58.79938pt too wide) in paragraph at lines 39--40
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (67.59937pt too wide) in paragraph at lines 40--41
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (14.79944pt too wide) in paragraph at lines 41--42
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (41.1994pt too wide) in paragraph at lines 54--55
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (54.39938pt too wide) in paragraph at lines 55--56
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (58.79938pt too wide) in paragraph at lines 67--68
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+ []
+
+[6]
+Overfull \hbox (80.79935pt too wide) in paragraph at lines 80--81
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+Overfull \hbox (58.79938pt too wide) in paragraph at lines 81--82
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (80.79935pt too wide) in paragraph at lines 82--83
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [7]
+Overfull \hbox (96.44916pt too wide) in paragraph at lines 72--73
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (68.2492pt too wide) in paragraph at lines 73--74
+[][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (54.14923pt too wide) in paragraph at lines 74--75
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 75.
+
+Overfull \hbox (32.99927pt too wide) in paragraph at lines 75--76
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (11.8493pt too wide) in paragraph at lines 80--81
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.89929pt too wide) in paragraph at lines 81--82
+[][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.94928pt too wide) in paragraph at lines 82--83
+[][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.89929pt too wide) in paragraph at lines 83--84
+[][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.94928pt too wide) in paragraph at lines 84--85
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (75.2992pt too wide) in paragraph at lines 86--87
+[][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.94928pt too wide) in paragraph at lines 93--94
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 94.
+
+Overfull \hbox (89.39917pt too wide) in paragraph at lines 94--95
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (110.54913pt too wide) in paragraph at lines 95--96
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (103.49915pt too wide) in paragraph at lines 100--101
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (96.44916pt too wide) in paragraph at lines 101--102
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.94928pt too wide) in paragraph at lines 102--103
+[][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (89.39917pt too wide) in paragraph at lines 107--108
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[8]
+Overfull \hbox (11.8493pt too wide) in paragraph at lines 113--114
+[][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (54.14923pt too wide) in paragraph at lines 114--115
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+[9]
+Overfull \hbox (6.37971pt too wide) in paragraph at lines 158--158
+[]\OT1/cmr/bx/n/17.28 Explication du fonc-tion-ne-ment de notre pla-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
-[5] (./RapportLaTex.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
+
+ []
+
+[10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+<create_db_succes.png, id=52, 452.69125pt x 180.675pt>
+File: create_db_succes.png Graphic file (type png)
+
+<use create_db_succes.png>
+Package pdftex.def Info: create_db_succes.png used on input line 168.
+(pdftex.def)             Requested size: 226.34506pt x 90.33727pt.
+ <parser_ex.png, id=53, 459.7175pt x 385.44pt>
+File: parser_ex.png Graphic file (type png)
+
+<use parser_ex.png>
+Package pdftex.def Info: parser_ex.png used on input line 171.
+(pdftex.def)             Requested size: 229.85818pt x 192.71953pt.
+
+Overfull \hbox (7.30283pt too wide) in paragraph at lines 170--173
+[]\OT1/cmr/m/n/12 Ensuite nous al-lons ex^^Secuter le fi-chier "par-ser.php". V
+oici un pe-tit exemple : 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--173
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--177
+
+ []
+
+[12 <./create_db_succes.png> <./parser_ex.png>] [13] (./RapportLaTex.aux) ) 
 Here is how much of TeX's memory you used:
- 4406 strings out of 493089
- 64424 string characters out of 6134843
- 141663 words of memory out of 5000000
- 7852 multiletter control sequences out of 15000+600000
+ 4723 strings out of 493089
+ 67304 string characters out of 6134842
+ 189679 words of memory out of 5000000
+ 8155 multiletter control sequences out of 15000+600000
  9155 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,32p,840b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmti12.pfb>
-Output written on RapportLaTex.pdf (5 pages, 327623 bytes).
+ 37i,6n,32p,2715b,1554s stack positions out of 5000i,500n,10000p,200000b,80000s
+</us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on RapportLaTex.pdf (13 pages, 392256 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 102 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

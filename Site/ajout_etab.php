@@ -101,7 +101,7 @@ Released   : 20130902
         	$typeEta = $_POST['type'];
         	if (empty($nameEta) or empty($street) or empty($num) or empty($zip) or empty($city) or empty($long) or empty($lat) or empty($tel) or empty($typeEta)) {
         		echo '<script language="javascript">';
-                echo 'alert("Something missing !")';
+                echo 'alert("Il manque quelque chose !")';
                 echo '</script>';
 
         	}

@@ -12,7 +12,7 @@
             Mot de passe : <input type="password" name="password"/><br/>
             <div class="button">
             <input type="submit" name="connexion" value="Connexion"/>
-            <input type="submit" name="register" value="Register"/>
+            <input type="submit" name="register" value="Enregistrer"/>
             <div>
         </form>
         <div>
@@ -25,7 +25,7 @@
 
             if (empty($pseudo) or empty($password)) {
                 echo '<script language="javascript">';
-                echo 'alert("login or password empty !")';
+                echo 'alert("Il manque quelque chose!")';
                 echo '</script>';
             }
             else {
@@ -36,7 +36,7 @@
                     $result=$stmt->fetch();
                     if ($result==""){
                         echo '<script language="javascript">';
-                        echo 'alert("login or password wrong !")';
+                        echo 'alert("Il ya une erreur quelque part!")';
                         echo '</script>';
                     }
                     $clientID=$result[0];

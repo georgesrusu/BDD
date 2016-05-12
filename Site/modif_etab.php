@@ -148,7 +148,7 @@ Released   : 20130902
  			try{
  				if (empty($_POST['ID'])) {
         			echo '<script language="javascript">';
-                	echo 'alert("ID is missing !")';
+                	echo 'alert("Il faut l\'ID!")';
                 	echo '</script>';
         		}
         		else {
@@ -166,7 +166,7 @@ Released   : 20130902
            	 		}
            	 		else{
 						echo '<script language="javascript">';
-                		echo 'alert("ID doesn\'t exist !")';
+                		echo 'alert("l\'ID n\'existe pas!")';
                 		echo '</script>';
            	 		}
            	 	}

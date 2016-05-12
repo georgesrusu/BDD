@@ -28,7 +28,7 @@ session_start();
             if ($password!=$password2){
 
                 echo '<script language="javascript">';
-                echo 'alert("Password not matching!")';
+                echo 'alert("Les mot de passe ne se resemble pas!")';
                 echo '</script>';
             }
             else{
