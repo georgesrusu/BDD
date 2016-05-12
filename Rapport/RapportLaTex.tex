@@ -189,16 +189,59 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 \par Pendant que le parser s'exécute on peut très bien regarder dans la base de donne qui va progressivement se remplir avec nos établissement. Une fois celle ci fini on peut passer à l'interface graphique.\\
 \par Nous arrivons à notre plateforme. Nous arrivons sur notre page de garde. Ici on va se connecter, pour cela il suffit d'aller dans la section "connexion" et une page avec un nom d'utilisateur et un mot de passe s'afficher. Si on a pas d'utilisateur on va en créer un, pour cela il y a le bouton création de compte. La création de compte se passe exactement comme pour une connexion, le client devra choisir un identifiant,un mot de passe et donner son adresse mail. Une fois connecté on va se retrouver sur la page d'accueil et on peut commencer la démo. Il faut tout de meme noter que pour voir les établissement il ne faut pas être nécessairement connecté. Voici ce que ça donne jusqu'ici:\\
 
-\centerline{\includegraphics[scale=0.3]{acceuil.png}}
+\centerline{\includegraphics[scale=0.3]{acceuil.png}}\hfill 
 
-\par Nous allons maintenant essayer le moteur de recherche, nous allons rechercher les établissement qui sont des bar. Voyons ce que ça donne.
-Pour la démonstration, on va se déconnecter et se connecter avec un autre utilisateur qui sera admin pour pouvoir montrer quelque fonctionnalité
+\par Nous allons maintenant essayer le moteur de recherche, nous allons rechercher les établissement qui sont des bar. Voyons ce que ça donne:\\
 
+\centerline{\includegraphics[scale=0.3]{recherche.png}}\hfill 
+
+Pour chaque résultat si on clique sur le lien "Plus de détails" on va arriver sur la page de présentation d'un établissement. Regardons :\\
+
+\centerline{\includegraphics[scale=0.3]{exemple.png}}\hfill 
+C'est aussi sur cette page que le client va pouvoir commenter et apposer un tag tout en respectant les contraintes vu plus haut. Voici un exemple de commentaire:\\
+
+\centerline{\includegraphics[scale=0.3]{commentaire.png}}\hfill 
+
+Voici un exemple de tag:\\
+
+\centerline{\includegraphics[scale=0.3]{tag.png}}\hfill 
+On va avancer et on va arriver à la page du profil de l'identifiant, voici une page d'un utilisateur et d'un admin:\\
+\centerline{\includegraphics[scale=0.3]{utilisateur.png}}\hfill \break
+
+\centerline{\includegraphics[scale=0.3]{admin.png}}\hfill 
+
+Comme vous pouvez le voir l'admin qui est dans notre exemple Boris peut ajouter, modifier et supprimer des établissements tandis qu'un utilisateur ne détient pas ce pouvoir.
+\par Voyons comment se passe l'ajout d'un établissement:\\
+
+\centerline{\includegraphics[scale=0.3]{etab1.png}}\hfill
+
+Une fois cette première étape effectué, nous arrivons sur cette page :\\
+
+\centerline{\includegraphics[scale=0.3]{etab2.png}}\hfill
+
+\par Passons maintenant à la modification d'un établissement:\\
+
+\centerline{\includegraphics[scale=0.3]{modif1.png}}\hfill
+Il faut préciser que l'admin peut voit tout les établissement existant dans la base de donne et en choisissant un id , il peut modifier les colonnes qu'il désire de l'établissement correspondant. Même principe que pour l'ajout, nous arrivons sur une autre page :\\
+
+\centerline{\includegraphics[scale=0.3]{modif2.png}}\hfill
+
+Encore une fois l'admin peut voir les caractéristique de l'établissement et peux ou non modifier certaine information.
+\par La suppression se fait avec le même principe, la seule différence c'est que l'admin n'a qu'une seule étape, le choix de l'établissement à supprimer qui se fait comme pour la modification grâce à un id.
+
+Pour terminer notre bref démonstration, la page des requêtes :\\
+
+\centerline{\includegraphics[scale=0.3]{requet.png}}\hfill
+
+Cette page a été spécialement conçue pour la démonstration des requêtes SQL demandées.
+
+\section{Fonctionnalité implémenté}
+\par Comme fonctionnalité dans la page d'accueil un petit affichage des dernier établissement créer, dans la page de présentation de chaque établissement nous avons la carte de localisation, les scores affiché avec des étoiles. Le client a la possibilité de changer sont mot de passe ainsi que son email. En ce qui concerne l'historique de l'activité d'un utilisateur, sont historique reprend les commentaire dans l'orde du plus récent vers le plus ancien et aussi l'historique des tag apposé.
 \section{Explication et justification de nos choix}
  \par Nous avons choisi mysql tout simplement parce que nous l'avons déjà tous les deux. Nous avons choisi de créer une plateforme web parce que cela convient au mieux au projet.
  Pour le serveur mysql nous avons utilise une "raspberry pie" sur laquelle tourne le serveur mysql. Nous pouvons l'accéder à distance grâce à un vpn. En ce qui concerne l'interface graphique de notre plateforme, nous ne nous sommes pas trop attardé la dessus puisque cela sort du cadre de ce cours, nous avons donc opter pour le choix d'un template que nous avons quelque peu modifié à notre sauce. Comme langage intermédiaire entre l'interface graphique (html et css) nous avons choisi le php puisque nous le connaission quelque peu.\\
 
-
+section{Fonctionnalité implementé}
 \end{document}
 
 
