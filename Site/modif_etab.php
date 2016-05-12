@@ -152,13 +152,11 @@ Released   : 20130902
                 	echo '</script>';
         		}
         		else {
-        			echo $_POST['ID'];
  					$sql = 'SELECT type FROM Etablissement WHERE ID="'.$_POST['ID'].'"';
             		$stmt = $conn->prepare($sql); 
             		$stmt->execute();
             		$result=$stmt->fetch();
             		$type=$result[0];
-            		echo $type;
             		if ($type!=""){
             			$table=array($_POST['ID'],$_POST['name'],$_POST['street'],$_POST['num'],$_POST['zip'],$_POST['city'],$_POST['longitude'],$_POST['latitude'],$_POST['tel'],$_POST['site'],$type);
             			$url = urlencode(serialize($table));
