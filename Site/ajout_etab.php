@@ -71,8 +71,8 @@ Released   : 20130902
             Rue : <input type="text" name="street" placeholder="Champ obligatoire"/><br/>
             Numero : <input type="number" min="0" name="num" placeholder="Champ obligatoire"/><br/>
             Code Postal : <input type="number" min="0" name="zip" placeholder="Champ obligatoire"/><br/>
-            Localite : <input type="text" name="city" placeholder="Champ obligatoire"/><br/>
-            Longitude : <input type="number" min="0" name="longitude" placeholder="Champ obligatoire"/><br/>
+            Localite : <input type="text" step="any" name="city" placeholder="Champ obligatoire"/><br/>
+            Longitude : <input type="number" step="any" min="0" name="longitude" placeholder="Champ obligatoire"/><br/>
             Latitude : <input type="number" min="0" name="latitude" placeholder="Champ obligatoire"/><br/>
             Telephone : <input type="text" name="tel" placeholder="Champ obligatoire"/><br/>
             Site : <input type="text" name="site"/><br/>

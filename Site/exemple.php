@@ -386,7 +386,7 @@ Released   : 20130902
 					//echo '</form>';
 
 					//echo '<form name="labelAutre" method="post" action="exemple.php?etablissementID='.$etablissementID.'">';
-					echo '</br><input type="text" name="labelText" placeholder="Label">';
+					echo '</br><input type="text" name="labelText" placeholder="Nouveau label">';
 					echo '<div class="button">';
 					echo '<input type="submit" name="labelAutreSend" value="Envoyer">';
 					echo '</div></form>';
