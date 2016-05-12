@@ -76,9 +76,10 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 
 	$b \leftarrow \sigma_{clientID \ IN (a)\wedge score >= 4}(Commentaire)$
 
-	$c \leftarrow \sigma_{etablissementID \ IN (b) \wedge \#Etablissement >= 3 }$
+	$c \leftarrow \sigma_{etablissementID \ IN (b) \wedge \#Etablissement >= 3 }(Commentaire)$
 
 	$d \leftarrow \sigma_{ID \ IN (c)}(Utilisateur)$
+
 \subsection{R2}
 	$a \leftarrow \pi (\sigma_{Identifiant="Brenda"}(Utilisateur))$
 
@@ -92,12 +93,12 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 
 	$f \leftarrow e \div c$
 
-	$g \leftarrow \pi_{Nom}(f \bowtie_{clientID=ID} Utilisateur)$
+	$g \leftarrow \pi_{Nom}(f \bowtie_{etablissementID=ID} Etablissement)$
 
 \subsection{R3}
-	$a \leftarrow \pi_{etablissementID}(Etablissement)$
+	$a \leftarrow \pi_{ID}(Etablissement)$
 
-	$b \leftarrow \sigma_{etablissemntID \ IN \ (a) \wedge \#Etablissement \ <= \ 1}(Commentaire)$
+	$b \leftarrow \sigma_{etablissemntID \ NOT \ IN \ (a) \ OR \ \# clientID \ <= \ 1}(Commentaire)$
 
 \subsection{R4}
 	$a \leftarrow \pi_{etablissementID, clientID}(ModificationAdmin)$
@@ -111,6 +112,10 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 	$e \leftarrow a - d$
 
 	$f \leftarrow \pi_{identitifant}(e \bowtie_{clientID=ID} Utilisateur)$
+
+\section{Tuple relationnel}
+\subsection{R1}
+	$\{ u.Nom | Utilisateur(u) \wedge Commentaire(c) \wedge u.ID = c.clientID \wedge c.etablissementID >= 3 \wedge c.clientID = u.ID \wedge u.identifiant = "Brenda" \wedge c.score >= 4 \}$
 
 \end{document}
 
