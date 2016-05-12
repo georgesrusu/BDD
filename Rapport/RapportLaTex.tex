@@ -170,8 +170,12 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 \par Ensuite nous allons exécuter le fichier "parser.php". Voici un petit exemple :\\
 \centerline{\includegraphics[scale=0.5]{parser_ex.png}}
 \par Pendant que le parser s'exécute on peut très bien regarder dans la base de donne qui va progressivement se remplir avec nos établissement. Une fois celle ci fini on peut passer à l'interface graphique.\\
-\par Nous arrivons à notre plateforme. Nous arrivons sur notre page de garde. Ici on va se connecter, pour cela il suffit d'aller dans la section "connexion" et une page avec un nom d'utilisateur et un mot de passe s'afficher. Si on a pas d'utilisateur on va en créer un, pour cela il y a le bouton création de compte. La création de compte se passe exactement comme pour une connexion, le client devra choisir un identifiant,un mot de passe et donner son adresse mail. Une fois connecté on va se retrouver sur la page d'accueil et on peut commencer la démo. Il faut tout de meme noter que pour voir les établissement il ne faut pas être nécessairement connecté. Voici ce que ça donne jusqu'ici:
-\centerline{\includegraphics[scale=0.5]{create_db_succes.png}}
+\par Nous arrivons à notre plateforme. Nous arrivons sur notre page de garde. Ici on va se connecter, pour cela il suffit d'aller dans la section "connexion" et une page avec un nom d'utilisateur et un mot de passe s'afficher. Si on a pas d'utilisateur on va en créer un, pour cela il y a le bouton création de compte. La création de compte se passe exactement comme pour une connexion, le client devra choisir un identifiant,un mot de passe et donner son adresse mail. Une fois connecté on va se retrouver sur la page d'accueil et on peut commencer la démo. Il faut tout de meme noter que pour voir les établissement il ne faut pas être nécessairement connecté. Voici ce que ça donne jusqu'ici:\\
+
+\centerline{\includegraphics[scale=0.3]{acceuil.png}}
+
+\par Nous allons maintenant essayer le moteur de recherche, nous allons rechercher les établissement qui sont des bar. Voyons ce que ça donne.
+Pour la démonstration, on va se déconnecter et se connecter avec un autre utilisateur qui sera admin pour pouvoir montrer quelque fonctionnalité
 
 \section{Explication et justification de nos choix}
  \par Nous avons choisi mysql tout simplement parce que nous l'avons déjà tous les deux. Nous avons choisi de créer une plateforme web parce que cela convient au mieux au projet.
