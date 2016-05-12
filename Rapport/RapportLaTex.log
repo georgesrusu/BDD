@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  12 MAY 2016 16:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  12 MAY 2016 22:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -306,16 +306,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--69
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
 
  []
 
-[5] (./RapportLaTex.aux) ) 
+
+Overfull \hbox (74.1803pt too wide) in paragraph at lines 118--119
+[]$\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 u:Nom\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 U
+tilisateur\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12
+ ^ \OML/cmm/m/it/12 Commentaire\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 c\OT1/cmr/m/n/
+12 ) \OMS/cmsy/m/n/12 ^ \OML/cmm/m/it/12 u:ID \OT1/cmr/m/n/12 = \OML/cmm/m/it/1
+2 c:clientID \OMS/cmsy/m/n/12 ^ \OML/cmm/m/it/12 c:etablissementID >\OT1/cmr/m/
+n/12 =
+ []
+
+[5]
+Overfull \hbox (6.06984pt too wide) in paragraph at lines 124--125
+[]$\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 e:Nom\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 E
+tablissement\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/
+12 ^ 9   \OML/cmm/m/it/12 =c[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Commentaire\OT1
+/cmr/m/n/12 (\OML/cmm/m/it/12 c[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^ \OML/cmm/
+m/it/12 c[]:etablissementID \OT1/cmr/m/n/12 =
+ []
+
+[6] (./RapportLaTex.aux) ) 
 Here is how much of TeX's memory you used:
- 4406 strings out of 493089
- 64424 string characters out of 6134843
- 141663 words of memory out of 5000000
- 7852 multiletter control sequences out of 15000+600000
+ 4408 strings out of 493089
+ 64447 string characters out of 6134843
+ 142663 words of memory out of 5000000
+ 7854 multiletter control sequences out of 15000+600000
  9155 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,6n,32p,840b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -329,10 +348,10 @@ ts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmti12.pfb>
-Output written on RapportLaTex.pdf (5 pages, 327623 bytes).
+Output written on RapportLaTex.pdf (6 pages, 332467 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -117,6 +117,15 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 \subsection{R1}
 	$\{ u.Nom | Utilisateur(u) \wedge Commentaire(c) \wedge u.ID = c.clientID \wedge c.etablissementID >= 3 \wedge c.clientID = u.ID \wedge u.identifiant = "Brenda" \wedge c.score >= 4 \}$
 
+\subsection{R2}
+	$\{ e.Nom | Etablissement(e) \wedge \forall u \ Utilisateur(u) \rightarrow (\exists c (Commentaire(c) \wedge e.ID = c.etablissementID \wedge c.clientID = u.ID \wedge c.score > 3 \wedge u.Nom = "Brenda"))\}$
+
+\subsection{R3}
+	$\{ e.Nom | Etablissement(e) \wedge \exists \! \! \! / c_1 (Commentaire(c_1) \wedge c_1.etablissementID = e.ID) \vee \exists! c_2(Commentaire (c_2) \wedge c_2.etablissemendID = e.ID) \}$
+
+\subsection{R4}
+	$\{ u.Nom | Utilisateur(u) \wedge \exists e \exists \! \! \! / c (Etablissement(e) \wedge Commentaire(c) \wedge c.clientID = u.ID \wedge c.etablissementID = e.ID) \}$
+
 \end{document}
 
 
