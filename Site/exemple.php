@@ -27,50 +27,7 @@ Released   : 20130902
 
 <?php
 	include("../connect.php");
-	//try{
 		$ID = $_GET['etablissementID'];
-		/*
-		if ($typeEtablissement == "Restaurant") {
-			$stmt = $conn->prepare("SELECT * FROM Restaurant"); 
-			$stmt->execute();
-
-			$restaurantList = $stmt->fetchall();
-
-			for ($rest=0; $rest < sizeof($restaurantList); $rest++) { 
-				if ($ID == $restaurantList[$rest][0]) {
-					$indexTable = $rest;
-				}
-			}
-		}
-		elseif ($typeEtablissement == "Bar") {
-			$stmt = $conn->prepare("SELECT * FROM Bar"); 
-			$stmt->execute();
-
-			$restaurantList = $stmt->fetchall();
-
-			for ($bar=0; $bar < sizeof($restaurantList); $bar++) { 
-				if ($ID == $restaurantList[$bar][0]) {
-					$indexTable = $bar;
-				}
-			}
-		}
-
-		elseif ($typeEtablissement == "Hotel") {
-			$stmt = $conn->prepare("SELECT * FROM Hotel"); 
-			$stmt->execute();
-
-			$restaurantList = $stmt->fetchall();
-
-			for ($hot=0; $hot < sizeof($restaurantList); $hot++) { 
-				if ($ID == $restaurantList[$i][$hot]) {
-					$indexTable = $hot;
-				}
-			}
-		}*/
-	//}
-	//catch(PDOException $e) {
-      //  echo "Error: " . $e->getMessage()."<br/>";
-    //}
 
 	function closedPrint($day, $id) {
 		if ($id == "0") {
@@ -104,19 +61,6 @@ Released   : 20130902
 		}
 	}
 ?>
-
-<!--<script src="http://maps.googleapis.com/maps/api/js"></script>
-<script>
-function initialize() {
-  var mapProp = {
-    center:new google.maps.LatLng(<?=50.8133?>,<?=4.38157?>),
-    zoom:18,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-google.maps.event.addDomListener(window, 'load', initialize());
-</script>-->
 
 </head>
 <body>
@@ -437,14 +381,14 @@ google.maps.event.addDomListener(window, 'load', initialize());
 					echo '</select>';
 					echo '
 					<div class="button">
-            		<input type="submit" name="envoyer" value="Submit"/>
+            		<input type="submit" name="envoyer" value="Envoyer"/>
       				</div>';
 					//echo '</form>';
 
 					//echo '<form name="labelAutre" method="post" action="exemple.php?etablissementID='.$etablissementID.'">';
 					echo '</br><input type="text" name="labelText" placeholder="Label">';
 					echo '<div class="button">';
-					echo '<input type="submit" name="labelAutreSend" value="Send">';
+					echo '<input type="submit" name="labelAutreSend" value="Envoyer">';
 					echo '</div></form>';
 				}
 				else{

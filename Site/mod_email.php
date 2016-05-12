@@ -28,7 +28,7 @@ session_start();
             if ($email!=$email2){
 
                 echo '<script language="javascript">';
-                echo 'alert("Email not matching!")';
+                echo 'alert("Les emails ne se resemble pas!")';
                 echo '</script>';
             }
             else{

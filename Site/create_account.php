@@ -11,7 +11,7 @@
             Password : <input type="password" name="password"/><br/>
             email : <input type="email" name="email"/> <br/>    
             <div class="button">
-                <input type="submit" name="register" value="Register"/>
+                <input type="submit" name="register" value="Enregister"/>
             <div>
         </form>
         <div>
@@ -25,7 +25,7 @@
 
             if (empty($pseudo) or empty($password) or empty($email)) {
                 echo '<script language="javascript">';
-                echo 'alert("login, password or email empty !")';
+                echo 'alert("Il manque quelque chose!")';
                 echo '</script>';
             }
             else {
@@ -37,7 +37,7 @@
                     $result=$stmt->fetch();
                     if ($result>0){
                         echo '<script language="javascript">';
-                        echo 'alert("login exist !")';
+                        echo 'alert("L\'identifiant existe deja!")';
                         echo '</script>';
                     }
                     else{
@@ -49,7 +49,7 @@
                     $result=$stmt->fetch();
                     if ($result==""){
                         echo '<script language="javascript">';
-                        echo 'alert("Something went wrong. We are sorry. Please try again later.")';
+                        echo 'alert("Quelque chose c\'est mal passé! Desole")';
                         echo '</script>';
                         }
                     $clientID=$result[0];

@@ -191,7 +191,7 @@ Released   : 20130902
 
                 if (empty($price) or empty($banquet)) {
                     echo '<script language="javascript">';
-                    echo 'alert("Something missing !")';
+                    echo 'alert("Il manque quelque chose!")';
                     echo '</script>';
                 }
                 else {
@@ -210,7 +210,7 @@ Released   : 20130902
 
                 if (empty($price) or empty($bedRooms) or empty($stars)) {
                     echo '<script language="javascript">';
-                    echo 'alert("Something missing !")';
+                    echo 'alert("Il manque quelque chose!")';
                     echo '</script>';
                 }
                 else {

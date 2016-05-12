@@ -134,7 +134,7 @@ Released   : 20130902
  		if(isset($_POST['del'])){
             if (empty($_POST['ID'])) {
                 echo '<script language="javascript">';
-                echo 'alert("ID is missing !")';
+                echo 'alert("Il faut l\'ID !")';
                 echo '</script>';
             }
             else {
@@ -158,7 +158,7 @@ Released   : 20130902
                     }
                     else{
                         echo '<script language="javascript">';
-                        echo 'alert("ID doesn\'t exist !")';
+                        echo 'alert("L\'ID n\'existe pas!")';
                         echo '</script>';
                     }
                     echo '<meta http-equiv="Refresh" content="0;URL=./suppr_etab.php?action=deleted">';

@@ -5,7 +5,7 @@ SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM Commentair
 
 R2:
 
-select nom from Etablissement where ID in(select distinct etablissementID from Commentaire where clientID in (select distinct clientID from Commentaire where etablissementID in(SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) group by clientID having count(distinct etablissementID)>=(SELECT count(etablissementID) FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4)));
+SELECT nom FROM Etablissement WHERE ID IN(SELECT DISTINCT etablissementID FROM Commentaire WHERE clientID IN (SELECT DISTINCT clientID FROM Commentaire WHERE etablissementID IN(SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) group by clientID having count(DISTINCT etablissementID)>=(SELECT count(etablissementID) FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4)))
 
 R3:
 

@@ -8,31 +8,31 @@
 \usepackage{enumitem}
 \title{Rapport : Projet  - Base de donnée}
 \author{Maximilien ROMAIN (000411776) - George RUSU (000407965)}
-\date{\today}
+\date{Le 8 mai 2016}
 
 \begin{document}
 
 \maketitle
+\newpage
 \tableofcontents
 \newpage
 
 \section{Diagramme}
 	\begin{flushleft}
-		\includegraphics[scale=0.6]{BDD-UML-2Final.pdf}
+		\centerline{\includegraphics[scale=0.7]{UML_FINAL.png}}
 	\end{flushleft}
 
 \subsection{Contraintes :}
 
 \begin{itemize}
-	\item Un client peut etre un admin ou bien un utilisateur
-	\item Un client ne peut pas commenter un même établissement une même date
-	\item La date d'enregsitrement d'un utilisateur doit etre inferieure a la date de chaque commentaire
-	\item Un client peut faire un commentaire sans choisir de label(tag)
-	\item Un commentaire possede un ID unique et doit contenier l'ID du client, l'ID du label si il y en a un, l'ID de l'etablissement ainsi que le texte et le score.
-	\item Un client ne peut pas labeliser plusieurs fois un même établissement avec un même label
+	\item Un client peut être un admin ou bien un utilisateur.
+	\item Un client ne peut pas commenter un même établissement une même date.
+	\item La date d'enregistrement d'un utilisateur doit être inférieure a la date de chaque commentaire qu'il fait.
+	\item Un client peut faire soit un commentaire soit apposer un label(tag) qu'il crée ou qu'il invente.
+	\item Un commentaire doit contenir l'ID du client, l'ID de l'établissement ainsi que le texte et le score.
+	\item Un label doit contenir l'ID du client, l'ID de l'établissement ainsi que le label(tag).
+	\item Un client ne peut pas labeliser plusieurs fois un même établissement avec un même label.
 \end{itemize}
-\newpage
-
 \section{Model Relationnel}
 \begin{itemize}
 	\item Etablissement(ID, Nom, Adresse, AdRue, AdNuméro, AdCodePostal, AdLocalité, Coordonnée, CoodLongitude, CoordLatitude, NumTelephone, \textit{SiteWeb})
@@ -42,36 +42,80 @@
 	\\ID référence Etablissement.ID
 	\item Hotel(ID, NbrEtoiles, NbrChambres, IndicePrix)
 	\\ID référence Etablissement.ID
-	\item Client(ID, Identifiant, AdresseMail, MotDePasse, DateCréation)
-	\item Utilisateur(ID)
-	\\ID référence Client.ID
+	\item Utilisateur(ID, Identifiant, AdresseMail, MotDePasse, DateCréation)
 	\item Admin(ID)
-	\\ID référence Client.ID
-	\item Modification(AdminID, EtablissementID, TypeModif, Date)
-	\\AdminID référence Client.ID; EtablissementID référence Etablissement.ID
-	\item Commentaire(ID, Score, Texte, Date, EtablissementID, UtilisateurID)
+	\\ID référence Utilisateur.ID
+	\item ModificationAdmin(AdminID, EtablissementID, Date)
+	\\AdminID référence Utilisateur.ID; EtablissementID référence Etablissement.ID
+	\item Commentaire(Score, Texte, Date, EtablissementID, UtilisateurID)
 	\\EtablissementID référence Etablissement.ID; UtilisateurID référence Client.ID
-	\item Tag(ID, IDLabel, EtablissementID, UtilisateurID, IDListeTag) 
-	\\EtablissementID référence Etablissement.ID; UtilisateurID référence Client.ID; IDLabel référence ListeTag.ID
-	\item ListTag(ID, countUser, text)
-	\item ClientCommentaire(ID, EtablissementID)
-	\\ID référence Client.ID ; EtablissementID référence Commentaire.EtablissementID
-
+	\item Label(EtablissementID, UtilisateurID, Tag) 
+	\\EtablissementID référence Etablissement.ID; UtilisateurID référence Utilisateur.ID;
 \end{itemize}
 \newpage
 
 \section{Choix d'implémentation}
-Pour expliquer notre schema UML plus haut, nous avons choisi l'implementation suivante: lorsqu'on voudra connaître les informations d'un établissement en particulière (commentaires, tags , auteur du commentaire, auteur du tag, etc) il nous suffira de retrouver son id correspondant et de regarder avec cet id dans les tables Commentaire et Tag. Idem, pour un utilisateur, si on souhaite savoir ce qu'il a commenté. Nous pouvons donc dire que nos deux tables de bases sont Commentaire et Tag. \\
+\par Pour expliquer notre schéma UML plus haut, nous avons choisi l'implémentation suivante: lorsqu'on voudra connaître les informations d'un établissement en particulière (commentaires, tags , auteur du commentaire, auteur du tag, etc) il nous suffira de retrouver son id correspondant et de regarder avec cet id dans les tables Commentaire ,Label et ModificationAdmin. Idem, pour un utilisateur, si on souhaite savoir ce qu'il a commenté. Nous pouvons donc dire que nos deux tables de bases sont Commentaire et Label. \\
 
-En ce qui concerne l'ajout d'un label, nous avons decidé d'avoir une table ("ListeTag") qui va stocker tous les tag/label deja crée avec chacun leur id et chaque label qui caracterisera un etablissement dans la table Tag.\\
+\par En ce qui concerne le distinction entre utilisateur et admin, nous avons une colonne, isAdmin qui grâce à un booléen ou bien à un int (0 ou 1) nous permet de savoir si le client est admin ou bien un simple utilisateur. L'héritage présent dans le schéma permet donc de voir ce qu'un admin peut faire en plus qu'un client standard, c'est à dire creer un établissement.\\ 
 
-En ce qui concerne le disctinction entre utilisateur et admin, nous avons une colonne, isAdmin qui grace a un boolean ou bien a un int (0 ou 1) nous permet de savoir si le client est admin ou bien un simple utilisateur. L'héritage présent dans le schéma permet donc de voir ce qu'un admin peut faire en plus qu'un client standard. C'est même opération supplémentaire que peut faire un admin sont stocké dans une nouvelle table (Modification) qui va permettre de récupérer chaque modification d'un établissement, c'est à dire sont type de modification (Création, suppression ou modification) ainsi que sa date, l'admin qui a opéré et l'établissement concerné.\\
-
+\par Les langages utilisé sont: le "html" et "css3" ainsi que le "php" et pour ce qui concerne le sql nous avons choisi le "mysql".
 \section{Installation}
-Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la base de données qui contiendra toutes les informations qui seront utilisées par l'application.  Pour ce faire le premier fichier à éxécuter est Create-DB.php, en vérifiant que le fichier header\_connect.php se connectera bien au bon serveur.  Une fois fait la nouvelle base de donnée Eureka à été crée ainsi que toutes ses tables.  AFIN de ne pas commencer avec une application vide, nous allons parsons des informations se trouvant dans des fichiers XML.  Pour ce faire, nous éxécutons parser.php, qui comme l'indique son nom s'occupe de parser les fichiers XML et de remplir la base de donnée avec les données obtenues.  L'application est maintenant bien installé et il est possible désormais de l'utiliser correctement.
+\par Pour installer notre application, il est d'abord nécéssaire de mettre en place la base de données qui contiendra toutes les informations qui seront utilisées. Pour ce faire le premier fichier à exécuter une fois que la connexion à un serveur mysql est faite, est "Create-DB.php", en vérifiant que le fichier header\_connect.php se connectera bien.  Une fois cela fait, la base de donnée Eureka à été crée ainsi que toutes ses tables.  Afin de ne pas commencer avec une application vide, nous allons parser des fichiers XML qui vont remplir notre base de donné en respectant les contrainte cité plus haut(date des utilisateurs). L'application est maintenant bien installé et il est possible désormais de l'utiliser correctement. Notre application est un site, il est donc maintenant possible de lancer la page "index.php" et nous voila dans notre application.
+\section{Script SQL DDL}
+\par Voici le fichier "Create-DB.php" comme demandé:
+\lstinputlisting[basicstyle=\tiny]{../Create-DB.php}
 
 \section{Requetes}
-\subsection{R1}
+\subsection{En SQL}
+\subsubsection{R1}
+\begin{lstlisting}
+SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM 
+Commentaire WHERE etablissementID IN (SELECT etablissementID FROM 
+Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE 
+identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING 
+count(etablissementID)>=3)
+\end{lstlisting}
+\subsubsection{R2}
+\begin{lstlisting}
+SELECT nom FROM Etablissement WHERE ID IN(SELECT DISTINCT 
+etablissementID FROM Commentaire WHERE clientID IN (SELECT 
+DISTINCT clientID FROM Commentaire WHERE etablissementID IN
+(SELECT etablissementID FROM Commentaire WHERE clientID IN 
+(SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND
+ score>=4) group by clientID having count(DISTINCT 
+ etablissementID)>=(SELECT count(etablissementID) FROM Commentaire 
+ WHERE clientID IN (SELECT ID FROM Utilisateur WHERE
+  identifiant="Brenda") 
+ AND score>=4)))
+\end{lstlisting}
+\subsubsection{R3}
+\begin{lstlisting}
+SELECT DISTINCT e.nom FROM Etablissement e WHERE NOT EXISTS 
+(SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS 
+(SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID
+ HAVING count(*)<=1)
+\end{lstlisting}
+\subsubsection{R4}
+\begin{lstlisting}
+SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT m.adminID FROM 
+ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire WHERE
+ clientID=m.adminID AND etablissementID=m.etablissementID))
+\end{lstlisting}
+\subsubsection{R5}
+\begin{lstlisting}
+SELECT nom FROM Etablissement e,Commentaire c WHERE 
+e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3
+ ORDER BY avg(c.score) DESC
+\end{lstlisting}
+\subsubsection{R6}
+\begin{lstlisting}
+SELECT l.texte FROM Label l,Commentaire c WHERE 
+l.etablissementID=c.etablissementID GROUP BY texte HAVING 
+count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
+\end{lstlisting}
+\subsection{Algèbre relationnelle}
+\subsubsection{R1}
 	$a \leftarrow \sigma_{identifiant="Brenda"}(Utilisateur)$
 
 	$b \leftarrow \sigma_{clientID \ IN (a)\wedge score >= 4}(Commentaire)$
@@ -80,7 +124,8 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 
 	$d \leftarrow \sigma_{ID \ IN (c)}(Utilisateur)$
 
-\subsection{R2}
+\subsubsection{R2}
+
 	$a \leftarrow \pi (\sigma_{Identifiant="Brenda"}(Utilisateur))$
 
 	$b \leftarrow a \ast Commentaire$
@@ -95,12 +140,13 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 
 	$g \leftarrow \pi_{Nom}(f \bowtie_{etablissementID=ID} Etablissement)$
 
-\subsection{R3}
+\subsubsection{R3}
 	$a \leftarrow \pi_{ID}(Etablissement)$
+
 
 	$b \leftarrow \sigma_{etablissemntID \ NOT \ IN \ (a) \ OR \ \# clientID \ <= \ 1}(Commentaire)$
 
-\subsection{R4}
+\subsubsection{R4}
 	$a \leftarrow \pi_{etablissementID, clientID}(ModificationAdmin)$
 
 	$b \leftarrow \pi_{etablissementID}(Commentaire)$
@@ -113,18 +159,41 @@ Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la 
 
 	$f \leftarrow \pi_{identitifant}(e \bowtie_{clientID=ID} Utilisateur)$
 
-\section{Tuple relationnel}
-\subsection{R1}
+\subsection{Calcul relationnel tuple}
+\subsubsection{R1}
 	$\{ u.Nom | Utilisateur(u) \wedge Commentaire(c) \wedge u.ID = c.clientID \wedge c.etablissementID >= 3 \wedge c.clientID = u.ID \wedge u.identifiant = "Brenda" \wedge c.score >= 4 \}$
 
-\subsection{R2}
+\subsubsection{R2}
 	$\{ e.Nom | Etablissement(e) \wedge \forall u \ Utilisateur(u) \rightarrow (\exists c (Commentaire(c) \wedge e.ID = c.etablissementID \wedge c.clientID = u.ID \wedge c.score > 3 \wedge u.Nom = "Brenda"))\}$
 
-\subsection{R3}
+\subsubsection{R3}
 	$\{ e.Nom | Etablissement(e) \wedge \exists \! \! \! / c_1 (Commentaire(c_1) \wedge c_1.etablissementID = e.ID) \vee \exists! c_2(Commentaire (c_2) \wedge c_2.etablissemendID = e.ID) \}$
 
-\subsection{R4}
+\subsubsection{R4}
 	$\{ u.Nom | Utilisateur(u) \wedge \exists e \exists \! \! \! / c (Etablissement(e) \wedge Commentaire(c) \wedge c.clientID = u.ID \wedge c.etablissementID = e.ID) \}$
+
+\section{Explication du fonctionnement de notre plateforme}
+\par Tout d'abord, commençons par la création de la base de donnée. Pour le script de création il n'y a rien de compliqué, ce ne sont que des requete d'insertion(on peut le voir à la section 5). Nous arrivons donc au parseur qui va commencer par le fichier "Restaurant.xml" et va le décomposer de manière à remplir la base de donne et ainsi de suite pour les fichier "Cafes.xml" et "Hotel.xml". Lors du traitement de celui-ci, les utilisateur vont être ajouté en fonction de leur activité. S' ils ont ajoute un établissement ils seront admin ou s' ils ont apposer un commentaire ou un label ils seront utilisateur. Ils faut biensur noter que si on s'aperçoit qu'un utilisateur a créer par la suite un établissement, il va devenir un admin. Pour un établissement c'est un peu plus complexe, on va d'abord insérer l'établissement dans la table Etablissement, et puis en fonction du type de celui ci, on va faire une insertion dans la table correspondante (Restaurant,Bar ou Hotel). Il faut tout de même ne pas oublier que chaque établissement est créer par un admin, cette création sera stockée dans la table ModificationAdmin ainsi que la date de création qui sera elle aussi déterminé depuis les fichier xml. Attention, à chaque fois qu'on fais une insertion dans la table ModificationAdmin on va regarder si la date de création est bien plus récente que la date de création de l'utilisateur, sinon on fait un swap des deux dates. Passons donc aux Commentaires et aux labels. Au fur et à mesure que le parseur rencontre des commentaires ou des tags, il va ajouter les utilisateurs s'ils ne sont pas déjà existant, insérer les commentaires et leur score dans la table Commentaire et les tags dans la table Label. Idem que pour la création des établissement, on va vérifier pour chaque commentaire si la date de celui ci est plus récente que celle de la création de l'utilisateur sinon l'échange aura lieu.\\
+
+\par Ensuite, l'interface graphique. Celle ci est très simple, elle contient une page de garde, un moteur de recherche, une page où on peut consulter notre profil si on est connecté et ensuite une page spécialement faite pour les requête demandé. Pour la page d'accueil, on peut voir les dernier établissement ajouté, pour chacun on peut le consulter, c'est à dire voir tous ce qui le défini (cfr. plus bas). La page du moteur de recherche nous permet de rechercher un établissement par le type, le nom, la commune et par un tag. Une recherche doit être au minimum composé par un de ces attribut si pas tous. Chaque combinaison est possible. Le résultat de la recherche sera affiché en dessous du moteur de recherche et pour chaque établissement nous allons pouvoir le consulter. Lors de la consultation de chaque établissement dans son contexte, on peut voir son nom ses caractéristique ainsi que sa localisation, les commentaire qui ont déjà été fait, une moyenne des score pour l'évaluer, les tags ainsi que leur poids et biensur c'est sur cette page qu'un utilisateur connecté pourra ajouter un commentaire et un tag. Nous arrivons donc à la page du profil, mais pour cela il faut bien être connecté et donc être membre (si pas membre il est possible de créer un compte). Le client peut modifier son mot de passe ainsi que son email, voir son historique d'activité qui est composé de commentaires et de tags, ainsi que pour chaque d'eux il peut les voir dans leur contexte, c'est a dire sur la page de présentation de l'établissement expliqué plus haut. Si l'utilisateur qui est connecte est aussi admin il a la possibilité d'ajouter un établissement, le modifier ou bien en supprimer un. L'ajout est très simple, l'admin doit compléter les champs nécessaire à la description d'un établissement et choisir le type et en fonction de ce type l'utilisateur sera dirigé vers une page avec les caractéristique spécifique de ce type d'établissement où il pourra finaliser l'ajout. Pour la modification le principe est le même, l'admin peut voir tous les établissement qui sont présent et grâce à l'id d'un établissement il peut modifier seulement les champs qu'il désire pour l'établissement choisi et une fois cela fait, grâce au type de l'établissement il sera dirigé vers une autre page pour modifier les caractéristique spécifique Nous arrivons donc à la suppression d'un établissement, sur cette page l'admin peut consulter tout les établissement qui sont présent dans la base de donne et grâce à un id il peut efface l'établissement correspondant à cet id. La dernière page qui est celle des requête est une page spécialement faite pour la démonstration des requêtes SQL demandées.\\
+
+\par Enfin, la base de notre site est la base de donné Eureka, c'est la que nous avons toute les informations. Nous ne stockons rien du cote client sauf les variable de session. Le fonctionnement de notre application est due aux variable de session et a l'url grâce au quel on peut changer de page et arriver sur celle désiré.
+
+\section{Demonstration}
+\par Nous allons supposer que la connexion avec le serveur mysql est déjà fonctionnelle. Nous allons donc creer la base de donne grace au script "Create-DB.php". Voici un output une fois que la base de donné a été créer avec succès:\\
+
+\centerline{\includegraphics[scale=0.5]{create_db_succes.png}}
+
+\par Ensuite nous allons exécuter le fichier "parser.php". Voici un petit exemple :\\
+\centerline{\includegraphics[scale=0.5]{parser_ex.png}}
+\par Pendant que le parser s'exécute on peut très bien regarder dans la base de donne qui va progressivement se remplir avec nos établissement. Une fois celle ci fini on peut passer à l'interface graphique.\\
+\par Nous arrivons à notre plateforme. Nous arrivons sur notre page de garde. Ici on va se connecter, pour cela il suffit d'aller dans la section "connexion" et une page avec un nom d'utilisateur et un mot de passe s'afficher. Si on a pas d'utilisateur on va en créer un, pour cela il y a le bouton création de compte. La création de compte se passe exactement comme pour une connexion, le client devra choisir un identifiant,un mot de passe et donner son adresse mail. Une fois connecté on va se retrouver sur la page d'accueil et on peut commencer la démo. Il faut tout de meme noter que pour voir les établissement il ne faut pas être nécessairement connecté. Voici ce que ça donne jusqu'ici:
+\centerline{\includegraphics[scale=0.5]{create_db_succes.png}}
+
+\section{Explication et justification de nos choix}
+ \par Nous avons choisi mysql tout simplement parce que nous l'avons déjà tous les deux. Nous avons choisi de créer une plateforme web parce que cela convient au mieux au projet.
+ Pour le serveur mysql nous avons utilise une "raspberry pie" sur laquelle tourne le serveur mysql. Nous pouvons l'accéder à distance grâce à un vpn. En ce qui concerne l'interface graphique de notre plateforme, nous ne nous sommes pas trop attardé la dessus puisque cela sort du cadre de ce cours, nous avons donc opter pour le choix d'un template que nous avons quelque peu modifié à notre sauce. Comme langage intermédiaire entre l'interface graphique (html et css) nous avons choisi le php puisque nous le connaission quelque peu.\\
+
 
 \end{document}
 

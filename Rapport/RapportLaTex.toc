@@ -1,16 +1,28 @@
 \select@language {french}
-\contentsline {section}{\numberline {1}Diagramme}{2}
-\contentsline {subsection}{\numberline {1.1}Contraintes :}{2}
-\contentsline {section}{\numberline {2}Model Relationnel}{3}
-\contentsline {section}{\numberline {3}Choix d'impl\'ementation}{4}
-\contentsline {section}{\numberline {4}Installation}{4}
-\contentsline {section}{\numberline {5}Requetes}{5}
-\contentsline {subsection}{\numberline {5.1}R1}{5}
-\contentsline {subsection}{\numberline {5.2}R2}{5}
-\contentsline {subsection}{\numberline {5.3}R3}{5}
-\contentsline {subsection}{\numberline {5.4}R4}{5}
-\contentsline {section}{\numberline {6}Tuple relationnel}{6}
-\contentsline {subsection}{\numberline {6.1}R1}{6}
-\contentsline {subsection}{\numberline {6.2}R2}{6}
-\contentsline {subsection}{\numberline {6.3}R3}{6}
-\contentsline {subsection}{\numberline {6.4}R4}{6}
+\contentsline {section}{\numberline {1}Diagramme}{3}
+\contentsline {subsection}{\numberline {1.1}Contraintes :}{3}
+\contentsline {section}{\numberline {2}Model Relationnel}{4}
+\contentsline {section}{\numberline {3}Choix d'impl\'ementation}{5}
+\contentsline {section}{\numberline {4}Installation}{5}
+\contentsline {section}{\numberline {5}Script SQL DDL}{5}
+\contentsline {section}{\numberline {6}Requetes}{8}
+\contentsline {subsection}{\numberline {6.1}En SQL}{8}
+\contentsline {subsubsection}{\numberline {6.1.1}R1}{8}
+\contentsline {subsubsection}{\numberline {6.1.2}R2}{8}
+\contentsline {subsubsection}{\numberline {6.1.3}R3}{8}
+\contentsline {subsubsection}{\numberline {6.1.4}R4}{8}
+\contentsline {subsubsection}{\numberline {6.1.5}R5}{8}
+\contentsline {subsubsection}{\numberline {6.1.6}R6}{9}
+\contentsline {subsection}{\numberline {6.2}Alg\`ebre relationnelle}{9}
+\contentsline {subsubsection}{\numberline {6.2.1}R1}{9}
+\contentsline {subsubsection}{\numberline {6.2.2}R2}{9}
+\contentsline {subsubsection}{\numberline {6.2.3}R3}{9}
+\contentsline {subsubsection}{\numberline {6.2.4}R4}{9}
+\contentsline {subsection}{\numberline {6.3}Calcul relationnel tuple}{10}
+\contentsline {subsubsection}{\numberline {6.3.1}R1}{10}
+\contentsline {subsubsection}{\numberline {6.3.2}R2}{10}
+\contentsline {subsubsection}{\numberline {6.3.3}R3}{10}
+\contentsline {subsubsection}{\numberline {6.3.4}R4}{10}
+\contentsline {section}{\numberline {7}Explication du fonctionnement de notre plateforme}{10}
+\contentsline {section}{\numberline {8}Demonstration}{12}
+\contentsline {section}{\numberline {9}Explication et justification de nos choix}{14}
