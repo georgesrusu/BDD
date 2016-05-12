@@ -13,6 +13,7 @@
 \begin{document}
 
 \maketitle
+\newpage
 \tableofcontents
 \newpage
 
@@ -119,10 +120,12 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 
 	$b \leftarrow \sigma_{clientID \ IN (a)\wedge score >= 4}(Commentaire)$
 
-	$c \leftarrow \sigma_{etablissementID \ IN (b) \wedge \#Etablissement >= 3 }$
+	$c \leftarrow \sigma_{etablissementID \ IN (b) \wedge \#Etablissement >= 3 }(Commentaire)$
 
 	$d \leftarrow \sigma_{ID \ IN (c)}(Utilisateur)$
+
 \subsubsection{R2}
+
 	$a \leftarrow \pi (\sigma_{Identifiant="Brenda"}(Utilisateur))$
 
 	$b \leftarrow a \ast Commentaire$
@@ -135,12 +138,13 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 
 	$f \leftarrow e \div c$
 
-	$g \leftarrow \pi_{Nom}(f \bowtie_{clientID=ID} Utilisateur)$
+	$g \leftarrow \pi_{Nom}(f \bowtie_{etablissementID=ID} Etablissement)$
 
 \subsubsection{R3}
-	$a \leftarrow \pi_{etablissementID}(Etablissement)$
+	$a \leftarrow \pi_{ID}(Etablissement)$
 
-	$b \leftarrow \sigma_{etablissemntID \ IN \ (a) \wedge \#Etablissement \ <= \ 1}(Commentaire)$
+
+	$b \leftarrow \sigma_{etablissemntID \ NOT \ IN \ (a) \ OR \ \# clientID \ <= \ 1}(Commentaire)$
 
 \subsubsection{R4}
 	$a \leftarrow \pi_{etablissementID, clientID}(ModificationAdmin)$
@@ -154,7 +158,20 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 	$e \leftarrow a - d$
 
 	$f \leftarrow \pi_{identitifant}(e \bowtie_{clientID=ID} Utilisateur)$
+
 \subsection{Calcul relationnel tuple}
+\subsubsection{R1}
+	$\{ u.Nom | Utilisateur(u) \wedge Commentaire(c) \wedge u.ID = c.clientID \wedge c.etablissementID >= 3 \wedge c.clientID = u.ID \wedge u.identifiant = "Brenda" \wedge c.score >= 4 \}$
+
+\subsubsection{R2}
+	$\{ e.Nom | Etablissement(e) \wedge \forall u \ Utilisateur(u) \rightarrow (\exists c (Commentaire(c) \wedge e.ID = c.etablissementID \wedge c.clientID = u.ID \wedge c.score > 3 \wedge u.Nom = "Brenda"))\}$
+
+\subsubsection{R3}
+	$\{ e.Nom | Etablissement(e) \wedge \exists \! \! \! / c_1 (Commentaire(c_1) \wedge c_1.etablissementID = e.ID) \vee \exists! c_2(Commentaire (c_2) \wedge c_2.etablissemendID = e.ID) \}$
+
+\subsubsection{R4}
+	$\{ u.Nom | Utilisateur(u) \wedge \exists e \exists \! \! \! / c (Etablissement(e) \wedge Commentaire(c) \wedge c.clientID = u.ID \wedge c.etablissementID = e.ID) \}$
+
 \section{Explication du fonctionnement de notre plateforme}
 \par Tout d'abord, commençons par la création de la base de donnée. Pour le script de création il n'y a rien de compliqué, ce ne sont que des requete d'insertion(on peut le voir à la section 5). Nous arrivons donc au parseur qui va commencer par le fichier "Restaurant.xml" et va le décomposer de manière à remplir la base de donne et ainsi de suite pour les fichier "Cafes.xml" et "Hotel.xml". Lors du traitement de celui-ci, les utilisateur vont être ajouté en fonction de leur activité. S' ils ont ajoute un établissement ils seront admin ou s' ils ont apposer un commentaire ou un label ils seront utilisateur. Ils faut biensur noter que si on s'aperçoit qu'un utilisateur a créer par la suite un établissement, il va devenir un admin. Pour un établissement c'est un peu plus complexe, on va d'abord insérer l'établissement dans la table Etablissement, et puis en fonction du type de celui ci, on va faire une insertion dans la table correspondante (Restaurant,Bar ou Hotel). Il faut tout de même ne pas oublier que chaque établissement est créer par un admin, cette création sera stockée dans la table ModificationAdmin ainsi que la date de création qui sera elle aussi déterminé depuis les fichier xml. Attention, à chaque fois qu'on fais une insertion dans la table ModificationAdmin on va regarder si la date de création est bien plus récente que la date de création de l'utilisateur, sinon on fait un swap des deux dates. Passons donc aux Commentaires et aux labels. Au fur et à mesure que le parseur rencontre des commentaires ou des tags, il va ajouter les utilisateurs s'ils ne sont pas déjà existant, insérer les commentaires et leur score dans la table Commentaire et les tags dans la table Label. Idem que pour la création des établissement, on va vérifier pour chaque commentaire si la date de celui ci est plus récente que celle de la création de l'utilisateur sinon l'échange aura lieu.\\
 
@@ -176,6 +193,7 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 \section{Explication et justification de nos choix}
  \par Nous avons choisi mysql tout simplement parce que nous l'avons déjà tous les deux. Nous avons choisi de créer une plateforme web parce que cela convient au mieux au projet.
  Pour le serveur mysql nous avons utilise une "raspberry pie" sur laquelle tourne le serveur mysql. Nous pouvons l'accéder à distance grâce à un vpn. En ce qui concerne l'interface graphique de notre plateforme, nous ne nous sommes pas trop attardé la dessus puisque cela sort du cadre de ce cours, nous avons donc opter pour le choix d'un template que nous avons quelque peu modifié à notre sauce. Comme langage intermédiaire entre l'interface graphique (html et css) nous avons choisi le php puisque nous le connaission quelque peu.\\
+
 
 \end{document}
 
