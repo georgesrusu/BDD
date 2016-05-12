@@ -13,6 +13,7 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
 \newpage
 
 \section{Diagramme}
@@ -23,9 +24,8 @@
 \subsection{Contraintes :}
 
 \begin{itemize}
-	\item Un client peut etre un admin ou bien un utilisatuer
+	\item Un client peut etre un admin ou bien un utilisateur
 	\item Un client ne peut pas commenter un même établissement une même date
-	\item Un client ne peut pas choisir le meme label plusieur fois pour un meme etablissement dans un commentaire
 	\item La date d'enregsitrement d'un utilisateur doit etre inferieure a la date de chaque commentaire
 	\item Un client peut faire un commentaire sans choisir de label(tag)
 	\item Un commentaire possede un ID unique et doit contenier l'ID du client, l'ID du label si il y en a un, l'ID de l'etablissement ainsi que le texte et le score.
@@ -67,9 +67,19 @@ En ce qui concerne l'ajout d'un label, nous avons decidé d'avoir une table ("Lis
 
 En ce qui concerne le disctinction entre utilisateur et admin, nous avons une colonne, isAdmin qui grace a un boolean ou bien a un int (0 ou 1) nous permet de savoir si le client est admin ou bien un simple utilisateur. L'héritage présent dans le schéma permet donc de voir ce qu'un admin peut faire en plus qu'un client standard. C'est même opération supplémentaire que peut faire un admin sont stocké dans une nouvelle table (Modification) qui va permettre de récupérer chaque modification d'un établissement, c'est à dire sont type de modification (Création, suppression ou modification) ainsi que sa date, l'admin qui a opéré et l'établissement concerné.\\
 
+\section{Installation}
+Afin d'installer l'application, il est d'abord nécéssaire de mettre en place la base de données qui contiendra toutes les informations qui seront utilisées par l'application.  Pour ce faire le premier fichier à éxécuter est Create-DB.php, en vérifiant que le fichier header\_connect.php se connectera bien au bon serveur.  Une fois fait la nouvelle base de donnée Eureka à été crée ainsi que toutes ses tables.  AFIN de ne pas commencer avec une application vide, nous allons parsons des informations se trouvant dans des fichiers XML.  Pour ce faire, nous éxécutons parser.php, qui comme l'indique son nom s'occupe de parser les fichiers XML et de remplir la base de donnée avec les données obtenues.  L'application est maintenant bien installé et il est possible désormais de l'utiliser correctement.
+
 \newpage
 \section{Requetes}
 \subsection{R1}
+	$a \leftarrow \sigma_{identifiant="Brenda"}(Utilisateur)$
+
+	$b \leftarrow \sigma_{clientID \ IN (a)\wedge score >= 4}(Commentaire)$
+
+	$c \leftarrow \sigma_{etablissementID \ IN (b) \wedge \#Etablissement >= 3 }$
+
+	$d \leftarrow \sigma_{ID \ IN (c)}(Utilisateur)$
 \subsection{R2}
 	$a \leftarrow \pi (\sigma_{Identifiant="Brenda"}(Utilisateur))$
 

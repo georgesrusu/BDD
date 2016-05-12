@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  11 MAY 2016 13:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  11 MAY 2016 16:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -253,16 +253,28 @@ Overfull \hbox (14.8936pt too wide) in paragraph at lines 15--15
  [][] 
  []
 
-[1
+(./RapportLaTex.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+)
+\tf@toc=\write3
+\openout3 = `RapportLaTex.toc'.
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<BDD-UML-2Final.pdf, id=8, 804.28226pt x 391.18547pt>
+ [1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] <BDD-UM
+L-2Final.pdf, id=9, 804.28226pt x 391.18547pt>
 File: BDD-UML-2Final.pdf Graphic file (type pdf)
- <use BDD-UML-2Final.pdf>
-Package pdftex.def Info: BDD-UML-2Final.pdf used on input line 20.
+
+<use BDD-UML-2Final.pdf>
+Package pdftex.def Info: BDD-UML-2Final.pdf used on input line 21.
 (pdftex.def)             Requested size: 482.57307pt x 234.71309pt.
 
-Overfull \hbox (92.57307pt too wide) in paragraph at lines 20--21
+Overfull \hbox (92.57307pt too wide) in paragraph at lines 21--22
 []  
  []
 
@@ -293,27 +305,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--69
 
  []
 
-[4]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 74.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 74.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 74.
-
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+[4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
 
  []
 
-[5] (./RapportLaTex.aux) ) 
+[6] (./RapportLaTex.aux) ) 
 Here is how much of TeX's memory you used:
- 4401 strings out of 493089
- 64353 string characters out of 6134843
+ 4406 strings out of 493089
+ 64424 string characters out of 6134843
  141663 words of memory out of 5000000
- 7850 multiletter control sequences out of 15000+600000
- 8848 words of font info for 31 fonts, out of 8000000 for 9000
+ 7852 multiletter control sequences out of 15000+600000
+ 9155 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,32p,688b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,6n,32p,840b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
@@ -322,11 +327,12 @@ sfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmti12.pfb>
-Output written on RapportLaTex.pdf (5 pages, 316636 bytes).
+m/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmti12.pfb>
+Output written on RapportLaTex.pdf (6 pages, 327349 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
