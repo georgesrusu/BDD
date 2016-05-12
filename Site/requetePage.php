@@ -109,7 +109,7 @@ Released   : 20130902
 					}
 					elseif($_POST['request']=="request3"){
 						echo "<p><strong>La requete 3 est :</strong> Tous les établissements pour lesquels il y a au plus un commentaire.</p>";
-						$sql='SELECT nom FROM Etablissement WHERE ID IN (SELECT DISTINCT e.ID FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID HAVING count(*)<=1))';
+						$sql='SELECT DISTINCT e.nom FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID HAVING count(*)<=1)';
 					}
 					elseif($_POST['request']=="request4"){
 						echo "<p><strong>La requete 4 est :</strong> La liste des administrateurs n’ayant pas commenté tous les établissements qu’ils ont crées.</p>";
