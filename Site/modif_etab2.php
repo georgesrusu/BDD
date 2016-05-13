@@ -313,7 +313,6 @@ Released   : 20130902
 					$sql=substr($sql, 0, -2);
    					$sql=$sql.' WHERE ID="'.$ID.'"';
    				}
-   				echo $sql;
 				try {
 					$conn->exec($sql);
 					if($type="Hotel"){
@@ -324,7 +323,6 @@ Released   : 20130902
             	}
    			}
 
-   			echo $type;
 			if ($type=="Restaurant"){
 				$price=$_POST['price'];
 				$banquet=$_POST['banquet'];
