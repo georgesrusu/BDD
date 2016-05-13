@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.10)  13 MAY 2016 12:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.10)  13 MAY 2016 12:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -639,6 +639,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 189--190
  []
 
 [11]
+Overfull \hbox (12.59444pt too wide) in paragraph at lines 191--192
+\OT1/cmr/m/n/12 requ^etes de-mand^^Se. Pour la page d'ac-cueil, on peut voir le
+s der-nier ^^Setablissements
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 191--192
 
  []
@@ -812,7 +818,7 @@ Here is how much of TeX's memory you used:
  11721 multiletter control sequences out of 15000+600000
  9155 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,6n,32p,2715b,1807s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,6n,32p,2720b,1807s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></
@@ -825,7 +831,7 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on RapportLaTex.pdf (21 pages, 1473188 bytes).
+Output written on RapportLaTex.pdf (21 pages, 1473474 bytes).
 PDF statistics:
  545 PDF objects out of 1000 (max. 8388607)
  475 compressed objects within 5 object streams
