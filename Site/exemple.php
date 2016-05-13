@@ -209,6 +209,13 @@ Released   : 20130902
 				</script></div>
 				<br/>
 
+			<h2 class="infos">Météo aujourd'hui:</h2>
+			<?php
+				echo '<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat='.$result[7].'&lon='.$result[6].'&name='.$result[5].'&units=ca"> </iframe>';
+        		?>
+        		<br/>
+
+
 			<h2 class="infos">Contact:</h2>
 				<?php
 				echo "<p>Téléphone : " . $result[8] ."</p>";

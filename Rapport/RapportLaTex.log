@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.10)  13 MAY 2016 13:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.10)  13 MAY 2016 13:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -707,11 +707,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 211--212
 
  []
 
-<exemple.png, id=405, 1200.485pt x 685.56125pt>
+<exemple.png, id=405, 1175.39125pt x 711.65875pt>
 File: exemple.png Graphic file (type png)
  <use exemple.png>
 Package pdftex.def Info: exemple.png used on input line 213.
-(pdftex.def)             Requested size: 360.14828pt x 205.66995pt.
+(pdftex.def)             Requested size: 352.6201pt x 213.49927pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 213--215
 
@@ -836,7 +836,7 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on RapportLaTex.pdf (21 pages, 1473503 bytes).
+Output written on RapportLaTex.pdf (21 pages, 1492582 bytes).
 PDF statistics:
  545 PDF objects out of 1000 (max. 8388607)
  475 compressed objects within 5 object streams
