@@ -119,13 +119,15 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 \end{lstlisting}
 \subsection{Algèbre relationnelle}
 \subsubsection{R1}
-	$a \leftarrow \sigma_{identifiant="Brenda"}(Utilisateur)$
+	$a \leftarrow \pi_{ID} (\sigma_{identifiant="Brenda"}(Utilisateur))$
 
-	$b \leftarrow \sigma_{clientID \ IN (a)\wedge score >= 4}(Commentaire)$
+	$b \leftarrow \pi_{etablissementID, clientID} (\sigma_{score >= 4}(Commentaire \cap a))$
 
-	$c \leftarrow \sigma_{etablissementID \ IN (b) \wedge \#Etablissement >= 3 }(Commentaire)$
+	$c \leftarrow \pi_{clientID} (\sigma_{\# Etablissement >= 3} (b))$
 
-	$d \leftarrow \sigma_{ID \ IN (c)}(Utilisateur)$
+	$d \leftarrow \pi_{identifiant} (Etablissement \cap c)$\\
+
+	$\pi_{identifiant} (Etablissement \cap \pi_{clientID} (\sigma_{\# Etablissement >= 3} (\pi_{etablissementID, clientID}  (\\ \sigma_{score >= 4}(Commentaire \cap \pi_{ID} (\sigma_{identifiant="Brenda"}(Utilisateur)))))))$
 
 \subsubsection{R2}
 
@@ -141,13 +143,18 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 
 	$f \leftarrow e \div c$
 
-	$g \leftarrow \pi_{Nom}(f \bowtie_{etablissementID=ID} Etablissement)$
+	$g \leftarrow \pi_{Nom}(f \bowtie_{etablissementID=ID} Etablissement)$\\
+
+	$\pi_{Nom}(\pi_{etablissementID, clientID}(\sigma_{score > 3}(Commentaire) - \sigma_{score > 3}(\\ \pi (\sigma_{Identifiant="Brenda"}(Utilisateur)) \ast Commentaire)) \div \sigma_{score > 3}(\\ \pi (\sigma_{Identifiant="Brenda"}(Utilisateur)) \ast Commentaire) \bowtie_{etablissementID=ID} Etablissement)$
 
 \subsubsection{R3}
-	$a \leftarrow \pi_{ID}(Etablissement)$
+	$a \leftarrow \sigma_{etablissementID = ID \wedge \#(*) <= 1}(Commentaire)$
 
+	$b \leftarrow \sigma_{etablissementID = ID} (Commentaire)$
 
-	$b \leftarrow \sigma_{etablissemntID \ NOT \ IN \ (a) \ OR \ \# clientID \ <= \ 1}(Commentaire)$
+	$c \leftarrow \pi_{Nom} (Etablissement \cap a - b)$\\
+
+	$\pi_{Nom} (Etablissement \cap \sigma_{etablissementID = ID \wedge \#(*) <= 1}(Commentaire) - \sigma_{etablissementID = ID} (\\ Commentaire))$
 
 \subsubsection{R4}
 	$a \leftarrow \pi_{etablissementID, clientID}(ModificationAdmin)$
@@ -160,7 +167,9 @@ count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC
 
 	$e \leftarrow a - d$
 
-	$f \leftarrow \pi_{identitifant}(e \bowtie_{clientID=ID} Utilisateur)$
+	$f \leftarrow \pi_{identitifant}(e \bowtie_{clientID=ID} Utilisateur)$\\
+
+	$\pi_{identitifant}(\pi_{etablissementID, clientID}(ModificationAdmin) - \pi_{etablissementID, clientID}(\\ \pi_{etablissementID, clientID}(ModificationAdmin) \ast \pi_{etablissementID}(Commentaire)) \bowtie_{clientID=ID} Utilisateur)$
 
 \subsection{Calcul relationnel tuple}
 \subsubsection{R1}
