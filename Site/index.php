@@ -108,8 +108,12 @@ Released   : 20130902
 						echo "<p>".$etab[10]."</p>";
 						echo "<p>".$etab[2]." ".$etab[3].", ".$etab[5]." - ".$etab[4]."</p>";
 						echo "<p>telephone : ".$etab[8]."</p>";
-						$siteWeb=$etab[9]!=""?$etab[9]:"aucun";
-						echo "<p>site web : ".$siteWeb."</p>";
+						if($etab[9]!=""){
+							echo '<p>site web : <a href="'.$etab[9].'">'.$etab[9].'</a></p>';
+						}
+						else{
+							echo '<p>site web : aucun</p>';
+						}
 						echo '<strong><a href=./exemple.php?etablissementID='.$etab[0].'>Plus de details ...</a></strong>';
 						echo "<hr>";
 						echo "</br>";

@@ -221,7 +221,7 @@ Released   : 20130902
 				echo "<p>Téléphone : " . $result[8] ."</p>";
 				echo "<p>Site web : ";
 				if ($result[9]) {
-					echo $result[9];
+					echo '<a href="'.$result[9].'">'.$result[9].'</a>';
 				}
 				else {
 					echo "Aucun";

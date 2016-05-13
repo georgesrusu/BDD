@@ -164,8 +164,12 @@ Released   : 20130902
       						echo "<p>".$result[$i][10]."</p>";
            					echo "<p>".$result[$i][2]." ".$result[$i][3].", ".$result[$i][5]." - ".$result[$i][4]."</p>";
            					echo "<p>telephone : ".$result[$i][8]."</p>";
-           					$siteWeb=$result[$i][9]!=""?$result[$i][9]:"aucun";
-           					echo "<p>site web : ".$siteWeb."</p>";
+                            if($result[$i][9]!=""){
+                            echo '<p>site web : <a href="'.$result[$i][9].'">'.$result[$i][9].'</a></p>';
+                        }
+                        else{
+                            echo '<p>site web : aucun</p>';
+                        }
                             $etab_envoye=$etablissementID+1;
            					echo '<strong><a href=./exemple.php?etablissementID='.$etablissementID.'>Plus de details ...</a></strong>';
            					echo "<hr>";
