@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  13 MAY 2016 09:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.9)  13 MAY 2016 11:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -562,12 +562,69 @@ Overfull \hbox (54.14923pt too wide) in paragraph at lines 117--118
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+
+ []
+
+
+Overfull \hbox (12.91487pt too wide) in paragraph at lines 129--130
+[]$\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Etablissement \OMS/c
+msy/m/n/12 \ \OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^[[]\OT1/
+cmr/m/n/12 (\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 ([] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--146
+
+ []
+
+
+Overfull \hbox (53.21759pt too wide) in paragraph at lines 147--148
+\OML/cmm/m/it/12 ^^Y\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^[[]\OT1/cmr/m/n/12 (\OM
+L/cmm/m/it/12 Utilisateur\OT1/cmr/m/n/12 )) \OMS/cmsy/m/n/12 ^^C \OML/cmm/m/it/
+12 Commentaire\OT1/cmr/m/n/12 ) \OML/cmm/m/it/12 .[]/[] Etablissement\OT1/cmr/m
+/n/12 )$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
 
  []
 
 [9]
-Overfull \hbox (74.1803pt too wide) in paragraph at lines 166--167
+Overfull \hbox (58.22632pt too wide) in paragraph at lines 156--157
+[]$\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Etablissement \OMS/c
+msy/m/n/12 \ \OML/cmm/m/it/12 ^^[[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Commentair
+e\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^[[]\OT1/cmr/m/n/12 (
+[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
+
+ []
+
+
+Overfull \hbox (28.47003pt too wide) in paragraph at lines 171--172
+[]$\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12
+ (\OML/cmm/m/it/12 ModificationAdmin\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^@ \OML
+/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 ([] 
+ []
+
+
+Overfull \hbox (61.68472pt too wide) in paragraph at lines 171--172
+\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ModificationAdmin\OT1/c
+mr/m/n/12 ) \OMS/cmsy/m/n/12 ^^C \OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cm
+m/m/it/12 Commentaire\OT1/cmr/m/n/12 )) \OML/cmm/m/it/12 .[]/[]
+ []
+
+
+Overfull \hbox (74.1803pt too wide) in paragraph at lines 175--176
 []$\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 u:Nom\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 U
 tilisateur\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 u\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12
  ^ \OML/cmm/m/it/12 Commentaire\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 c\OT1/cmr/m/n/
@@ -577,7 +634,7 @@ n/12 =
  []
 
 
-Overfull \hbox (6.06984pt too wide) in paragraph at lines 172--173
+Overfull \hbox (6.06984pt too wide) in paragraph at lines 181--182
 []$\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 e:Nom\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 E
 tablissement\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/
 12 ^ 9   \OML/cmm/m/it/12 =c[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Commentaire\OT1
@@ -585,185 +642,187 @@ tablissement\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 e\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/
 m/it/12 c[]:etablissementID \OT1/cmr/m/n/12 =
  []
 
-
-Overfull \hbox (6.37971pt too wide) in paragraph at lines 177--177
+[10]
+Overfull \hbox (6.37971pt too wide) in paragraph at lines 186--186
 []\OT1/cmr/bx/n/17.28 Explication du fonc-tion-ne-ment de notre pla-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--179
+Underfull \hbox (badness 10000) in paragraph at lines 187--188
 
  []
 
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 180--181
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
 
  []
 
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
 
  []
 
-<create_db_succes.png, id=384, 452.69125pt x 180.675pt>
+<create_db_succes.png, id=388, 452.69125pt x 180.675pt>
 File: create_db_succes.png Graphic file (type png)
 
 <use create_db_succes.png>
-Package pdftex.def Info: create_db_succes.png used on input line 187.
+Package pdftex.def Info: create_db_succes.png used on input line 196.
 (pdftex.def)             Requested size: 226.34506pt x 90.33727pt.
- <parser_ex.png, id=385, 459.7175pt x 385.44pt>
+ <parser_ex.png, id=389, 459.7175pt x 385.44pt>
 File: parser_ex.png Graphic file (type png)
 
 <use parser_ex.png>
-Package pdftex.def Info: parser_ex.png used on input line 190.
+Package pdftex.def Info: parser_ex.png used on input line 199.
 (pdftex.def)             Requested size: 229.85818pt x 192.71953pt.
 
-Overfull \hbox (7.30283pt too wide) in paragraph at lines 189--191
+Overfull \hbox (7.30283pt too wide) in paragraph at lines 198--200
 []\OT1/cmr/m/n/12 Ensuite nous al-lons ex^^Secuter le fi-chier "par-ser.php". V
 oici un pe-tit exemple : 
  []
 
-[12 <./create_db_succes.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
 
  []
 
-<acceuil.png, id=391, 1243.64626pt x 713.66624pt>
+[13 <./create_db_succes.png> <./parser_ex.png>]
+<acceuil.png, id=397, 1243.64626pt x 713.66624pt>
 File: acceuil.png Graphic file (type png)
  <use acceuil.png>
-Package pdftex.def Info: acceuil.png used on input line 194.
+Package pdftex.def Info: acceuil.png used on input line 203.
 (pdftex.def)             Requested size: 373.09676pt x 214.10152pt.
- [13 <./parser_ex.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 196--197
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
 
  []
 
 <recherche.png, id=398, 1210.5225pt x 701.62125pt>
 File: recherche.png Graphic file (type png)
  <use recherche.png>
-Package pdftex.def Info: recherche.png used on input line 198.
+Package pdftex.def Info: recherche.png used on input line 207.
 (pdftex.def)             Requested size: 363.15955pt x 210.48799pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+ [14 <./acceuil.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
 
  []
 
-<exemple.png, id=399, 1200.485pt x 685.56125pt>
+<exemple.png, id=404, 1200.485pt x 685.56125pt>
 File: exemple.png Graphic file (type png)
  <use exemple.png>
-Package pdftex.def Info: exemple.png used on input line 202.
+Package pdftex.def Info: exemple.png used on input line 211.
 (pdftex.def)             Requested size: 360.14828pt x 205.66995pt.
- [14 <./acceuil.png> <./recherche.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 202--204
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--213
 
  []
 
-<commentaire.png, id=406, 1031.855pt x 676.5275pt>
+<commentaire.png, id=405, 1031.855pt x 676.5275pt>
 File: commentaire.png Graphic file (type png)
  <use commentaire.png>
-Package pdftex.def Info: commentaire.png used on input line 205.
+Package pdftex.def Info: commentaire.png used on input line 214.
 (pdftex.def)             Requested size: 309.55888pt x 202.95981pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
-
- []
-
-<tag.png, id=407, 775.89874pt x 400.49625pt>
-File: tag.png Graphic file (type png)
- <use tag.png>
-Package pdftex.def Info: tag.png used on input line 209.
-(pdftex.def)             Requested size: 232.77141pt x 120.1498pt.
- [15 <./exemple.png> <./commentaire.png>] <utilisateur.png, id=414, 1147.28625p
-t x 510.90875pt>
-File: utilisateur.png Graphic file (type png)
-
-<use utilisateur.png>
-Package pdftex.def Info: utilisateur.png used on input line 211.
-(pdftex.def)             Requested size: 344.18852pt x 153.2738pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 209--212
-
- []
-
-<admin.png, id=415, 1164.35pt x 582.175pt>
-File: admin.png Graphic file (type png)
- <use admin.png>
-Package pdftex.def Info: admin.png used on input line 213.
-(pdftex.def)             Requested size: 349.3077pt x 174.65384pt.
- [16 <./tag.png> <./utilisateur.png> <./admin.png>]
+[15 <./recherche.png> <./exemple.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 216--217
 
  []
 
-<etab1.png, id=423, 1178.4025pt x 547.04375pt>
+<tag.png, id=412, 775.89874pt x 400.49625pt>
+File: tag.png Graphic file (type png)
+ <use tag.png>
+Package pdftex.def Info: tag.png used on input line 218.
+(pdftex.def)             Requested size: 232.77141pt x 120.1498pt.
+
+<utilisateur.png, id=413, 1147.28625pt x 510.90875pt>
+File: utilisateur.png Graphic file (type png)
+ <use utilisateur.png>
+Package pdftex.def Info: utilisateur.png used on input line 220.
+(pdftex.def)             Requested size: 344.18852pt x 153.2738pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--221
+
+ []
+
+[16 <./commentaire.png> <./tag.png>]
+<admin.png, id=420, 1164.35pt x 582.175pt>
+File: admin.png Graphic file (type png)
+ <use admin.png>
+Package pdftex.def Info: admin.png used on input line 222.
+(pdftex.def)             Requested size: 349.3077pt x 174.65384pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 225--226
+
+ []
+
+<etab1.png, id=421, 1178.4025pt x 547.04375pt>
 File: etab1.png Graphic file (type png)
  <use etab1.png>
-Package pdftex.def Info: etab1.png used on input line 218.
+Package pdftex.def Info: etab1.png used on input line 227.
 (pdftex.def)             Requested size: 353.52348pt x 164.11438pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 220--221
+ [17 <./utilisateur.png> <./admin.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
 
-<etab2.png, id=424, 1192.455pt x 694.595pt>
+<etab2.png, id=428, 1192.455pt x 694.595pt>
 File: etab2.png Graphic file (type png)
  <use etab2.png>
-Package pdftex.def Info: etab2.png used on input line 222.
+Package pdftex.def Info: etab2.png used on input line 231.
 (pdftex.def)             Requested size: 357.73926pt x 208.38011pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
 
  []
 
-<modif1.png, id=425, 1163.34625pt x 619.31375pt>
+<modif1.png, id=429, 1163.34625pt x 619.31375pt>
 File: modif1.png Graphic file (type png)
  <use modif1.png>
-Package pdftex.def Info: modif1.png used on input line 226.
+Package pdftex.def Info: modif1.png used on input line 235.
 (pdftex.def)             Requested size: 349.00658pt x 185.79555pt.
- [17 <./etab1.png> <./etab2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 226--228
+ [18 <./etab1.png> <./etab2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 235--237
 
  []
 
-<modif2.png, id=432, 1153.30875pt x 554.07pt>
+<modif2.png, id=436, 1153.30875pt x 554.07pt>
 File: modif2.png Graphic file (type png)
  <use modif2.png>
-Package pdftex.def Info: modif2.png used on input line 229.
+Package pdftex.def Info: modif2.png used on input line 238.
 (pdftex.def)             Requested size: 345.9953pt x 166.22227pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 234--235
+Underfull \hbox (badness 10000) in paragraph at lines 243--244
 
  []
 
-<requet.png, id=433, 1174.3875pt x 542.025pt>
+<requet.png, id=437, 1174.3875pt x 542.025pt>
 File: requet.png Graphic file (type png)
  <use requet.png>
-Package pdftex.def Info: requet.png used on input line 236.
+Package pdftex.def Info: requet.png used on input line 245.
 (pdftex.def)             Requested size: 352.31897pt x 162.60875pt.
- [18 <./modif1.png> <./modif2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 244--246
+ [19 <./modif1.png> <./modif2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 253--255
 
  []
 
-[19 <./requet.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 247.
- [20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 247.
+[20 <./requet.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 256.
+ [21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 256.
  (./RapportLaTex.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 247.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 247.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 256.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 256.
 Package rerunfilecheck Info: File `RapportLaTex.out' has not changed.
 (rerunfilecheck)             Checksum: B3AED4F45D7D944A3E87319F532D1941;1697.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 247.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 256.
  ) 
 Here is how much of TeX's memory you used:
- 8549 strings out of 493089
- 125385 string characters out of 6134843
+ 8550 strings out of 493089
+ 125392 string characters out of 6134843
  271887 words of memory out of 5000000
  11720 multiletter control sequences out of 15000+600000
  9155 words of font info for 32 fonts, out of 8000000 for 9000
@@ -781,10 +840,10 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on RapportLaTex.pdf (20 pages, 1471570 bytes).
+Output written on RapportLaTex.pdf (21 pages, 1472294 bytes).
 PDF statistics:
- 540 PDF objects out of 1000 (max. 8388607)
- 471 compressed objects within 5 object streams
- 225 named destinations out of 1000 (max. 500000)
+ 544 PDF objects out of 1000 (max. 8388607)
+ 474 compressed objects within 5 object streams
+ 226 named destinations out of 1000 (max. 500000)
  300 words of extra memory for PDF output out of 10000 (max. 10000000)
 
