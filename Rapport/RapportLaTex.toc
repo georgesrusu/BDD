@@ -17,13 +17,13 @@
 \contentsline {subsubsection}{\numberline {6.2.1}R1}{9}{subsubsection.6.2.1}
 \contentsline {subsubsection}{\numberline {6.2.2}R2}{9}{subsubsection.6.2.2}
 \contentsline {subsubsection}{\numberline {6.2.3}R3}{9}{subsubsection.6.2.3}
-\contentsline {subsubsection}{\numberline {6.2.4}R4}{9}{subsubsection.6.2.4}
+\contentsline {subsubsection}{\numberline {6.2.4}R4}{10}{subsubsection.6.2.4}
 \contentsline {subsection}{\numberline {6.3}Calcul relationnel tuple}{10}{subsection.6.3}
 \contentsline {subsubsection}{\numberline {6.3.1}R1}{10}{subsubsection.6.3.1}
 \contentsline {subsubsection}{\numberline {6.3.2}R2}{10}{subsubsection.6.3.2}
 \contentsline {subsubsection}{\numberline {6.3.3}R3}{10}{subsubsection.6.3.3}
-\contentsline {subsubsection}{\numberline {6.3.4}R4}{10}{subsubsection.6.3.4}
-\contentsline {section}{\numberline {7}Explication du fonctionnement de notre plateforme}{10}{section.7}
-\contentsline {section}{\numberline {8}Demonstration}{12}{section.8}
-\contentsline {section}{\numberline {9}Fonctionnalit\'es impl\'ement\'ees}{19}{section.9}
-\contentsline {section}{\numberline {10}Justification de nos choix}{19}{section.10}
+\contentsline {subsubsection}{\numberline {6.3.4}R4}{11}{subsubsection.6.3.4}
+\contentsline {section}{\numberline {7}Explication du fonctionnement de notre plateforme}{11}{section.7}
+\contentsline {section}{\numberline {8}Demonstration}{13}{section.8}
+\contentsline {section}{\numberline {9}Fonctionnalit\'es impl\'ement\'ees}{20}{section.9}
+\contentsline {section}{\numberline {10}Justification de nos choix}{20}{section.10}
