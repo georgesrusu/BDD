@@ -100,12 +100,12 @@ Released   : 20130902
 				if (isset($_POST['executer'])) {
 					if($_POST['request']=="request1"){
 						echo "<p><strong>La requete 1 est :</strong> Tous les utilisateurs qui apprécient au moins 3 établissements que l’utilisateur \"Brenda\" apprécie.</p>";
-						$sql='SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM Commentaire WHERE etablissementID IN (SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING count(etablissementID)>=3)';
+						$sql='SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT c.clientID FROM Commentaire c WHERE c.etablissementID IN (SELECT c.etablissementID FROM Commentaire c WHERE c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4) GROUP BY c.clientID HAVING count(c.etablissementID)>=3)';
 					}
 					elseif($_POST['request']=="request2"){
 						echo "<p><strong>La requete 2 est :</strong> Tous les établissements qu’apprécie au moins un utilisateur qui apprécie tous les établissements que
 						\"Brenda\" apprécie.<p>";
-						$sql='SELECT nom FROM Etablissement WHERE ID IN(SELECT DISTINCT etablissementID FROM Commentaire WHERE clientID IN (SELECT DISTINCT clientID FROM Commentaire WHERE etablissementID IN(SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) group by clientID having count(DISTINCT etablissementID)>=(SELECT count(etablissementID) FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4)));';
+						$sql='SELECT e.nom FROM Etablissement e WHERE e.ID IN(SELECT DISTINCT c.etablissementID FROM Commentaire c WHERE c.clientID IN (SELECT DISTINCT c.clientID FROM Commentaire c WHERE c.etablissementID IN(SELECT c.etablissementID FROM Commentaire c WHERE c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4) GROUP BY c.clientID HAVING count(DISTINCT c.etablissementID)>=(SELECT count(c.etablissementID) FROM Commentaire c WHERE c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4)))';
 					}
 					elseif($_POST['request']=="request3"){
 						echo "<p><strong>La requete 3 est :</strong> Tous les établissements pour lesquels il y a au plus un commentaire.</p>";
@@ -113,7 +113,7 @@ Released   : 20130902
 					}
 					elseif($_POST['request']=="request4"){
 						echo "<p><strong>La requete 4 est :</strong> La liste des administrateurs n’ayant pas commenté tous les établissements qu’ils ont crées.</p>";
-						$sql='SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT m.adminID FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire WHERE clientID=m.adminID AND etablissementID=m.etablissementID))';
+						$sql='SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT m.adminID FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire c WHERE c.clientID=m.adminID AND c.etablissementID=m.etablissementID))';
 					}
 					elseif($_POST['request']=="request5"){
     					$sql = "SET sql_mode = ''";

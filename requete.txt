@@ -1,11 +1,11 @@
 
 R1:
 
-SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM Commentaire WHERE etablissementID IN (SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING count(etablissementID)>=3)
+SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT c.clientID FROM Commentaire c WHERE c.etablissementID IN (SELECT c.etablissementID FROM Commentaire c WHERE c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4) GROUP BY c.clientID HAVING count(c.etablissementID)>=3)
 
 R2:
 
-SELECT nom FROM Etablissement WHERE ID IN(SELECT DISTINCT etablissementID FROM Commentaire WHERE clientID IN (SELECT DISTINCT clientID FROM Commentaire WHERE etablissementID IN(SELECT etablissementID FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4) group by clientID having count(DISTINCT etablissementID)>=(SELECT count(etablissementID) FROM Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND score>=4)))
+SELECT e.nom FROM Etablissement e WHERE e.ID IN(SELECT DISTINCT c.etablissementID FROM Commentaire c WHERE c.clientID IN (SELECT DISTINCT c.clientID FROM Commentaire c WHERE c.etablissementID IN(SELECT c.etablissementID FROM Commentaire c WHERE c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4) GROUP BY c.clientID HAVING count(DISTINCT c.etablissementID)>=(SELECT count(c.etablissementID) FROM Commentaire c WHERE c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4)))
 
 R3:
 
@@ -13,7 +13,7 @@ SELECT DISTINCT e.nom FROM Etablissement e WHERE NOT EXISTS (SELECT * FROM Comme
 
 R4:
 
-SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT m.adminID FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire WHERE clientID=m.adminID AND etablissementID=m.etablissementID))
+SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT m.adminID FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire c WHERE c.clientID=m.adminID AND c.etablissementID=m.etablissementID))
 
 R5:
 

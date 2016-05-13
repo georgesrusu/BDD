@@ -60,7 +60,7 @@
 \par Pour expliquer notre schéma UML plus haut, nous avons choisi l'implémentation suivante: lorsqu'on voudra connaître les informations d'un établissement en particulière (commentaires, tags , auteur du commentaire, auteur du tag, etc) il nous suffira de retrouver son id correspondant et de regarder avec cet id dans les tables Commentaire ,Label et ModificationAdmin. Idem, pour un utilisateur, si on souhaite savoir ce qu'il a commenté. Nous pouvons donc dire que nos deux tables de bases sont Commentaire et Label. \\
 
 \par En ce qui concerne le distinction entre utilisateur et admin, nous avons une colonne, isAdmin qui grâce à un booléen ou bien à un int (0 ou 1) nous permet de savoir si le client est admin ou bien un simple utilisateur. L'héritage présent dans le schéma permet donc de voir ce qu'un admin peut faire en plus qu'un client standard, c'est à dire creer un établissement.\\ 
-
+\par L'héritage pour la table Etablissement comme vu sur le schéma a été résolut en faisant des tables pour chaque type et en ajoutant dans la table Etablissement une colonne "type" qui nous permet de savoir dans quel table fille se trouve l'établissement.\\
 \par Les langages utilisé sont: le "html" et "css3" ainsi que le "php" et pour ce qui concerne le sql nous avons choisi le "mysql".
 \section{Installation}
 \par Pour installer notre application, il est d'abord nécéssaire de mettre en place la base de données qui contiendra toutes les informations qui seront utilisées. Pour ce faire le premier fichier à exécuter une fois que la connexion à un serveur mysql est faite, est "Create-DB.php", en vérifiant que le fichier header\_connect.php se connectera bien.  Une fois cela fait, la base de donnée Eureka à été crée ainsi que toutes ses tables.  Afin de ne pas commencer avec une application vide, nous allons parser des fichiers XML qui vont remplir notre base de donné en respectant les contrainte cité plus haut(date des utilisateurs). L'application est maintenant bien installé et il est possible désormais de l'utiliser correctement. Notre application est un site, il est donc maintenant possible de lancer la page "index.php" et nous voila dans notre application.
@@ -72,43 +72,44 @@
 \subsection{En SQL}
 \subsubsection{R1}
 \begin{lstlisting}
-SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT clientID FROM 
-Commentaire WHERE etablissementID IN (SELECT etablissementID FROM 
-Commentaire WHERE clientID IN (SELECT ID FROM Utilisateur WHERE 
-identifiant="Brenda") AND score>=4) GROUP BY clientID HAVING 
-count(etablissementID)>=3)
+SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT
+c.clientID FROM Commentaire c WHERE c.etablissementID IN
+(SELECT c.etablissementID FROM Commentaire c WHERE 
+c.clientID IN (SELECT u.ID FROM Utilisateur u WHERE
+u.identifiant="Brenda") AND c.score>=4) GROUP BY 
+c.clientID HAVING count(c.etablissementID)>=3)
 \end{lstlisting}
 \subsubsection{R2}
 \begin{lstlisting}
-SELECT nom FROM Etablissement WHERE ID IN(SELECT DISTINCT 
-etablissementID FROM Commentaire WHERE clientID IN (SELECT 
-DISTINCT clientID FROM Commentaire WHERE etablissementID IN
-(SELECT etablissementID FROM Commentaire WHERE clientID IN 
-(SELECT ID FROM Utilisateur WHERE identifiant="Brenda") AND
- score>=4) group by clientID having count(DISTINCT 
- etablissementID)>=(SELECT count(etablissementID) FROM Commentaire 
- WHERE clientID IN (SELECT ID FROM Utilisateur WHERE
-  identifiant="Brenda") 
- AND score>=4)))
+SELECT e.nom FROM Etablissement e WHERE e.ID IN(SELECT 
+DISTINCT c.etablissementID FROM Commentaire c WHERE 
+c.clientID IN (SELECT DISTINCT c.clientID FROM Commentaire c 
+WHERE c.etablissementID IN(SELECT c.etablissementID FROM 
+Commentaire c WHERE c.clientID IN (SELECT u.ID FROM 
+Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4) 
+GROUP BY c.clientID HAVING count(DISTINCT 
+c.etablissementID)>=(SELECT count(c.etablissementID) 
+FROM Commentaire c WHERE c.clientID IN (SELECT u.ID 
+FROM Utilisateur u WHERE u.identifiant="Brenda") AND c.score>=4)))
 \end{lstlisting}
 \subsubsection{R3}
 \begin{lstlisting}
 SELECT DISTINCT e.nom FROM Etablissement e WHERE NOT EXISTS 
 (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID) OR EXISTS 
 (SELECT * FROM Commentaire c WHERE c.etablissementID=e.ID GROUP BY e.ID
- HAVING count(*)<=1)
+HAVING count(*)<=1)
 \end{lstlisting}
 \subsubsection{R4}
 \begin{lstlisting}
-SELECT identifiant FROM Utilisateur WHERE ID IN (SELECT m.adminID FROM 
-ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire WHERE
- clientID=m.adminID AND etablissementID=m.etablissementID))
+SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT m.adminID
+FROM ModificationAdmin m WHERE not exists (SELECT * FROM Commentaire
+c WHERE c.clientID=m.adminID AND c.etablissementID=m.etablissementID))
 \end{lstlisting}
 \subsubsection{R5}
 \begin{lstlisting}
 SELECT nom FROM Etablissement e,Commentaire c WHERE 
 e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3
- ORDER BY avg(c.score) DESC
+ORDER BY avg(c.score) DESC
 \end{lstlisting}
 \subsubsection{R6}
 \begin{lstlisting}
