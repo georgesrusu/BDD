@@ -17,8 +17,7 @@ SELECT u.identifiant FROM Utilisateur u WHERE u.ID IN (SELECT m.adminID FROM Mod
 
 R5:
 
-SELECT nom FROM Etablissement e,Commentaire c WHERE e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3 ORDER BY avg(c.score) DESC
-
+SELECT e.nom,AVG(c.score) FROM Etablissement e,Commentaire c WHERE e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3 ORDER BY avg(c.score) DESC
 R6:
 
 SELECT l.texte FROM Label l,Commentaire c WHERE l.etablissementID=c.etablissementID GROUP BY texte HAVING count(DISTINCT l.etablissementID)>=5 ORDER BY avg(c.score) DESC

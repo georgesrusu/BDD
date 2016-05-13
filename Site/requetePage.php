@@ -119,7 +119,7 @@ Released   : 20130902
     					$sql = "SET sql_mode = ''";
     					$conn->exec($sql);	//sinon erreur group by clause chez george pie seulement
 						echo "<p><strong>La requete 5 est :</strong> La liste des établissements ayant au minimum trois commentaires, classée selon la moyenne des scores attribués.</p>";
-						$sql='SELECT nom,c.score FROM Etablissement e,Commentaire c WHERE e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3 ORDER BY avg(c.score) DESC';
+						$sql='SELECT e.nom,AVG(c.score) FROM Etablissement e,Commentaire c WHERE e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3 ORDER BY avg(c.score) DESC';
 						$expl="Classe dans l'ordre decroissant.";
 						$mode=1;
 					}

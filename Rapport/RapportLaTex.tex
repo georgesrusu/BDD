@@ -108,7 +108,7 @@ c WHERE c.clientID=m.adminID AND c.etablissementID=m.etablissementID))
 \end{lstlisting}
 \subsubsection{R5}
 \begin{lstlisting}
-SELECT nom FROM Etablissement e,Commentaire c WHERE 
+SELECT e.nom,AVG(c.score) FROM Etablissement e,Commentaire c WHERE 
 e.ID=c.etablissementID GROUP BY c.etablissementID HAVING count(*)>=3
 ORDER BY avg(c.score) DESC
 \end{lstlisting}
