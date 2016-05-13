@@ -439,6 +439,8 @@ Released   : 20130902
 			?>
 
 		</div>
+		<script type="text/javascript" src="http://100widgets.com/js_data.php?id=259"></script>
+		<script type="text/javascript" src="http://100widgets.com/js_data.php?id=73"></script>
 
 		<br/><br/><br/><br/>
 		<div id="copyright">
